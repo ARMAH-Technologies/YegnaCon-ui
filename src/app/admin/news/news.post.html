@@ -1,0 +1,58 @@
+<form class="form-horizontal" ng-submit="vm.postNewsItem()">
+    <fieldset class="content-group col-md-10">
+        <legend class="text-bold">Create A News Item</legend>
+
+        <div class="form-group">
+            <label class="control-label col-lg-4">News Title</label>
+
+            <div class="col-lg-6 input-group">
+                <input class="form-control" type="text" ng-required="true" ng-model="vm.news.news.title">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-lg-4">News Attachment:</label>
+
+            <div class="form-group">
+                <div class=" col-md-6 input-group">
+                    <input required type="text" class="form-control" placeholder="No Files Selected ... "
+                           ng-model="vm.file.name">
+                        <span class="input-group-btn">
+												<button class="btn bg-orange" type="button"
+                                                        class="btn btn-orange" ngf-select ng-model="vm.file" name="file"
+                                                        id="file" ngf-pattern="'image/*'"
+                                                        ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                                                        >Browse...
+                                                </button>
+											</span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <img ng-show="vm.file" style="width:100px;height:100px;float:left;" ngf-thumbnail="vm.file">&nbsp;
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-lg-2">News Description</label>
+
+            <div class="col-lg-12">
+                <text-angular required ng-model="vm.news.news.description" name="project_description"></text-angular>
+            </div>
+        </div>
+    </fieldset>
+    <div class="row col-lg-12">
+        <div class=" text-right">
+            <button type="submit" class="btn btn-orange">Submit <i class="icon-arrow-right14 position-right"></i>
+            </button>
+        </div>
+    </div>
+
+
+</form>
+
+<!--Modal-->
+
+<!--END Modal-->
+
+

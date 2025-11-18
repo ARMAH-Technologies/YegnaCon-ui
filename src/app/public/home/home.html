@@ -1,0 +1,558 @@
+<div class="container" style="padding-top:150px">
+    <div class="row">
+
+        <div class="col-md-2 hidden-xs">
+            <div class="side-navigation">
+                <div style="margin-bottom:15px;">
+                    <figure class="position-static">
+                        <figure>
+                            <img src="assets/images/public/images/sidebar_1.png" alt="" width="100%">
+                        </figure>
+                    </figure>
+                </div>
+                <hr>
+                <div style="margin-bottom:15px;">
+                    <figure class="position-static">
+                        <figure>
+                            <img src="assets/images/public/images/sidebar_2.png" alt="" width="100%">
+                        </figure>
+                    </figure>
+                </div>
+                <hr>
+                <div style="margin-bottom:15px;">
+                    <figure class="position-static">
+                        <figure>
+                            <img src="assets/images/public/images/sidebar_3.png" alt="" width="100%">
+                        </figure>
+                    </figure>
+                </div>
+                <hr>
+                <div style="margin-bottom:15px;">
+                    <figure class="position-static">
+                        <figure>
+                            <img src="assets/images/public/images/sidebar_.png" alt="" width="100%">
+                        </figure>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 ">
+
+            <section class="container">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li>
+                            <img alt="" src="assets/images/public/upload/slide/slide1.jpg"/>
+
+                            <div class="flexcaption">
+                                <div class="container">
+                                    <!--   <div class="inner-caption">
+                                           <h1>We have Great Stuff</h1>
+
+                                           <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                           </p>
+                                       </div>-->
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <img alt="" src="assets/images/public/upload/slide/slide2.jpg"/>
+
+                            <div class="flexcaption">
+                                <div class="container">
+                                    <!--  <div class="inner-caption">
+                                          <h1>Our menager is very friendly</h1>
+
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    </p>
+                                </div>-->
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <img alt="" src="assets/images/public/upload/slide/slide3.jpg"/>
+
+                            <div class="flexcaption">
+                                <div class="container">
+                                    <!--  <div class="inner-caption">
+                                          <h1>Our menager is very friendly</h1>
+
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    </p>
+                                </div>-->
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <img alt="" src="assets/images/public/upload/slide/slide4.jpg"/>
+
+                            <div class="flexcaption">
+                                <div class="container">
+                                    <!--  <div class="inner-caption">
+                                          <h1>Our menager is very friendly</h1>
+
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    </p>
+                                </div>-->
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <img alt="" src="assets/images/public/upload/slide/slide5.jpg"/>
+
+                            <div class="flexcaption">
+                                <div class="container">
+                                    <!--  <div class="inner-caption">
+                                          <h1>Our menager is very friendly</h1>
+
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    </p>
+                                </div>-->
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <img alt="" src="assets/images/public/upload/slide/slide3.jpg"/>
+
+                            <div class="flexcaption">
+                                <div class="container">
+                                    <!--  <div class="inner-caption">
+                                          <h1>Our menager is very friendly</h1>
+
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    </p>
+                                </div>-->
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <!--Featured News
+            ==================================================-->
+            <div class="services-wrapp">
+                <div class="news-title">
+                    <h2 class="text-center">Our - Latest News</h2>
+                </div>
+                <div class="posts">
+                    <div class="row" style="margin-top:30px;">
+                        <div class="col-sm-6" style="margin-bottom:20px;">
+                            <div class="post-box">
+                                <div class="post-box-image">
+                                    <a href="#" ui-sref="main.public.news({newsId: vm.news[0].id})">
+                                        <img src="{{vm.image1}}" alt="">
+                                    </a>
+                                </div>
+
+                                <div class="post-box-content">
+                                    <h2><a href="#" ui-sref="main.public.news({newsId: vm.news[0].id})">{{vm.news[0].title|
+                                        limitTo:15}}</a></h2>
+
+                                    <p style="text-align: justify "
+                                       ng-bind-html="vm.dumpHTML(vm.news[0].description) | limitHTML : 200">
+
+                                    </p>
+                                    <br>
+                                </div>
+                                <div class="entry-meta">
+                                        <span class="entry-date "><i
+                                                class="fa fa-calendar"></i>&nbsp;{{vm.news[0].created_at|date:'mediumDate'}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="entry-comments"><i class="fa fa-comments"></i> <a
+                                        href="" ui-sref="main.public.news({newsId: vm.news[0].id})">{{vm.news[0].totalComments}}
+                                    Comments</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="entry-comments">
+                             <a ui-sref="main.public.news({newsId: vm.news[0].id})">Read More</a>
+                        </span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" style="margin-bottom: 25px">
+                            <div class="post-box post-box-small">
+                                <div class="post-box-image">
+                                    <a href="#" ui-sref="main.public.news({newsId: vm.news[1].id})">
+                                        <img src="{{vm.image2}}" alt="">
+                                    </a>
+                                </div>
+
+                                <div class="post-box-content">
+                                    <h2><a href="#">{{vm.news[1].title| limitTo:15}}</a></h2>
+
+                                    <p style="text-align: justify "
+                                       ng-bind-html="vm.dumpHTML(vm.news[1].description) | limitHTML : 150">
+
+                                    </p>
+                                    <br>
+                                </div>
+                                <div class="entry-meta">
+                                        <span class="entry-date "><i
+                                                class="fa fa-calendar"></i>&nbsp;{{vm.news[1].created_at|date:'mediumDate'}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="entry-comments"><i class="fa fa-comments"></i> <a
+                                        href="">{{vm.news[1].totalComments}}
+                                    Comments</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="entry-comments">
+                             <a ui-sref="main.public.news({newsId: vm.news[1].id})">Read More</a>
+                        </span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="post-box post-box-small">
+                                <div class="post-box-image">
+                                    <a href="#" ui-sref="main.public.news({newsId: vm.news[2].id})">
+                                        <img src="{{vm.image3}}" alt="">
+                                    </a>
+                                </div>
+
+                                <div class="post-box-content">
+                                    <h2><a href="#">{{vm.news[2].title| limitTo:15}}</a></h2>
+
+                                    <p style="text-align: justify "
+                                       ng-bind-html="vm.dumpHTML(vm.news[2].description) | limitHTML : 150">
+
+                                    </p>
+                                    <br>
+                                </div>
+                                <div class="entry-meta">
+                                        <span class="entry-date "><i
+                                                class="fa fa-calendar"></i>&nbsp;{{vm.news[2].created_at|date:'mediumDate'}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="entry-comments"><i class="fa fa-comments"></i> <a
+                                        href="">{{vm.news[2].totalComments}}
+                                    Comments</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="entry-comments">
+                             <a ui-sref="main.public.news({newsId: vm.news[0].id})">Read More</a>
+                        </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- services-offer
+            ================================================== -->
+            <section class="services-offer-section2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="services-post">
+                                <img src="assets/images/public/images/business-directory.jpg" alt="">
+
+                                <h2>Business Directory</h2>
+
+                                <p>Yegnacon Offers an organized and well sorted business directory,you can find
+                                    Contractors, consultants, suppliers and also professionals</p>
+                                <a href="" ui-sref="main.public.about_us">Read More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="services-post">
+                                <img src="assets/images/public/images/paint1.jpg" alt="">
+
+                                <h2>Vacancy & Tenders</h2>
+
+                                <p>Latest Vacancies and Tenders are posted here at Yegnacon, unlike other vendors,
+                                    at yegnacon subscribers are able to post too. </p>
+                                <a href="" ui-sref="main.public.about_us">Read More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="services-post">
+                                <img src="assets/images/public/images/free-proforma-invoice-template.jpg" alt="">
+
+                                <h2>Proforma Management</h2>
+
+                                <p>We are glad to tell you that, Yegnacon is the first and only web app in Ethiopia
+                                    which offers proforma request and reply
+                                    cycle.</p>
+                                <a href="" ui-sref="main.public.about_us">Read More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="services-post">
+                                <img src="assets/images/public/images/insource-vs-outsource-signs.jpg" alt="">
+
+                                <h2>Project Outsource & In-source</h2>
+
+                                <p>Have You wondered to whom you outsource your construction projects, well at
+                                    Yegnacon everything is easier now,</p>
+                                <a href="" ui-sref="main.public.about_us">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End services-offer section -->
+
+            <!-- about section
+           ================================================== -->
+            <section class="about-section">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tab-posts-box">
+                            <ul class=" text-center nav nav-tabs" id="myTab">
+                                <li class="active">
+                                    <a class="tender" href="#option1" data-toggle="tab">Latest Tenders</a>
+                                </li>
+                                <li>
+                                    <a href="#option2" data-toggle="tab">Latest Vacancy</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="option1">
+                                    <div class="positions-list" style="margin-bottom:0px;">
+                                        <div ng-repeat="tenders in vm.tenders" class="positions-list-item">
+                                            <h2>
+                                                <a href="" ng-click="vm.showDetail(tenders.id, 'tender')">{{tenders.title|limitTo:45}}...</a>
+                                            </h2>
+
+                                            <h3><span> <i class="fa fa-location-arrow"></i> </span>
+                                                {{tenders.company}},
+                                                <br>
+                                            <span ng-show="tenders.status == 'active'"
+                                                  class="label label-success">Active</span>
+                                            <span ng-show="tenders.status == 'inactive'"
+                                                  class="label label-warning">Pending</span>
+                                            </h3>
+
+                                            <div class="position-list-item-date">Opening:
+                                                {{tenders.opening_date|date:'mediumDate'}}
+                                            </div>
+                                            <!-- /.position-list-item-date -->
+                                            <div class="position-list-item-action">Closing:
+                                                {{tenders.closing_date|date:'mediumDate'}}
+                                            </div>
+                                            <!-- /.position-list-item-action -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="option2">
+                                    <div class="positions-list" style="margin-bottom:0px;">
+                                        <div ng-repeat="vacancy in vm.vacancies" class="positions-list-item">
+                                            <h2>
+                                                <a href="" ng-click="vm.showDetail(vacancy.id, 'vacancy')" >{{vacancy.title|limitTo:45}}...</a>
+                                            </h2>
+
+                                            <h3><span> <i class="fa fa-location-arrow"></i> </span>
+                                                {{vacancy.company}},
+                                                <br>
+                                            <span ng-show="vacancy.status == 'active'"
+                                                  class="label label-success">Active</span>
+                                            <span ng-show="vacancy.status == 'inactive'"
+                                                  class="label label-warning">Pending</span>
+                                            </h3>
+
+                                            <div class="position-list-item-date">Opening:
+                                                {{vacancy.posted_date|date:'mediumDate'}}
+                                            </div>
+                                            <!-- /.position-list-item-date -->
+                                            <div class="position-list-item-action">Closing:
+                                                {{vacancy.closing_date|date:'mediumDate'}}
+                                            </div>
+                                            <!-- /.position-list-item-action -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End about section -->
+
+        </div>
+        <div class="col-md-2 hidden-xs">
+            <div class="side-navigation">
+                <div style="margin-bottom:15px;">
+                    <div ng-if="!currentUser" class="row">
+                        <form class="panel panel-default" role="form" name="loginForm" novalidate>
+                            <h2 class="panel-heading">Login</h2>
+                            <small class="display-block  alert-danger">{{loginError}}</small>
+                            <img class="col-md-offset-4" ng-show="vm.authenticating"  height="80px" src="assets/images/loading.png"/>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group"
+                                             ng-class="{ 'has-error': (loginForm.company.$touched || loginForm.$submitted) && loginForm.company.$invalid || loginError != ''}">
+                                            <label>Email</label>
+                                            <input required name="company" class="form-control" type="email"
+                                                   placeholder="Enter your email here"
+                                                   ng-model="vm.email">
+
+                                            <div class="form_error" ng-messages="loginForm.company.$error"
+                                                 ng-if="loginForm.company.$touched || loginForm.$submitted || loginError != ''"
+                                                 role="alert">
+                                                <p ng-message="required">Name cannot be empty!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group"
+                                             ng-class="{ 'has-error': (loginForm.password.$touched || loginForm.$submitted) && loginForm.password.$invalid || loginError != ''}">
+                                            <label>Password</label>
+                                            <input required name="password" class="form-control" type="password"
+                                                   placeholder=""
+                                                   ng-model="vm.password">
+
+                                            <div class="form_error" ng-messages="loginForm.password.$error"
+                                                 ng-if="loginForm.password.$touched || loginForm.$submitted || loginError != ''"
+                                                 role="alert">
+                                                <p ng-message="required">Password cannot be empty!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="submit" class="col-md-12 btn btn-default pull-right" value="Login"
+                                       ng-click="singIn(loginForm.$valid, vm.email, vm.password)"/>
+
+                                <p style="margin-top: 10px">If You don't have an Account,</p>
+
+                                <a ui-sref="main.public.pricing"><i class="fa fa-user"></i>&nbsp;&nbsp;Sign Up</a>
+
+                            </div>
+                        </form>
+                    </div>
+                    <figure ng-if="currentUser" class="position-static">
+                        <figure>
+                            <img src="assets/images/public/images/sidebar_6.png" alt="" width="100%">
+                        </figure>
+                    </figure>
+                </div>
+                <hr>
+                <div style="margin-bottom:15px;">
+                    <figure class="position-static">
+                        <figure>
+                            <img src="assets/images/public/images/side_image.jpg" alt="" width="100%">
+                        </figure>
+                    </figure>
+                </div>
+                <hr>
+                <div style="margin-bottom:15px;">
+                    <figure class="position-static">
+                        <figure>
+                            <img src="assets/images/public/images/sidebar_5.png" alt="" width="100%">
+                        </figure>
+                    </figure>
+                </div>
+                <hr>
+                <div style="margin-bottom:15px;">
+                    <figure class="position-static">
+                        <figure>
+                            <img src="assets/images/public/images/sidebar_4.png" alt="" width="100%">
+                        </figure>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div style="padding:0px; margin:0px; background-color:#fff;font-family:Arial, sans-serif">
+
+        <!-- #region Jssor Slider Begin -->
+
+        <!-- Generator: Jssor Slider Maker -->
+        <!-- Source: http://www.jssor.com/demos/scrolling-logo-thumbnail-slider.slider -->
+
+        <!-- This demo works without jquery library. -->
+
+        <script type="text/javascript" src="js/public/js/jssor.slider-21.1.min.js"></script>
+        <!-- use jssor.slider-21.1.debug.js instead for debug -->
+        <script>
+            jssor_1_slider_init = function () {
+
+                var jssor_1_options = {
+                    $AutoPlay: true,
+                    $Idle: 0,
+                    $AutoPlaySteps: 4,
+                    $SlideDuration: 1600,
+                    $SlideEasing: $Jease$.$Linear,
+                    $PauseOnHover: 4,
+                    $SlideWidth: 140,
+                    $Cols: 7
+                };
+
+                var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+                //responsive code begin
+                //you can remove responsive code if you don't want the slider scales while window resizing
+                function ScaleSlider() {
+                    var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
+                    if (refSize) {
+                        refSize = Math.min(refSize, 1200);
+                        jssor_1_slider.$ScaleWidth(refSize);
+                    }
+                    else {
+                        window.setTimeout(ScaleSlider, 30);
+                    }
+                }
+
+                ScaleSlider();
+                $Jssor$.$AddEvent(window, "load", ScaleSlider);
+                $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+                $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+                //responsive code end
+            };
+        </script>
+
+
+        <div id="jssor_1"
+             style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1200px; height: 100px; overflow: hidden; visibility: hidden;">
+            <!-- Loading Screen -->
+            <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
+                <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+                <div style="position:absolute;display:block;background:url('assets/images/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+            </div>
+            <div data-u="slides"
+                 style="cursor: default; position: relative; top: 0px; left: 0px; width: 1200px; height: 100px; overflow: hidden;">
+                <div style="display: none;">
+                    <img data-u="image" src="assets/images/public/images/footer-logo-slider.png"/>
+                </div>
+                <div style="display: none;">
+                    <img data-u="image" src="assets/images/public/images/footer-logo-slider.png"/>
+                </div>
+                <div style="display: none;">
+                    <img data-u="image" src="assets/images/public/images/justice_footer_logo.jpg"/>
+                </div>
+                <div style="display: none;">
+                    <img data-u="image" src="assets/images/public/images/Makita-logo-vector.png"/>
+                </div>
+                <div style="display: none;">
+                    <img data-u="image" src="assets/images/public/images/dangote-cement-nigeria.png"/>
+                </div>
+                <div style="display: none;">
+                    <img data-u="image" src="assets/images/public/images/cat_logo.jpg"/>
+                </div>
+                <div style="display: none;">
+                    <img data-u="image" src="assets/images/public/images/bosh_logo.png"/>
+                </div>
+                <div style="display: none;">
+                    <img data-u="image" src="assets/images/public/images/footer-logo-slider.png"/>
+                </div>
+                <div style="display: none;">
+                    <img data-u="image" src="assets/images/public/images/footer-logo-slider.png"/>
+                </div>
+                <div style="display: none;">
+                    <img data-u="image" src="assets/images/public/images/footer-logo-slider.png"/>
+                </div>
+                <div style="display: none;">
+                    <img data-u="image" src="assets/images/public/images/footer-logo-slider.png"/>
+                </div>
+                <a data-u="add" href="http://www.jssor.com" style="display:none">Jssor Slider</a>
+
+            </div>
+        </div>
+        <script>
+            jssor_1_slider_init();
+        </script>
+
+        <!-- #endregion Jssor Slider End -->
+    </div>
+</div>

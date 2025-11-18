@@ -1,0 +1,47 @@
+<div class="panel panel-default panel-default-main">
+    <div class="row">
+        <div class="col-sm-10">
+            <h2 class="sidebar-label">My Vacancies</h2>
+        </div>
+        <div class="col-sm-2">
+            <button ui-sref="main.public.consultantDashboard.vacancyCreate"
+                    class="btn btn-default btn-action pull-right"><i class="fa fa-plus"></i>  Add Vacancy</button>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Posted Date</th>
+            <th>Closing Date</th>
+            <th>Status</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="vacancy in vm.vacancies | itemsPerPage: vm.itemsPerPage" total-items="vm.totalItems" current-page="vm.currentPage">
+            <td>{{ vacancy.order }}</td>
+            <td><a class="active_anchor" ui-sref="main.public.vacancyDetail({vacancyId:vacancy.id})">{{ vacancy.title }}</a></td>
+            <td>{{ vacancy.category }}</td>
+            <!--<td>{{ vacancy.education_level}}</td>-->
+            <!--<td>{{ vacancy.experience }}</td>-->
+            <td>{{ vacancy.posted_date}}</td>
+            <td>{{ vacancy.closing_date}}</td>
+            <td>{{ vacancy.status }}</td>
+            <td>
+                <ul class="list-inline list-unstyled">
+                    <li><button style="padding: 0 10px; margin: 0;" class="btn btn-default " ui-sref="main.public.consultantDashboard.vacancyCreate({vacancyId:vacancy.id, edit:true})"><i class="fa fa-pencil"></i></button></li>
+                    <li><button style="padding: 0 10px; margin: 0;" class="btn btn-default" ng-click="vm.deleteVacancy(vacancy.id)"><i class="fa fa-trash-o"></i></button></li>
+                </ul>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <ul class="pagination pagination-separated pagination-rounded text-center">
+        <dir-pagination-controls on-page-change="vm.getVacancies()"></dir-pagination-controls>
+    </ul>
+</div>

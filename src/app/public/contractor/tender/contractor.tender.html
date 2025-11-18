@@ -1,0 +1,154 @@
+<div class="panel panel-default panel-default-main">
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tab-posts-box">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <ul class=" text-center nav nav-tabs" id="myTab">
+                                <li class="active" ng-show="currentUser.subscriptions.data.package.data.package=='Premium' ||
+                                currentUser.subscriptions.data.package.data.package=='Corporate'">
+                                    <a class="tender" data-target="#opt1" data-toggle="tab">My Tenders</a>
+                                </li>
+                                <li ng-class="{ 'active' : currentUser.subscriptions.data.package.data.package=='Standard'}">
+                                    <a data-target="#opt2" data-toggle="tab">Latest Tenders</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="opt1">
+
+                            <div class="row">
+                                <div class="col-sm-10">
+
+                                </div>
+                                <div class="col-sm-2">
+                                    <button ui-sref="main.public.contractorDashboard.tenderCreate"
+                                            class="btn btn-default btn-action pull-right"><i class="fa fa-plus"> Add Tender</i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th width="5%">Number</th>
+                                    <th>Title</th>
+                                    <th>Closing Date</th>
+                                    <th>Status</th>
+                                    <th>Edit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr dir-paginate="tender in vm.tenders | itemsPerPage: vm.itemsPerPage"
+                                    total-items="vm.totalItems"
+                                    current-page="vm.currentPage">
+                                    <td>{{ tender.order }}</td>
+                                    <td><a class="active_anchor"
+                                           ui-sref="main.public.tenderDetail({tenderId:tender.id})"> {{ tender.title
+                                        }}</a></td>
+                                    <td>{{ tender.closing_date }}</td>
+                                    <td>{{ tender.status }}</td>
+                                    <td>
+                                        <ul class="list-inline list-unstyled">
+                                            <li>
+                                                <button style="padding: 0 10px; margin: 0;" class="btn btn-default "
+                                                        ui-sref="main.public.contractorDashboard.tenderCreate({tenderId:tender.id, edit:true})">
+                                                    <i class="fa fa-pencil"></i></button>
+                                            </li>
+                                            <li>
+                                                <button style="padding: 0 10px; margin: 0;" class="btn btn-default"
+                                                        ng-click="vm.deleteTender(tender.id)"><i
+                                                        class="fa fa-trash-o"></i></button>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <ul class="pagination pagination-separated pagination-rounded text-center">
+                                <dir-pagination-controls on-page-change="vm.getTenders()"></dir-pagination-controls>
+                            </ul>
+                        </div>
+
+
+                        <div class="tab-pane" id="opt2">
+
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h2 class="sidebar-label"></h2>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label style="padding-top: 10px;">Select Tender Categories:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <multiselect required ng-model="vm.category" data-compare-by="id"
+                                                         options="c.category for c in vm.filteredTenders"
+                                                         data-multiple="true"></multiselect>
+
+
+                                        </div>
+                                        <div style="font-size: large" class="display-inline"
+                                             ng-repeat="filteredTender in vm.filteredTender">
+
+                                        </div>
+                                        <div class="col-md-4 pull-right">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <button class="btn btn-orange btn-sm"
+                                                            ng-click="vm.addTendersChoice()">Add
+                                                        To Your Choice
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th width="5%">Number</th>
+                                    <th width="45%">Title</th>
+                                    <th>Category</th>
+                                    <th>Posted Date</th>
+                                    <th>Closing Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr dir-paginate="tender in vm.latestTenders | itemsPerPage: vm.itemsPerPageLatest"
+                                    total-items="vm.totalItemsLatest" current-page="vm.currentPageLatest">
+                                    <td>{{ tender.order }}</td>
+                                    <td><a class="active_anchor"
+                                           ui-sref="main.public.tenderDetail({tenderId:tender.id})"> {{
+                                        tender.title|limitTo:30}}</a></td>
+                                    <td>{{ tender.category }}</td>
+                                    <td>{{ tender.opening_date }}</td>
+                                    <td>{{ tender.closing_date }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <ul class="pagination pagination-separated pagination-rounded">
+                                <dir-pagination-controls
+                                        on-page-change="vm.getLatestTenders()"></dir-pagination-controls>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>

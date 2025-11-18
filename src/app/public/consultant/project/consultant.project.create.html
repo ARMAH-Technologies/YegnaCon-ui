@@ -1,0 +1,112 @@
+<div class="panel panel-default panel-default-main">
+    <form id="contact-form" ng-submit="vm.addProject(projectAddForm.$valid)" name="projectAddForm" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" ng-class="{ 'has-error': projectAddForm.project_name.$touched && projectAddForm.project_name.$invalid}">
+                    <label for="proj_name">Project Name</label>
+                    <input type="text" id="proj_name"
+                           name="project_name" ng-model="vm.project.name" ng-required="true" ng-minlength="3" class="form-control" value="{{ vm.project.name }}"/>
+                    <div class="form_error" ng-messages="projectAddForm.project_name.$error" ng-if="projectAddForm.project_name.$touched" role="alert" >
+                        <p ng-message="minlength">Project name is too short.</p>
+                        <p ng-message="required">Project name is required.</p>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': projectAddForm.project_category.$touched && projectAddForm.project_category.$invalid}">
+                    <label>Project Category</label>
+                    <select ng-required="true" class="form-control" name="project_category" ng-model="vm.project.category">
+                        <option selected="selected" value="">Select Category of Job</option>
+                        <option value="Architectural and Construction Design">Architectural and Construction Design</option>
+                        <option value="Building and Finishing Materials">Building and Finishing Materials</option>
+                        <option value="Building Construction">Building Construction</option>
+                        <option value="Construction Machinery and Equipment">Construction Machinery and Equipment</option>
+                        <option value="Contract Administration and Supervision">Contract Administration and Supervision</option>
+                        <option value="Road and Bridge Construction">Road and Bridge Construction</option>
+                        <option value="Sewerage">Sewerage</option>
+                        <option value="Water Engineering Machinery and Equipment">Water Engineering Machinery and Equipment</option>
+                        <option value="Water Pipes and Fittings">Water Pipes and Fittings</option>
+                        <option value="Water System Installation">Water System Installation</option>
+                        <option value="Water Well and Pool Cleaning">Water Well and Pool Cleaning</option>
+                        <option value="Water Well Drilling">Water Well Drilling</option>
+                    </select>
+                    <div class="form_error" ng-messages="projectAddForm.project_category.$error" ng-if="projectAddForm.project_category.$touched" role="alert" >
+                        <p ng-message="required">You must select a Project Category.</p>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': projectAddForm.client.$touched && projectAddForm.client.$invalid}">
+                    <label>Client</label>
+                    <input type="text"  name="client" class="form-control" placeholder="eg. Example Cooperation" ng-model="vm.project.client" ng-required="true"/>
+                    <div class="form_error" ng-messages="projectAddForm.client.$error" ng-if="projectAddForm.client.$touched" role="alert" >
+                        <p ng-message="required">Client name is required.</p>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': projectAddForm.elapsed_time.$touched && projectAddForm.elapsed_time.$invalid}">
+                    <label>Project Elapsed Time</label>
+                    <input type="text" name="elapsed_time" placeholder="95% Completed" class="form-control" ng-model="vm.project.elapsed_time" ng-required="true"/>
+                    <div class="form_error" ng-messages="projectAddForm.elapsed_time.$error" ng-if="projectAddForm.elapsed_time.$touched" role="alert" >
+                        <p ng-message="required">Elapsed time is required.</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Project Cost</label>
+                    <input type="number" name="cost" placeholder="in ETB" class="form-control" ng-model="vm.project.cost" ng-required="true"/>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error': projectAddForm.location.$touched && projectAddForm.location.$invalid}">
+                    <label>Project Location</label>
+                    <input type="text" name="location" placeholder="Location" class="form-control" ng-model="vm.project.location" ng-required="true"/>
+                    <div class="form_error" ng-messages="projectAddForm.location.$error" ng-if="projectAddForm.location.$touched" role="alert" >
+                        <p ng-message="required">Location is required.</p>
+                    </div>
+                </div>
+                <label>Project Image:</label>
+                <div class="form-group" ng-class="{'has-error':projectAddForm.file.$touched && projectAddForm.file.$invalid}">
+                    <div class="input-group">
+                        <input required type="text" class="form-control" placeholder="No Files Selected ... " ng-model="vm.file.name">
+                        <span class="input-group-btn">
+												<button class="btn btn-orange" type="button"
+                                                        class="btn btn-orange" ngf-select ng-model="vm.file" name="file" id="file" ngf-pattern="'image/*'"
+                                                        ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                                                >Browse...</button>
+											</span>
+                    </div>
+                    <div class="help-block" ng-messages="projectAddForm.file.$error">
+                        <div ng-message="maxSize">The file must be less than 2MB</div>
+                        <div ng-message="minHeight">The file must be at least 100px high</div>
+                        <div ng-message="pattern">Invalid File Type</div>
+                        <div ng-message="required">You must upload a project Logo</div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <img ng-show="vm.file" style="width:100px;height:100px;float:left;" ngf-thumbnail="vm.file">&nbsp;
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="sidebar-label">Project Brief Description</h2>
+                <hr>
+
+                <div class="form-group" ng-class="{ 'has-error': projectAddForm.project_description.$touched && projectAddForm.project_description.$invalid}">
+                
+                    <text-angular required ng-model="vm.project.description" name="project_description"></text-angular>
+                    <div class="form_error" ng-messages="projectAddForm.project_description.$error" ng-if="projectAddForm.project_description.$touched" role="alert" >
+                        <p ng-message="required">Project Description is required.</p>
+                    </div>
+                </div>
+                <input type="submit" class="pull-right" value="Save Changes"/>
+            </div>
+
+
+
+        </div>
+
+
+
+    </form>
+</div>

@@ -1,0 +1,187 @@
+<div class="panel panel-default panel-default-main">
+    <form id="contact-form" name="productForm" ng-submit="vm.addProduct(productForm.$valid)" novalidate>
+        <h2 class="sidebar-label">Product Form</h2>
+
+        <div class="alert alert-success fade in" ng-class="{ 'display-hidden': vm.updateSuccess == ''}">
+            <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> {{ vm.updateSuccess }}
+        </div>
+        <div class="product-form">
+            <div class="row">
+                <hr>
+                <div class="col-md-6">
+                    <div class="form-group"
+                         ng-class="{ 'has-error': productForm.product_name.$touched && productForm.product_name.$invalid}">
+                        <label>Product Name </label>
+                        <input class="form-control" required type="text" name="product_name"
+                               ng-model="vm.product.name"/>
+
+                        <div class="form_error" ng-messages="productForm.product_name.$error"
+                             ng-if="productForm.product_name.$touched" role="alert">
+                            <p ng-message="required">Product Name is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error': productForm.supplier_category.$touched && productForm.supplier_category.$invalid}">
+                        <label>Product Category</label>
+                        <select class="form-control" name="supplier_category" required ng-model="vm.product.category">
+                            <option ng-repeat="categories in vm.coreService.supplierCategories" value={{categories}}>
+                                {{categories}}
+                            </option>
+                        </select>
+
+                        <div class="form_error" ng-messages="productForm.supplier_category.$error"
+                             ng-if="productForm.supplier_category.$touched" role="alert">
+                            <p ng-message="required">Supplier category must be selected!</p>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error': productForm.measurement.$touched && productForm.measurement.$invalid}">
+                        <label>Unit of Measurement</label>
+                        <select class="form-control" required name="measurement" ng-model="vm.product.unit">
+                            <option ng-repeat="units in vm.coreService.units" value={{units}}>{{units}}</option>
+                        </select>
+
+                        <div class="form_error" ng-messages="productForm.measurement.$error"
+                             ng-if="productForm.measurement.$touched" role="alert">
+                            <p ng-message="required">Unit of Measurement is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error': productForm.quantity.$touched && productForm.quantity.$invalid}">
+                        <label>Quantity</label>
+                        <input class="form-control" required type="number" name="quantity" min="0"
+                               ng-model="vm.product.quantity"/>
+
+                        <div class="form_error" ng-messages="productForm.quantity.$error"
+                             ng-if="productForm.quantity.$touched" role="alert">
+                            <p ng-message="required">Quantity is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label>Product Picture:</label>
+
+                        <div ng-class="{'display-hidden': vm.product_label == 'Update Product'}">
+                            <div class="form-group"
+                                 ng-class="{'has-error':productForm.file.$touched && productForm.file.$invalid}">
+                                <div class="input-group">
+                                    <input required type="text" class="form-control"
+                                           placeholder="No Files Selected ... " ng-model="vm.file.name">
+                                <span class="input-group-btn">
+                                                        <button class="btn btn-orange" type="button"
+                                                                class="btn btn-primary" ngf-select ng-model="vm.file"
+                                                                name="file" id="file" ngf-pattern="'image/*'"
+                                                                ngf-accept="'image/*'" ngf-max-size="20MB"
+                                                                ngf-min-height="100"
+                                                                >Browse...
+                                                        </button>
+                                                    </span>
+                                </div>
+                                <div class="help-block" ng-messages="productForm.file.$error">
+                                    <div ng-message="maxSize">The file must be less than 2MB</div>
+                                    <div ng-message="minHeight">The file must be at least 100px high</div>
+                                    <div ng-message="pattern">Invalid File Type</div>
+                                    <div ng-message="required">You must upload a project Logo</div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <img ng-show="vm.file" style="width:100px;height:100px;float:left;"
+                                     ngf-thumbnail="vm.file">&nbsp;
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'display-hidden': vm.product_label == 'Add Product'}">
+                            <img style="width:100px;height:100px;float:left;" src="{{ vm.product.logo }}">&nbsp;
+                            <!-- Trigger the modal with a button -->
+                            <button type="button" class="btn btn-info" style="padding: 5px; margin: 0;"
+                                    data-toggle="modal" data-target="#changePic">Change Picture
+                            </button>
+
+                            <!-- Modal -->
+                            <div id="changePic" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Change Picture</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group"
+                                                 ng-class="{'has-error':productForm.file.$touched && productForm.file.$invalid}">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="No Files Selected ... " ng-model="vm.file.name">
+                                                <span class="input-group-btn">
+                                                    <button class="btn bg-teal" type="button"
+                                                            class="btn btn-primary" ngf-select ng-model="vm.file"
+                                                            name="file" id="file2" ngf-pattern="'image/*'"
+                                                            ngf-accept="'image/*'" ngf-max-size="20MB"
+                                                            ngf-min-height="100"
+                                                            ngf-resize="{width: 100, height: 100}"
+                                                            >Browse...
+                                                    </button>
+                                                </span>
+                                                </div>
+                                                <div class="help-block" ng-messages="productForm.file.$error">
+                                                    <div ng-message="maxSize">The file must be less than 2MB</div>
+                                                    <div ng-message="minHeight">The file must be at least 100px high
+                                                    </div>
+                                                    <div ng-message="pattern">Invalid File Type</div>
+                                                    <div ng-message="required">You must upload a project Logo</div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <img ng-show="vm.file" style="width:100px;height:100px;float:left;"
+                                                     ngf-thumbnail="vm.file">&nbsp;
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" ng-click="vm.updatePicture()"
+                                                    data-dismiss="modal">Update
+                                            </button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="sidebar-label">Company Brief Description</h2>
+                        <hr>
+                        <div class="form-group"
+                             ng-class="{ 'has-error': (supplierUpdateForm.description.$touched || supplierUpdateForm.$submitted) && supplierUpdateForm.description.$invalid}">
+                            <label>Description</label>
+
+                            <text-angular required ng-model="vm.product.description" name="description"></text-angular>
+                            <div class="form_error" ng-messages="supplierUpdateForm.description.$error"
+                                 ng-if="supplierUpdateForm.description.$touched || supplierUpdateForm.$submitted"
+                                 role="alert">
+                                <p ng-message="required">Description is required</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="submit" class="pull-right" value="{{ vm.product_label }}"/>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+    </form>
+</div>
+

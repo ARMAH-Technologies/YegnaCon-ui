@@ -1,0 +1,61 @@
+<div class="panel panel-default panel-default-main">
+    <form id="contact-form" ng-submit="vm.addExperience(professionalExperienceForm.$valid)" name="professionalExperienceForm"
+          novalidate>
+        <div class="alert alert-success fade in" ng-class="{ 'display-hidden': vm.updateSuccess == ''}">
+            <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> {{ vm.updateSuccess }}
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6" ng-class="{ 'has-error': (professionalExperienceForm.company.$touched || professionalExperienceForm.$submitted) && professionalExperienceForm.company.$invalid}">
+                        <label>Company</label>
+                        <input type="text" class="form-control" required name="company" ng-model="vm.professional.company" />
+
+                        <div class="form_error" ng-messages="professionalExperienceForm.company.$error"
+                             ng-if="professionalExperienceForm.company.$touched || professionalExperienceForm.$submitted" role="alert">
+                            <p ng-message="required">Company Name required.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-class="{ 'has-error': (professionalExperienceForm.position.$touched || professionalExperienceForm.$submitted) && professionalExperienceForm.position.$invalid}">
+                        <label>Position</label>
+                        <input type="text" class="form-control" required name="position" ng-model="vm.professional.position" />
+
+                        <div class="form_error" ng-messages="professionalExperienceForm.position.$error"
+                             ng-if="professionalExperienceForm.position.$touched || professionalExperienceForm.$submitted" role="alert">
+                            <p ng-message="required">Position is required.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-class="{ 'has-error': (professionalExperienceForm.started_date.$touched || professionalExperienceForm.$submitted) && professionalExperienceForm.started_date.$invalid}">
+                        <label>Started Date</label>
+                        <input type="date" class="form-control" required name="started_date" ng-model="vm.professional.started_date" />
+
+                        <div class="form_error" ng-messages="professionalExperienceForm.started_date.$error"
+                             ng-if="professionalExperienceForm.started_date.$touched || professionalExperienceForm.$submitted" role="alert">
+                            <p ng-message="required">Position is required.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-class="{ 'has-error': (professionalExperienceForm.ended_date.$touched || professionalExperienceForm.$submitted) && professionalExperienceForm.ended_date.$invalid}">
+                        <label>Ended Date</label>
+                        <input type="date" class="form-control" required name="ended_date" ng-model="vm.professional.ended_date" />
+
+                        <div class="form_error" ng-messages="professionalExperienceForm.ended_date.$error"
+                             ng-if="professionalExperienceForm.ended_date.$touched || professionalExperienceForm.$submitted" role="alert">
+                            <p ng-message="required">Position is required.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': (professionalExperienceForm.description.$touched || professionalExperienceForm.$submitted) && professionalExperienceForm.description.$invalid}">
+                    <label>Description</label>
+                    <textarea name="description" rows="10"  class="form-control" required ng-model="vm.professional.description">
+                    </textarea>
+                    <div class="form_error" ng-messages="professionalExperienceForm.description.$error"
+                         ng-if="professionalExperienceForm.description.$touched || professionalExperienceForm.$submitted" role="alert">
+                        <p ng-message="required">Description is required.</p>
+                    </div>
+                </div>
+                <input type="submit" class="pull-right" name="submit" value="Add">
+            </div>
+        </div>
+    </form>
+</div>

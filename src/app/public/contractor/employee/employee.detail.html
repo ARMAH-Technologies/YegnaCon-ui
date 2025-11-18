@@ -1,0 +1,378 @@
+<div class="container">
+    <!-- news-section
+            ================================================== -->
+    <section class="news-section">
+        <div class="row">
+            <div class="col-lg-9 panel panel-default panel-default-main">
+                <div id="printableArea">
+                    <div class="row">
+                        <h1 class="col-lg-10">{{vm.employee.employee.name}}</h1>
+
+                        <div class="col-lg-2 date pull-right">
+                            <i class="fa fa-clock-o"> </i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row  col-md-6 ">
+                            <table class="table table-responsive">
+                                <tr>
+                                    <td>Employee Title:</td>
+                                    <td>
+                                        {{vm.employee.employee.employment_title}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Employment Type</td>
+                                    <td>
+                                        {{vm.employee.employee.employment_type}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Employment Date</td>
+                                    <td>{{vm.employee.employee.employment_date}}</td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 ">
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">
+                        <img src="assets/images/public/images/professional.png" alt="" width="80" height="72">
+
+                    </div>
+                    <div class="panel-heading">
+                        <h2 class="sidebar-label">Address Info</h2>
+                        <ul class="list-unstyled company-info">
+                            <li><i class="fa fa-phone"></i> {{vm.employee.employee.user.address.phone_number_1}}</li>
+                            <li><i class="fa fa-envelope"></i>{{vm.employee.employee.user.email}}</li>
+                            <li><i class="fa fa-map-marker"></i>{{vm.employee.employee.user.address.sub_city}} , {{vm.employee.employee.user.address.city}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row panel panel-default panel-default-main">
+            <div class="tab-posts-box">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active">
+                        <a data-target="#option1" data-toggle="tab">{{vm.balances[0].name}}</a>
+                    </li>
+                    <li>
+                        <a data-target="#option2" data-toggle="tab">{{vm.balances[1].name}}</a>
+                    </li>
+                    <li>
+                        <a data-target="#option3" data-toggle="tab">{{vm.balances[2].name}}</a>
+                    </li>
+                    <li>
+                        <a data-target="#option4" data-toggle="tab">{{vm.balances[3].name}}</a>
+                    </li>
+                 <li>
+                        <a data-target="#option5" data-toggle="tab">{{vm.balances[4].name}}</a>
+                    </li>
+                 <li>
+                        <a data-target="#option6" data-toggle="tab">{{vm.balances[5].name}}</a>
+                    </li>
+                 <li>
+                        <a data-target="#option7" data-toggle="tab">{{vm.balances[6].name}}</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="option1">
+                        <div class="row  col-md-6 ">
+                            <table class="table table-responsive table-bordered">
+                                <thead>
+                                    <th colspan="2" style="text-align: center">Leave Summary</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Total {{vm.balances[0].name}}</td>
+                                        <td>{{vm.balances[0].total}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Balance</td>
+                                        <td>{{vm.balances[0].remain}}</td>
+                                    </tr>
+                                <tbody>
+                            </table>
+                        </div>
+                        <div class="row table table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Leave Starting Date</th>
+                                        <th>Number of days</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in vm.requests | filter:{'leave_name':vm.balances[0].name}">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.start_date}}</td>
+                                    <td>{{item.number_of_days}}</td>
+                                    <td>{{item.status}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="option2">
+                        <div class="row  col-md-6 ">
+                            <table class="table table-responsive table-bordered">
+                                <thead>
+                                <th colspan="2" style="text-align: center">Leave Summary</th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Total {{vm.balances[1].name}}</td>
+                                    <td>{{vm.balances[1].total}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Balance</td>
+                                    <td>{{vm.balances[1].remain}}</td>
+                                </tr>
+                                <tbody>
+                            </table>
+                        </div>
+                        <div class="row table table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Leave Starting Date</th>
+                                    <th>Number of days</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in vm.requests | filter:{'leave_name':vm.balances[1].name}">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.start_date}}</td>
+                                    <td>{{item.number_of_days}}</td>
+                                    <td>{{item.status}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="option3">
+                        <div class="row  col-md-6 ">
+                            <table class="table table-responsive table-bordered">
+                                <thead>
+                                <th colspan="2" style="text-align: center">Leave Summary</th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Total {{vm.balances[2].name}}</td>
+                                    <td>{{vm.balances[2].total}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Balance</td>
+                                    <td>{{vm.balances[2].remain}}</td>
+                                </tr>
+                                <tbody>
+                            </table>
+                        </div>
+                        <div class="row table table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Leave Starting Date</th>
+                                    <th>Number of days</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in vm.requests | filter:{'leave_name':vm.balances[2].name}">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.start_date}}</td>
+                                    <td>{{item.number_of_days}}</td>
+                                    <td>{{item.status}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="option4">
+                        <div class="row  col-md-6 ">
+                            <table class="table table-responsive table-bordered">
+                                <thead>
+                                <th colspan="2" style="text-align: center">Leave Summary</th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Total {{vm.balances[3].name}}</td>
+                                    <td>{{vm.balances[3].total}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Balance</td>
+                                    <td>{{vm.balances[3].remain}}</td>
+                                </tr>
+                                <tbody>
+                            </table>
+                        </div>
+                        <div class="row table table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Leave Starting Date</th>
+                                    <th>Number of days</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in vm.requests | filter:{'leave_name':vm.balances[3].name}">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.start_date}}</td>
+                                    <td>{{item.number_of_days}}</td>
+                                    <td>{{item.status}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="option5">
+                        <div class="row  col-md-6 ">
+                            <table class="table table-responsive table-bordered">
+                                <thead>
+                                <th colspan="2" style="text-align: center">Leave Summary</th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Total {{vm.balances[4].name}}</td>
+                                    <td>{{vm.balances[4].total}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Balance</td>
+                                    <td>{{vm.balances[4].remain}}</td>
+                                </tr>
+                                <tbody>
+                            </table>
+                        </div>
+                        <div class="row table table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Leave Starting Date</th>
+                                    <th>Number of days</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in vm.requests | filter:{'leave_name':vm.balances[4].name}">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.start_date}}</td>
+                                    <td>{{item.number_of_days}}</td>
+                                    <td>{{item.status}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="option6">
+                        <div class="row  col-md-6 ">
+                            <table class="table table-responsive table-bordered">
+                                <thead>
+                                <th colspan="2" style="text-align: center">Leave Summary</th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Total {{vm.balances[5].name}}</td>
+                                    <td>{{vm.balances[5].total}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Balance</td>
+                                    <td>{{vm.balances[5].remain}}</td>
+                                </tr>
+                                <tbody>
+                            </table>
+                        </div>
+                        <div class="row table table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Leave Starting Date</th>
+                                    <th>Number of days</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in vm.requests | filter:{'leave_name':vm.balances[5].name}">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.start_date}}</td>
+                                    <td>{{item.number_of_days}}</td>
+                                    <td>{{item.status}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="option7">
+                        <div class="row  col-md-6 ">
+                            <table class="table table-responsive table-bordered">
+                                <thead>
+                                <th colspan="2" style="text-align: center">Leave Summary</th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Total {{vm.balances[6].name}}</td>
+                                    <td>{{vm.balances[6].total}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Balance</td>
+                                    <td>{{vm.balances[6].remain}}</td>
+                                </tr>
+                                <tbody>
+                            </table>
+                        </div>
+                        <div class="row table table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Leave Starting Date</th>
+                                    <th>Number of days</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in vm.requests | filter:{'leave_name':vm.balances[6].name}">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.start_date}}</td>
+                                    <td>{{item.number_of_days}}</td>
+                                    <td>{{item.status}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End news section -->
+</div>

@@ -1,0 +1,41 @@
+<div class="panel panel-default panel-default-main">
+    <form id="contact-form">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2 class="sidebar-label">Leave History</h2>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>No.</th>
+                <th>Leave Type</th>
+                <th>Leave Starting Date</th>
+                <th>Number of Days</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in vm.requests">
+                <td>{{$index+1}}</td>
+                <td>{{item.leave_name}}</td>
+                <td>{{item.start_date}}</td>
+                <td>{{item.number_of_days}}</td>
+                <td>{{item.status}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!--<div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <input type="submit" class="pull-right" value="Submit"/>
+                </div>
+            </div>
+        </div>-->
+    </form>
+    <!-- <ul class="pagination pagination-separated pagination-rounded text-center">
+         <dir-pagination-controls on-page-change="vm.getVacancies()"></dir-pagination-controls>
+     </ul>-->
+</div>

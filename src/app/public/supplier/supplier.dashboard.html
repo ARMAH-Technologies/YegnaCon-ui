@@ -1,0 +1,48 @@
+<div class="container" id="go_to_top">
+    <section class="page-banner-section">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>{{currentUser.subscriptions.data.package.data.package}} Supplier Dashboard</h2>
+            </div>
+            <div class="col-md-6">
+                <ul class="page-depth">
+                    <li><a href="">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="services-page-section news-section " style="padding-top: 5px">
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="side-navigation">
+                    <ul class="side-navigation-list">
+                       <!-- <li><a ng-class="{ 'active' : currentParentState=='profile'}"
+                               ui-sref="main.public.supplierDashboard.profile({supplierId:vm.supplierId})">Company
+                            Profile</a></li>-->
+                        <li><a ng-class="{ 'active' : currentParentState=='profile'}"
+                              ui-sref="main.public.supplierDetail({supplierId:vm.supplierId})">Company
+                        Profile</a></li>
+
+                        <li><a ng-class="{ 'active' : currentParentState=='myProducts'}"
+                               ui-sref="main.public.supplierDashboard.product({supplierId:vm.supplierId})">My
+                            Products</a></li>
+                        <li><a ng-class="{ 'active' : currentParentState=='proforma'}"
+                               ui-sref="main.public.supplierDashboard.proforma">Product Proforma</a>
+                        </li>
+                        <li><a ng-class="{ 'active' : currentParentState=='tender'}" ui-sref="main.public.supplierDashboard.tender">Tenders</a></li>
+                        <li><a ng-class="{ 'active' : currentParentState=='vacancy'}"
+                               ng-if="vm.subscription == 'Corporate' || vm.subscription == 'Premium'" ui-sref="main.public.supplierDashboard.vacancy">Vacancies</a></li>
+                        <li><a ui-sref="main.public.resetPassword">Account Setting</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <ui-view>
+
+                </ui-view>
+            </div>
+        </div>
+
+    </section>
+</div>

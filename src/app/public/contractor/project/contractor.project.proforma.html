@@ -1,0 +1,143 @@
+<div class="panel panel-default panel-default-main">
+    <div class="tab-posts-box">
+        <div class="row">
+            <div class="col-lg-11">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a aria-expanded="false" href="#tab2-2" target="_self" data-toggle="tab"><i
+                            class="fa fa-building-o"> </i> Projects you
+                        Outsourced</a></li>
+                    <li class=""><a aria-expanded="true" href="#tab2-1" target="_self" data-toggle="tab"><i
+                            class="fa fa-building-o"> </i> Projects
+                        Outsourced From Companies</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-1">
+                <div class="btn-group pull-right">
+                    <a ui-sref="main.public.contractorDashboard.projectProformaCreate" id=""
+                       class=" btn btn-default btn-action">
+                        <i class="fa fa-plus"> Add Outsourced Project </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="tab2-1" class="tab-pane fade in">
+                <br><br>
+
+                <div class="portlet-title">
+                    <div class="row">
+                        <div ng-if="vm.companyOutsourced.length == 0">
+                            <h4 class="text-center">No Outsourced Projects</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="portlet-body" ng-if="vm.companyOutsourced.length > 0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Project Title</th>
+                                <th>Project Category</th>
+                                <th>Posted Date</th>
+                                <th>Status</th>
+                                <th>File</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr dir-paginate="proforma in vm.companyOutsourced | itemsPerPage: vm.itemsPerPage"
+                                total-items="vm.totalItems" current-page="vm.currentPage">
+                                <td>
+                                    <a class="active_anchor"
+                                       ui-sref="main.public.contractorDashboard.projectProformaDetail({proformaId: proforma.id})">{{
+                                        proforma.proformaRequestProjectCost.data.title }}</a></td>
+                                <td>{{ proforma.proformaRequestProjectCost.data.type }} | {{
+                                    proforma.proformaRequestProjectCost.data.level }}
+                                </td>
+                                <td>{{ proforma.date|date:'mediumDate'}}</td>
+                                <td>{{ proforma.status}}</td>
+                                <td ng-hide="!proforma.file_name">
+                                    <button type="button" class="btn btn-orange" href="{{ proforma.file_name }}"
+                                            target="_blank"><i class="fa fa-download"></i>
+                                        Download File
+                                    </button>
+                                </td>
+                                <td ng-hide="proforma.file_name">No files attached</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <ul class="pagination pagination-separated pagination-rounded text-center">
+                            <dir-pagination-controls on-page-change="vm.getProformas()"></dir-pagination-controls>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade active in" id="tab2-2">
+                <div class="row" ng-if="vm.userOutsourced.length == 0">
+                    <div class="portlet-title">
+                        <div class="row">
+                            <div class="col-sm-10">
+
+                            </div>
+                            <div class="col-sm-2">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <br><br>
+                        <h4 class="text-center">You haven't Outsourced a Project yet</h4>
+                    </div>
+                </div>
+                <div class="row" ng-if="vm.userOutsourced.length">
+                    <div class="portlet-title">
+                        <div class="row">
+                            <div class="col-sm-10">
+                            </div>
+                            <div class="col-sm-2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th class="center">Proforma Request Id</th>
+                                    <th class="center">Project Title</th>
+                                    <th>Posted Date</th>
+                                    <th>Status</th>
+                                    <th>Replies</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr dir-paginate="proforma in vm.userOutsourced | itemsPerPage: vm.itemsPerPage2"
+                                    total-items="vm.totalItems2" current-page="vm.currentPage2">
+                                    <td class="center"><a class="active_anchor"
+                                                          ui-sref="main.public.contractorDashboard.projectProformaDetail({proformaId: proforma.id, user:true})">Proforma
+                                        ID #{{proforma.proforma_request_id}}</a>
+                                    </td>
+                                    <td class="center"><a class="active_anchor"
+                                                          ui-sref="main.public.contractorDashboard.projectProformaDetail({proformaId: proforma.id, user:true})">{{
+                                        proforma.proformaRequestProjectCost.data.title }}</a></td>
+                                    <td class="center">{{ proforma.date|date:'mediumDate'}}</td>
+                                    <td>{{ proforma.status}}</td>
+                                    <td>
+                                        <button ui-sref="main.public.contractorDashboard.projectProformaDetail({proformaId: proforma.id, user:true})"
+                                                class="btn btn-default" type="button">You have {{ proforma.noReplies }}
+                                            replies
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <ul class="pagination pagination-separated pagination-rounded text-center">
+                                <dir-pagination-controls on-page-change="vm.getProformas()"></dir-pagination-controls>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

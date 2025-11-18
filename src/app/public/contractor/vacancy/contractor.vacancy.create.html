@@ -1,0 +1,152 @@
+<div class="panel panel-default panel-default-main">
+    <form id="contact-form" ng-submit="vm.createVacancy(vacancyCreateForm.$valid)" name="vacancyCreateForm" novalidate>
+        <h2 class="sidebar-label">Vacancy Form</h2>
+
+        <div class="alert alert-success fade in" ng-class="{ 'display-hidden': vm.updateSuccess == ''}">
+            <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> {{ vm.updateSuccess }}
+        </div>
+
+        <div class="product-form">
+            <div class="row">
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': (vacancyCreateForm.job_title.$touched || vacancyCreateForm.$submitted) && vacancyCreateForm.job_title.$invalid}">
+                    <label>Job Title *</label>
+                    <input class="form-control" required type="text" class="" name="job_title"
+                           ng-model="vm.vacancy.title"/>
+
+                    <div class="form_error" ng-messages="vacancyCreateForm.job_title.$error"
+                         ng-if="vacancyCreateForm.job_title.$touched || vacancyCreateForm.$submitted" role="alert">
+                        <p ng-message="required">Job Title is required.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': (vacancyCreateForm.work_place.$touched || vacancyCreateForm.$submitted) && vacancyCreateForm.work_place.$invalid}">
+                    <label>Work Place</label>
+                    <select required name="work_place" ng-model="vm.vacancy.work_place" class="form-control">
+                        <option ng-repeat="location in vm.locations" value="{{ location }}">{{ location }}</option>
+                    </select>
+
+                    <div class="form_error" ng-messages="vacancyCreateForm.work_place.$error"
+                         ng-if="vacancyCreateForm.work_place.$touched  || vacancyCreateForm.$submitted" role="alert">
+                        <p ng-message="required">Work Place is required.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': (vacancyCreateForm.category.$touched || vacancyCreateForm.$submitted) && vacancyCreateForm.category.$invalid}">
+                    <label>Field</label>
+                    <select class="form-control" name="category" required ng-model="vm.vacancy.category">
+                        <option ng-repeat="title in vm.professionalTitle" value="{{title}}">{{title}}</option>
+                    </select>
+
+                    <div class="form_error" ng-messages="vacancyCreateForm.category.$error"
+                         ng-if="vacancyCreateForm.category.$touched  || vacancyCreateForm.$submitted" role="alert">
+                        <p ng-message="required">Field is required.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': (vacancyCreateForm.education_level.$touched || vacancyCreateForm.$submitted) && vacancyCreateForm.education_level.$invalid}">
+                    <label>Education Level</label>
+                    <select class="form-control" name="education_level" required ng-model="vm.vacancy.education_level">
+                        <option ng-repeat="level in vm.coreService.professionalsEducation" value="{{ level }}">
+                            {{ level }}
+                        </option>
+                    </select>
+
+                    <div class="form_error" ng-messages="vacancyCreateForm.education_level.$error"
+                         ng-if="vacancyCreateForm.education_level.$touched  || vacancyCreateForm.$submitted"
+                         role="alert">
+                        <p ng-message="required">Education is required.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': (vacancyCreateForm.experience.$touched || vacancyCreateForm.$submitted) && vacancyCreateForm.experience.$invalid}">
+                    <label>Experience</label>
+                    <select class="form-control" name="experience" required ng-model="vm.vacancy.experience">
+                        <option ng-repeat="experiene in vm.coreService.professionalsExperience" value="{{ experiene }}">
+                            {{ experiene }}
+                        </option>
+                    </select>
+
+                    <div class="form_error" ng-messages="vacancyCreateForm.experience.$error"
+                         ng-if="vacancyCreateForm.experience.$touched  || vacancyCreateForm.$submitted" role="alert">
+                        <p ng-message="required">Experience is required.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': (vacancyCreateForm.salary.$touched || vacancyCreateForm.$submitted) && vacancyCreateForm.salary.$invalid}">
+                    <label>Salary</label>
+
+                    <div class="checkbox">
+                        <label>
+                            <input ng-click="vm.salarySet()" ng-model="vm.vacancy.salary"
+                                   ng-true-value="'Negotiable'" ng-false-value="'figure'" type="checkbox">Negotiable
+                        </label>
+                    </div>
+                    <div class="input-group">
+
+                        <span class="input-group-addon" id="basic-addon1">ETB.</span>
+                        <input ng-disabled="vm.salaryDisable" type="text" class="form-control"
+                               placeholder="Salary In ETB."
+                               aria-describedby="basic-addon1"
+                               ng-model="vm.vacancy.salary">
+                    </div>
+                    <div class="form_error" ng-messages="vacancyCreateForm.salary.$error"
+                         ng-if="vacancyCreateForm.salary.$touched  || vacancyCreateForm.$submitted" role="alert">
+                        <p ng-message="required">Salary is required.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': (vacancyCreateForm.closing_date.$touched || vacancyCreateForm.$submitted) && vacancyCreateForm.closing_date.$invalid}">
+                    <label>Posting Date</label>
+                    <input class="form-control" required type="date" name="opening_date"
+                           ng-model="vm.vacancy.opening_date"/>
+
+                    <div class="form_error" ng-messages="vacancyCreateForm.opening_date.$error"
+                         ng-if="vacancyCreateForm.opening_date.$touched || vacancyCreateForm.$submitted" role="alert">
+                        <p ng-message="required">Opening Date is required.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': (vacancyCreateForm.closing_date.$touched || vacancyCreateForm.$submitted) && vacancyCreateForm.closing_date.$invalid}">
+                    <label>Closing Date</label>
+                    <input class="form-control" required type="date" name="closing_date"
+                           ng-model="vm.vacancy.closing_date"/>
+
+                    <div class="form_error" ng-messages="vacancyCreateForm.closing_date.$error"
+                         ng-if="vacancyCreateForm.closing_date.$touched || vacancyCreateForm.$submitted" role="alert">
+                        <p ng-message="required">Closing Date is required.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group"
+                     ng-class="{ 'has-error': (vacancyCreateForm.description.$touched || vacancyCreateForm.$submitted) && vacancyCreateForm.description.$invalid}">
+                    <label>Description</label>
+
+                    <text-angular required ng-model="vm.vacancy.description" name="description"></text-angular>
+                    <div class="form_error" ng-messages="vacancyCreateForm.description.$error"
+                         ng-if="vacancyCreateForm.description.$touched  || vacancyCreateForm.$submitted" role="alert">
+                        <p ng-message="required">Description is required.</p>
+                    </div>
+                    <!--<div ckeditor="vm.ckoptions" ready="ckOnReady"></div>-->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <input type="submit" class="pull-right" value="{{ vm.vacancy_label }}"/>
+                    </div>
+
+                </div>
+
+            </div>
+            <div>
+            </div>
+
+    </form>
+
+

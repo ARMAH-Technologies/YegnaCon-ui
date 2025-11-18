@@ -1,0 +1,177 @@
+
+<div class="panel border-orange-800">
+    <div class="panel-heading bg-orange-800">
+        <h6 class="panel-title">Users Subscription Invoice</h6>
+
+        <div class="heading-elements">
+            <button class="btn btn-orange" data-toggle="dropdown" ng-click="vm.printSubscriptionInvoice('subscriptionInvoice')"><i class="icon-printer"></i> Print</button>
+        </div>
+    </div>
+
+    <div class="panel-body" id="subscriptionInvoice">
+
+        <div class="container-fluid">
+            <table class="table">
+                <tr>
+                    <td>
+                        <img style="width:300px;height:100px;border-right:2px solid lightblue;padding-right:50px;" src="assets/images/public/images/Baseline_logo.png" alt="">
+                    </td>
+                    <td>
+                        <ul class="list-unstyled pull-right">
+                            <li class="text-right">Tel : <span>0115 544 207</span><span>0934 455678</span></li>
+                            <li class="text-right">Fax : <span>0115 554 208</span></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled pull-right">
+                            <li class="text-right">Email: <span>info@yegnacon.com</span></li>
+                            <li class="text-right"> <span>admin@yegnacon.com</span></li>
+                            <li class="text-right"> <span>http://www.yegnacon.com</span></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled pull-right">
+                            <li class="text-right">P.O.Box : <span>11850</span></li>
+                            <li class="text-right"><span>Addis Ababa</span></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+
+            <div class="col-md-12">
+                <h1 class="text-center">SALES CONTRACT AGREEMENT</h1>
+                <hr>
+                <div class="row">
+                    <span class="pull-left">Invoice Number</span>
+                    <span class="pull-right">Date: <u>{{ vm.currentDate|date:'mediumDate'}}</u></span>
+                </div>
+                <div class="row">
+                    <h2>Subscription</h2>
+                    <table class="table table-condensed" style="">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <strong>Subscriber</strong>
+                            </td>
+                            <td>
+                                <strong>{{vm.user.name}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Subscription Type</strong>
+                            </td>
+                            <td>
+                                <strong>{{vm.user.subscriptions.data.package.data.package}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Subscription Period</strong>
+                            </td>
+                            <td>
+                                <strong>{{vm.user.subscriptions.data.started_date|date:'mediumDate'}} - {{vm.user.subscriptions.data.expiration_date|date:'mediumDate'}}</strong>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Subscription Fee in Br. (Before VAT)</strong>
+                            </td>
+                            <td>ETB {{vm.user.subscriptions.data.package.data.price|number:2}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Subscription Fee in Br. including 15% VAT</strong>
+                            </td>
+                            <td>ETB {{vm.user.subscriptions.data.package.data.price * (1.15)|number:2 }} <label class="label label-default"> VAT ETB. {{vm.user.subscriptions.data.package.data.price * .15}}</label></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                <div class="row">
+                    <h2>Remark</h2>
+                    <p>Alert will be sent to<u> {{vm.user.email}}.</u> You may login @ http://www.yegnacon.com by using your username and password which you created on registration.</p>
+
+                </div>
+
+
+                <div class="row">
+                    <h2>Service Explanation</h2>
+                    <ul ng-show="vm.user.subscriptions.data.package.data.package == 'Standard'" class="text-muted">
+                        <li>Business Directory</li>
+                        <li>Full Tender Access</li>
+                        <li>Proforma Request & Reply</li>
+                    </ul>
+
+                    <ul ng-show="vm.user.subscriptions.data.package.data.package == 'Corporate'"  class="text-muted">
+                        <li>Standard Package + (Plus)</li>
+                        <li>Project in-Source & out Source</li>
+                        <li>Vacancy & Tender Posting</li>
+                        <li>Logo Advert On Home Page</li>
+                    </ul>
+
+                    <ul ng-show="vm.user.subscriptions.data.package.data.package == 'Premium'"  class="text-muted">
+                        <li>Corporate Package + (Plus)</li>
+                        <li>Company Profile Posting & Monthly Updating</li>
+                        <li>News Coverage Priority</li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <h2>Terms of Use and Agreement</h2>
+                    <ul class="text-muted">
+                        <li>Payment should be made inorder to be able to use service</li>
+                        <li>The service provider shall render the specified service for the duration of the subscription period mentioned above as soon as the payment has been made</li>
+                        <li>The service user must not pass on the username and password to a third party</li>
+                        <li>Violation of the above term will result in suspension or termination of the account</li>
+                        <li>By signing this sales agreement, you agree to Access <u><b> {{vm.user.subscriptions.data.package.data.package}} </b></u>Package service subscription agreement.</li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p><b>Signed and stamped for</b></p>
+                                    <p><b>Baseline Computer Trading PLC</b></p>
+                                    <p><b>Yegnacon.com</b></p>
+                                    <hr width="70%" class="pull-left">
+                                </td>
+                                <td>
+                                    <p><b>Signed and stamped for</b></p><br><br><br>
+                                    <!--<p>{{vm.user.name}}</p>-->
+                                    <hr width="70%" class="pull-left">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <table class="table table-condensed">
+                        <tr>
+                            <td>
+                                <p>Thank you for signing up yegnacon.com web servicee. Now you are able to access latest contraction
+                                    platform application. you  mak login to https://www.yegnacon.com using your username
+                                    and password.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+

@@ -1,0 +1,172 @@
+<div class="container">
+    <section class="page-banner-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Products</h2>
+                </div>
+                <div class="col-md-6">
+                    <ul class="page-depth">
+                        <li><a href="index.html">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- news-section ================================================== -->
+    <section class="news-section ">
+        <div class="row">
+            <div class="col-lg-2 hidden-sm">
+                <div class="side-navigation">
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+                    <hr>
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-8 panel panel-default panel-default-main">
+                <div class="row card">
+                    <form>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="search_keywords" ng-model="vm.search" ng-change="vm.getProducts()"
+                                       placeholder="Search products..."/>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <select class="form-control" ng-model="vm.category">
+                                    <option value="">All Categories</option>
+                                    <option ng-repeat="category in vm.coreService. supplierCategories" value="{{category}}">{{category}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group pull-lefclear">
+                                <button class="form-control btn-orange" type="button" ng-click="vm.getProducts()"><i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <ul class="list-unstyled">
+
+                    <div class="row">
+                        <div dir-paginate="product in vm.products | itemsPerPage: vm.itemsPerPage"
+                             total-items="vm.totalItems" current-page="vm.currentPage" class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="margin:0; padding:0">
+                                    <img src="{{ product.logo }}"
+                                         style="width:100%; height: 170px;">
+                                </div>
+                                <div class="panel-body">
+                                    <h2>
+                                        <a href="" ng-click="vm.showDetail(product.id, 'product')">{{product.name|limitTo:15}}</a>
+                                    </h2>
+
+                                    <div><strong>Available Qty: </strong>{{product.quantity}}</div>
+                                    <div><strong>Category: </strong>{{ product.category|limitTo:18}}...</div>
+                                    <div><strong>Supplier: </strong>{{product.supplier.data.supplier_name|limitTo:18}}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+
+                <ul class="pagination pagination-separated pagination-rounded text-center">
+                    <dir-pagination-controls on-page-change="vm.getProducts()"></dir-pagination-controls>
+                </ul>
+            </div>
+            <div class="col-md-2 hidden-sm">
+                <div class="side-navigation">
+
+                    <div style="margin-bottom:15px;">
+                        <div ng-if="!currentUser" class="row">
+                            <form class="panel panel-default" role="form" name="loginForm" novalidate>
+                                <h2 class="panel-heading">Login</h2>
+                                <small class="display-block  alert-danger">{{loginError}}</small>
+                                <img class="col-md-offset-4" ng-show="authenticating" height="80px"
+                                     src="assets/images/loading.png"/>
+
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"
+                                                 ng-class="{ 'has-error': (loginForm.company.$touched || loginForm.$submitted) && loginForm.company.$invalid || loginError != ''}">
+                                                <label>Email</label>
+                                                <input required name="company" class="form-control" type="email"
+                                                       placeholder="Enter your email here"
+                                                       ng-model="email">
+
+                                                <div class="form_error" ng-messages="loginForm.company.$error"
+                                                     ng-if="loginForm.company.$touched || loginForm.$submitted || loginError != ''"
+                                                     role="alert">
+                                                    <p ng-message="required">Name cannot be empty!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"
+                                                 ng-class="{ 'has-error': (loginForm.password.$touched || loginForm.$submitted) && loginForm.password.$invalid || loginError != ''}">
+                                                <label>Password</label>
+                                                <input required name="password" class="form-control" type="password"
+                                                       placeholder=""
+                                                       ng-model="password">
+
+                                                <div class="form_error" ng-messages="loginForm.password.$error"
+                                                     ng-if="loginForm.password.$touched || loginForm.$submitted || loginError != ''"
+                                                     role="alert">
+                                                    <p ng-message="required">Password cannot be empty!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="submit" class="col-md-12 btn btn-default pull-right" value="Login"
+                                           ng-click="singIn(loginForm.$valid, email, password)"/>
+
+                                    <p style="margin-top: 10px">If You don't have an Account,</p>
+
+                                    <a ui-sref="main.public.pricing"><i class="fa fa-user"></i>&nbsp;&nbsp;Sign Up</a>
+
+                                </div>
+                            </form>
+                        </div>
+                        <figure ng-if="currentUser" class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+                    <hr>
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End news section -->
+</div>

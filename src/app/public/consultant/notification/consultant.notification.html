@@ -1,0 +1,33 @@
+<div class="panel panel-default panel-default-main">
+    <div class="row">
+        <div class="col-sm-10">
+            <h2 class="sidebar-label">Notifications</h2>
+        </div>
+
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Notification</th>
+            <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="notification in vm.notifications | itemsPerPage: vm.itemsPerPage" total-items="vm.totalItems" current-page="vm.currentPage">
+            <th>{{ notification.order }}</th>
+            <th ng-show="notification.type == 'ProjectCostRequest' || notification.type == 'ProjectCostResponse'">
+                <a ui-sref="main.public.consultantDashboard.projectProformaDetail({proformaId:notification.item_id})">{{ notification.title }}</a>
+            </th>
+            <th ng-show="notification.type == 'ProductCostRequest' || notification.type == 'ProductCostResponse'">
+                <a ui-sref="main.public.consultantDashboard.projectProformaDetail({proformaId:notification.item_id})">{{ notification.title }}</a>
+            </th>
+            <th>{{ notification.type }}</th>
+        </tr>
+        </tbody>
+    </table>
+    <ul class="pagination pagination-separated pagination-rounded text-center">
+        <dir-pagination-controls on-page-change="vm.getTenders()"></dir-pagination-controls>
+    </ul>
+</div>

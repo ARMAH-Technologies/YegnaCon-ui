@@ -1,0 +1,68 @@
+<div class="container">
+    <!-- news-section
+<!-- map
+        ================================================== -->
+    <!-- contact section
+        ================================================== -->
+    <section class="contact-section">
+        <div class="col-md-12" style="padding-bottom: 40px;">
+            <div id="googleMap" style="height:400px;"></div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+
+            <div class="col-md-8">
+                <form id="contact-form">
+                    <h2>Send us a message</h2>
+
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input name="name" id="name" type="text" placeholder="Name" class="form-control">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <input name="mail" id="mail" type="text" placeholder="Email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="comment" id="comment" placeholder="Message" class="form-control"></textarea>
+                    </div>
+                    <input type="submit" id="submit_contact" value="Send Message">
+
+                    <div id="msg" class="message"></div>
+                </form>
+            </div>
+            <div class="col-md-4">
+
+                <div class="contact-info">
+                    <h2>Coact Info</h2>
+
+                    <p>You can contact or visit us in our office from Monday to Friday from 8:00 - 17:00</p>
+                    <ul class="information-list">
+                        <li><i class="fa fa-map-marker"></i><span>Meskel Flower Addis Ababa, Ethiopia</span>
+                        </li>
+                        <li><i class="fa fa-phone"></i><span>+251 118 332655</span><span>+1 605-315-8544</span></li>
+                        <li><i class="fa fa-envelope-o"></i><a href="contact2.html#">infor@yegnacon.com</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    >
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLXZ93JgCJWhV3BoZmSbPcBmOm9Q2FUfY&callback=initMap"
+            async defer></script>
+
+    <script>
+        function initMap() {
+            // Create a map object and specify the DOM element for display.
+            var map = new google.maps.Map(document.getElementById('googleMap'), {
+                center: {lat: 8.995752, lng: 38.766660},
+                scrollwheel: false,
+                zoom: 18
+            });
+        }
+
+    </script>
+
+    <!-- End contact section-->
+</div>

@@ -1,0 +1,71 @@
+<div class="panel panel-default panel-default-main">
+    <form id="contact-form">
+        <div class="row">
+            <div class="col-sm-4">
+                <h2 class="sidebar-label">Employees Leave Requests</h2>
+            </div>
+            <div class="col-sm-2">
+                <button ui-sref="main.public.contractorDashboard.leaveRequests"
+                        class="btn btn-default btn-action pull-right">Leave Requests
+                </button>
+            </div>
+            <div class="col-sm-2">
+                <button ui-sref="main.public.contractorDashboard.leaveHistory"
+                        class="btn btn-default btn-action pull-right">Leave History
+                </button>
+            </div>
+            <div class="col-sm-2">
+                <button ui-sref="main.public.contractorDashboard.leaveSettings"
+                        class="btn btn-default btn-action pull-right">Leave Settings
+                </button>
+            </div>
+            <div class="col-sm-2">
+                <button ui-sref="main.public.contractorDashboard.employeeCreate"
+                        class="btn btn-default btn-action pull-right"><i class="fa fa-plus"></i> Add Employee
+                </button>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>No.</th>
+                <th>Employee Name</th>
+                <th>Title</th>
+<!--
+                <th>Employment Date</th>
+-->
+                <th>Leave Type</th>
+                <th>Leave Starting Date</th>
+                <th>Number of Days</th>
+                <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in vm.requests | filter: {'request':{'status':'Pending'}}">
+                <td>{{$index+1}}</td>
+                <td><a class="active_anchor" ui-sref="main.public.contractorDashboard.employeeDetail({employeeId:item.employee_id})">{{item.name}}</a></td>
+                <td>{{item.employment_title}}</td>
+<!--
+                <td>{{item.employment_date}}</td>
+-->
+                <td>{{item.request.leave_name}}</td>
+                <td>{{item.request.start_date}}</td>
+                <td>{{item.request.number_of_days}}</td>
+                <td><input type="submit" value="Approve" class="btn btn-default btn-xs" ng-click="vm.updateLeaveRequest(item.employee_id,item.request.id,'Approved')"> <input type="submit" value="Deny" class="btn btn-default btn-xs" ng-click="vm.updateLeaveRequest(item.employee_id,item.request.id,'Denied')"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!--<div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <input type="submit" class="pull-right" value="Submit"/>
+                </div>
+            </div>
+        </div>-->
+    </form>
+    <!-- <ul class="pagination pagination-separated pagination-rounded text-center">
+         <dir-pagination-controls on-page-change="vm.getVacancies()"></dir-pagination-controls>
+     </ul>-->
+</div>

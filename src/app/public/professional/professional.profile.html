@@ -1,0 +1,298 @@
+<div class="panel panel-default panel-default-main">
+    <form ng-submit="vm.updateProfessional(professionalProfileForm.$valid)" name="professionalProfileForm"
+          novalidate>
+        <div class="alert alert-success fade in" ng-class="{ 'display-hidden': vm.updateSuccess == ''}">
+            <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> {{ vm.updateSuccess }}
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group"
+                     ng-class="{ 'has-error': (professionalProfileForm.name.$touched || professionalProfileForm.$submitted) && professionalProfileForm.name.$invalid}">
+                    <label>Full Name *</label>
+                    <input type="text" class="form-control" required name="name" ng-model="vm.professional.name"
+                           ng-disabled="true"/>
+
+                    <div class="form_error" ng-messages="professionalProfileForm.name.$error"
+                         ng-if="professionalProfileForm.name.$touched || professionalProfileForm.$submitted"
+                         role="alert">
+                        <p ng-message="required">Full name is required.</p>
+                    </div>
+                </div>
+                <div class="form-group "
+                     ng-class="{ 'has-error': (professionalProfileForm.professional_title.$touched || professionalProfileForm.$submitted) && professionalProfileForm.professional_title.$invalid}">
+                    <label>Professional Title</label>
+                    <select required name="professional_title" class="form-control" ng-model="vm.professional_title">
+                        <option ng-repeat = "categories in vm.coreService.vacancyCategories" value="{{categories}}">{{categories}}</option>
+
+                    </select>
+
+                    <div class="form_error" ng-messages="professionalProfileForm.professional_title.$error"
+                         ng-if="professionalProfileForm.professional_title.$touched || professionalProfileForm.$submitted"
+                         role="alert">
+                        <p ng-message="required">Title is required.</p>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{ 'has-error': (professionalProfileForm.birth_date.$touched || professionalProfileForm.$submitted) && professionalProfileForm.birth_date.$invalid}">
+                    <label>Birth Date</label>
+                    <input type="date" class="form-control" name="birth_date" ng-model="vm.birth_date">
+
+                    <div class="form_error" ng-messages="professionalProfileForm.birt_date.$error"
+                         ng-if="professionalProfileForm.birth_date.$touched || professionalProfileForm.$submitted"
+                         role="alert">
+                        <p ng-message="required">Birth date is required.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"
+                         ng-class="{ 'has-error': (professionalProfileForm.nationality.$touched || professionalProfileForm.$submitted) && professionalProfileForm.nationality.$invalid}">
+                        <label>Nationality</label>
+                        <input type="text" class="form-control" required name="nationality" ng-model="vm.nationality"
+                                />
+
+                        <div class="form_error" ng-messages="professionalProfileForm.nationality.$error"
+                             ng-if="professionalProfileForm.nationality.$touched || professionalProfileForm.$submitted"
+                             role="alert">
+                            <p ng-message="required">Nationality is required.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6"
+                         ng-class="{ 'has-error': (professionalProfileForm.gender.$touched || professionalProfileForm.$submitted) && professionalProfileForm.gender.$invalid}">
+                        <label>Gender</label>
+                        <select class="form-control" required name="gender" ng-model="vm.gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+
+
+                        <div class="form_error" ng-messages="professionalProfileForm.gender.$error"
+                             ng-if="professionalProfileForm.gender.$touched || professionalProfileForm.$submitted"
+                             role="alert">
+                            <p ng-message="required">Gender is required.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group"
+                     ng-class="{ 'has-error': (professionalProfileForm.skills.$touched || professionalProfileForm.$submitted) && professionalProfileForm.skills.$invalid}">
+                    <label>Skills</label>
+                    <tags-input ng-model="vm.skills"></tags-input>
+
+                    <div class="form_error" ng-messages="professionalProfileForm.skills.$error"
+                         ng-if="professionalProfileForm.skills.$touched || professionalProfileForm.$submitted"
+                         role="alert">
+                        <p ng-message="required">Gender is required.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <label>Profile Picture:</label>
+
+                <div class="form-group">
+                    <div class="row">
+                        <a type="button" class="btn btn-orange btn-sm" data-toggle="modal"
+                           data-target="#changePic"><i class="fa fa-edit"></i></a>
+                        <img style="width:200px;height:200px;float:left;" ng-src="{{ vm.professional.logo }}">&nbsp;
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="sidebar-label">Contact</h2>
+                <hr>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"
+                     ng-class="{ 'has-error': (professionalProfileForm.city.$touched || professionalProfileForm.$submitted) && professionalProfileForm.city.$invalid}">
+                    <label>City</label>
+                    <select required ng-model="vm.city" name="city" class="form-control">
+                        <option ng-repeat="location in vm.locations" value="{{location}}">{{location}}</option>
+                    </select>
+
+                    <div class="form_error" ng-messages="professionalProfileForm.city.$error"
+                         ng-if="professionalProfileForm.city.$touched || professionalProfileForm.$submitted"
+                         role="alert">
+                        <p ng-message="required">City is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"
+                     ng-class="{ 'has-error': (professionalProfileForm.subcity.$touched || professionalProfileForm.$submitted) && professionalProfileForm.subcity.$invalid}">
+                    <label>Sub City</label>
+                    <input type="text" class="form-control" name="subcity" ng-model="vm.sub_city"/>
+
+                    <div class="form_error" ng-messages="professionalProfileForm.subcity.$error"
+                         ng-if="professionalProfileForm.subcity.$touched || professionalProfileForm.$submitted"
+                         role="alert">
+                        <p ng-message="required">Sub City is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"
+                     ng-class="{ 'has-error': (professionalProfileForm.company_name.$touched || professionalProfileForm.$submitted) && professionalProfileForm.company_name.$invalid}">
+                    <label>House Number</label>
+                    <input type="text" class="form-control" name="house_number" placeholder=""
+                           ng-model="vm.house_no"/>
+
+                    <div class="form_error" ng-messages="professionalProfileForm.house_number.$error"
+                         ng-if="professionalProfileForm.house_number.$touched || professionalProfileForm.$submitted"
+                         role="alert">
+                        <p ng-message="required">House Number is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Specific Address <span class="additional-text"> (optional)</span></label>
+                    <input type="text" class="form-control" name="specific_address"
+                           placeholder="eg.building name,floor,office No"
+                           ng-model="vm.specific_address"/>
+
+                    <div class="form_error" ng-messages="professionalProfileForm.specific_address.$error"
+                         ng-if="professionalProfileForm.specific_address.$touched || professionalProfileForm.$submitted"
+                         role="alert">
+                        <p ng-message="required">Specific Address is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"
+                     ng-class="{ 'has-error': (professionalProfileForm.house_number.$touched || professionalProfileForm.$submitted) && professionalProfileForm.house_number.$invalid}">
+                    <label>Main Phone No.</label>
+                    <input type="number" class="form-control" name="house_number" placeholder="eg. +251 911 000000"
+                           ng-model="vm.phone_number_1"/>
+
+                    <div class="form_error" ng-messages="professionalProfileForm.house_number.$error"
+                         ng-if="professionalProfileForm.house_number.$touched || professionalProfileForm.$submitted"
+                         role="alert">
+                        <p ng-message="required">Main Phone No. is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>2nd phone Number <span class="additional-text"> (optional)</span></label>
+                    <input type="number" class="form-control" name="second_phone" placeholder="eg. +251 911 000000"
+                           ng-model="vm.phone_number_2"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input class="form-control" type="email" name="email" disabled ng-model="vm.professional.email"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"
+                     ng-class="{ 'has-error': (professionalProfileForm.country.$touched || professionalProfileForm.$submitted) && professionalProfileForm.country.$invalid}">
+                    <label>Country</label>
+                    <input type="text" class="form-control" name="country" ng-model="vm.country" disabled
+                           value="Ethiopia"/>
+
+                    <div class="form_error" ng-messages="professionalProfileForm.country.$error"
+                         ng-if="professionalProfileForm.country.$touched || professionalProfileForm.$submitted"
+                         role="alert">
+                        <p ng-message="required">Country is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Website <span class="additional-text"> (optional)</span></label>
+                    <input type="text" class="form-control" name="website" ng-model="vm.website"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Facebook link<span class="additional-text"> (optional)</span></label>
+                    <input type="text" class="form-control" name="facebook" ng-model="vm.facebook_link"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Twitter Link<span class="additional-text" style=""> (optional)</span></label>
+                    <input type="text" class="form-control" name="twitter" ng-model="vm.twitter_link"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Linkedin Link <span class="additional-text"> (optional)</span></label>
+                    <input type="text" class="form-control" name="linkedin" ng-model="vm.linkidin_link"/>
+                </div>
+            </div>
+            <div class="form-group col-md-12"
+                 ng-class="{ 'has-error': (professionalProfileForm.biography.$touched || professionalProfileForm.$submitted) && professionalProfileForm.biography.$invalid}">
+                <h2 class="sidebar-label">Biography</h2>
+
+                <text-angular required ng-model="vm.biography" name="biography"></text-angular>
+                <div class="form_error" ng-messages="professionalProfileForm.biography.$error"
+                     ng-if="professionalProfileForm.biography.$touched || professionalProfileForm.$submitted"
+                     role="alert">
+                    <p ng-message="required">Description is required</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <input type="submit" class="btn main-color pull-right" value="Save Changes"/>
+            </div>
+
+        </div>
+
+
+    </form>
+    <!-- Modal -->
+    <div id="changePic" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change Picture</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"
+                         ng-class="{'has-error':professionalProfileForm.file.$touched && professionalProfileForm.file.$invalid}">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="No Files Selected ... "
+                                   ng-model="vm.file.name">
+                            <span class="input-group-btn">
+                                                    <button class="btn btn-orange" type="button" ngf-select
+                                                            ng-model="vm.file"
+                                                            name="file" id="file2" ngf-pattern="'image/*'"
+                                                            ngf-accept="'image/*'" ngf-max-size="20MB"
+                                                            ngf-min-height="100"
+                                                            >Browse...
+                                                    </button>
+                                                </span>
+                        </div>
+                        <div class="help-block" ng-messages="professionalProfileForm.file.$error">
+                            <div ng-message="maxSize">The file must be less than 2MB</div>
+                            <div ng-message="minHeight">The file must be at least 100px high</div>
+                            <div ng-message="pattern">Invalid File Type</div>
+                            <div ng-message="required">You must upload a project Logo</div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <img ng-show="vm.file" style="width:100px;height:100px;float:left;"
+                             ngf-thumbnail="vm.file">&nbsp;
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-orange" ng-click="vm.updatePicture()" data-dismiss="modal">
+                        Update
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

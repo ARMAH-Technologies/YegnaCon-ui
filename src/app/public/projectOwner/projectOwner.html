@@ -1,0 +1,138 @@
+<div class="container">
+    <section class="page-banner-section">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Project Owners</h2>
+            </div>
+            <div class="col-md-6">
+                <ul class="page-depth">
+                    <li><a href="" ui-sref="main.public.contractor">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- news-section
+<!-- news-section
+        ================================================== -->
+    <section class="news-section">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="side-navigation">
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+                    <hr>
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+                    <hr>
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 panel panel-default panel-default-main">
+                <div class="row card">
+                    <form>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="search_keywords"
+                                       placeholder="Search projectOwners..."/>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>All Types</option>
+                                    <option ng-repeat="education in vm.coreService.projectOwnersEducation"
+                                            value={{education}} label={{education}}></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>All Experience</option>
+                                    <option ng-repeat="experience in vm.coreService.projectOwnersExperience"
+                                            value={{experience}} label={{experience}}></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group text-center">
+                                <button class="form-control btn-orange" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <ul class="team-list row ">
+                    <li dir-paginate="projectOwner in vm.projectOwners | itemsPerPage: vm.itemsPerPage"
+                        total-items="vm.totalItems" current-page="vm.currentPage" class="team-item col-md-4 ">
+                        <a ui-sref="main.public.projectOwnerDetail({projectOwnerId:projectOwner.id})">
+                            <div class=" team-item ">
+                                <div align="center" class="team-item-inner">
+                                    <img class="logo image-round-border"
+                                         src="{{ projectOwner.image }}" alt="" width="90"
+                                         height="90">
+                                    <br>
+
+                                    <h2 class="list-title"><a
+                                            href="" ng-click="vm.showDetail(projectOwner.id)">{{projectOwner.name|limitTo:10}}</a>
+                                    </h2>
+
+                                    <span style="font-size: 12px;">{{ projectOwner.projectOwner.data.projectOwner_title }}</span>
+
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="pagination pagination-separated pagination-rounded text-center">
+                    <dir-pagination-controls on-page-change=" vm.getProjectOwners()"></dir-pagination-controls>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <div class="side-navigation">
+
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+                    <hr>
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+                    <hr>
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End news section -->
+</div>

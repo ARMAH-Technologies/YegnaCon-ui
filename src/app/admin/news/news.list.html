@@ -1,0 +1,46 @@
+<div class="col-md-12">
+
+        <div class="panel body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>News Title</th>
+                        <th>Created At</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="news in vm.news | itemsPerPage: vm.itemsPerPage track by $index"
+                        total-items="vm.totalItems"
+                        current-page="vm.currentPage">
+
+                        <td>{{$index + 1}}</td>
+                        <td>{{news.title}}</td>
+                        <td>{{news.created_at | date:"medium"}}</td>
+                        <td class="text-center">
+                            <ul class="list-inline list-unstyled">
+                                <li>
+                                    <button ui-sref="main.admin.news.edit({newsId: news.id})" style="padding: 0 10px; margin: 0;" class="btn btn-default "
+                                            ng-click="">
+                                        <i class="icon-pencil"></i></button>
+                                </li>
+                                <li>
+                                    <button style="padding: 0 10px; margin: 0;" class="btn btn-default"
+                                            ng-click="vm.deleteNews(news.id)"><i class="icon-trash"></i></button>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ul class="pagination pagination-separated pagination-rounded text-center">
+                <dir-pagination-controls on-page-change="vm.getNews()"></dir-pagination-controls>
+            </ul>
+
+        </div>
+
+</div>
+

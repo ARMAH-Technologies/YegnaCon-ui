@@ -1,0 +1,23 @@
+[
+  {
+    "id":"1",
+    "employeeName":"Abebe Kebede",
+    "title":"Salesman",
+    "employmentDate":"01/27/2014",
+    "leaveType":"Annual Leave",
+    "leaveStartingDate":"03/04/2015",
+    "leaveEndingDate":"03/05/2015",
+    "numberOfDays":"2"
+  },
+  {
+    "id":"1",
+    "employeeName":"Abebech Alemu",
+    "title":"Cashier",
+    "employmentDate":"03/24/2015",
+    "leaveType":"Sick Leave",
+    "leaveStartingDate":"08/12/2016",
+    "leaveEndingDate":"08/15/2016",
+    "numberOfDays":"4"
+  }
+]
+

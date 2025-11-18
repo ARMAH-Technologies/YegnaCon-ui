@@ -1,0 +1,23 @@
+<!-- Segmented button -->
+<div class="panel border-orange">
+    <div class="panel-heading bg-orange-700">
+        <h6 class="panel-title">News</h6>
+
+        <div class="heading-elements">
+            <div class="btn-group heading-btn">
+
+                <button class="btn btn-orange dropdown-toggle" data-toggle="dropdown"><i class="icon-menu"></i></button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a ui-sref="main.admin.news.post"><i class="icon-add"></i>Add News Item</a></li>
+                    <li><a ui-sref="main.admin.news.list"><i class="icon-three-bars"></i>List News Items</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <ui-view></ui-view>
+    </div>
+</div>
+<!-- /segmented button -->

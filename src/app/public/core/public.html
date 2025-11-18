@@ -1,0 +1,246 @@
+<script type="text/javascript" src="js/public/js/script.js"></script>
+<!-- Container -->
+<div id="container">
+    <div id="loginAlert" class="alert alert-danger alert-dismissable fade in" style="font-size: larger"
+         ng-show="inactiveUser">
+        <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Subscription!</strong> <a ui-sref="main.public.getting-started" ng-click="inactiveUser = false">You must
+        subscribe to continue using this site.</a>
+    </div>
+
+    <!-- Header================================================== -->
+    <header class="clearfix">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="top-line">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul style="float: left" class="social-icons">
+                                <li><a class="facebook" href="https://www.facebook.com/yegnacon/" target="_blank"><i
+                                        class="fa fa-facebook"></i></a></li>
+                                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a class="rss" href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li><a class="google" href="#"><i class="fa fa-google-plus"></i></a></li>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul style="float:right" class="social-icons">
+                                <li ng-if="!currentUser"><a ui-sref="main.public.pricing"><i class="fa fa-user"></i>&nbsp;&nbsp;Register</a>
+                                </li>
+                                <li ng-if="currentUser"><a><i
+                                        class="fa fa-user"></i>&nbsp;&nbsp;{{currentUser.name}}</a></li>
+                                <li ng-if="!currentUser"><a ui-sref="main.public.login"><i class="fa fa-user"></i>&nbsp;&nbsp;Login
+                                </a>
+                                </li>
+                                <li ng-if="currentUser"><a href="" ng-click="vm.signOut()"><i class="fa fa-power-off"
+                                                                                              aria-hidden="true"></i>&nbsp;&nbsp;Logout</a>
+                                </li>
+                                <li><a>{{ vm.inactiveUser }}</a></li>
+                                <li><a ui-sref="main.public.documentation.home"><i class="fa fa-file"></i> &nbsp;
+                                    Help</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"><img src="assets/images/public/images/logo.png"
+                                                                   alt=""></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="drop"><a ng-class="{'active':(currentStateName=='main.public.home')}"
+                                            ui-sref="main.public.home">Home</a></li>
+                        <li class="drop"><a
+                                ng-class="{'active':(currentStateName=='main.public.consultant'||currentStateName=='main.public.contractor'||currentStateName=='main.public.supplier')}">Directory</a>
+                            <ul class="dropdown">
+                                <li><a ui-sref="main.public.consultant">Consultants</a></li>
+                                <li><a ui-sref="main.public.contractor">Contractors</a></li>
+                                <li><a ui-sref="main.public.supplier">Suppliers</a></li>
+                                <li><a ui-sref="main.public.otherServices">Other Services</a></li>
+                            </ul>
+                        </li>
+                        <li class="drop"><a
+                                ng-class="{'active':(currentStateName=='main.public.project'||currentStateName=='main.public.product')}">Construction</a>
+                            <ul class="dropdown">
+                                <li><a ui-sref="main.public.product">Products</a></li>
+                                <li><a ui-sref="main.public.project">Projects</a></li>
+                            </ul>
+                        </li>
+                        <li class="drop"><a
+                                ng-class="{'active':(currentStateName=='main.public.vacancy'||currentStateName=='main.public.professional')}"
+                                ui-sref="main.public.vacancy">Jobs</a>
+                            <ul class="dropdown">
+                                <li><a ui-sref="main.public.vacancy">Vacancies</a></li>
+                                <li><a ui-sref="main.public.professional">Professionals</a></li>
+                            </ul>
+                        </li>
+                        <li><a ng-class="{'active':currentStateName=='main.public.tender'}"
+                               ui-sref="main.public.tender">Tenders</a></li>
+                        <li ng-if="currentUser.profileType=='Admin'"><a
+                                ui-sref="main.admin.home">Admin</a>
+                        </li>
+                        <li ng-click="vm.notficationHover()" ng-class="{'active':currentStateName=='notification'}"
+                            ng-if="currentUser.status == 'active'">
+                            <a href="" ng-if="notifications.length != 0" class="dropdown-toggle" data-toggle="dropdown">Notifications
+                                <span style="background-color: orange;margin-top: 16px; border-color: orange;" class="label rounded label-danger">{{notifications.length}}</span></a>
+                            <a href="" ng-if="notifications.length == 0" class="dropdown-toggle" data-toggle="dropdown">Notifications
+                                <span style="background-color: orange;margin-top: 16px; border-color: orange;" class="label rounded label-success">{{notifications.length}}</span></a>
+                            <ul class="dropdown-menu scrollable-menu" role="menu" style="width: 400px;">
+                                <li ng-repeat="notification in notifications track by $index">
+                                    <a href="">
+                                        <div class="row notification_item" data-target=""
+                                             ng-click="readNotification(notification,$index)">
+                                            <div class="col-xs-2">
+                                                <img style="margin: 10px;" class="img-circle"
+                                                     src="{{ notification.user_logo }}" alt="" width="40px"
+                                                     height="40px">
+                                            </div>
+                                            <div class="col-xs-10" style="padding: 10px;">
+                                                <div class="row">
+                                                    <div class="col-xs-8">
+                                                        <h5 class="zero-margin-padding">{{
+                                                            notification.user_name|limitTo:15
+                                                            }}...</h5>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <p class="zero-margin-padding">{{ notification.created_at |
+                                                            date:mediumDate}}</p>
+                                                    </div>
+                                                </div>
+                                                <div>{{notification.title | limitTo:100}}...</div>
+                                                <span ng-if="notification.status == 'read'" class="label main-color">read</span>
+                                                <span ng-if="notification.status == 'unread'"
+                                                      class="label label-danger">unread</span>
+                                            </div>
+
+
+                                        </div>
+                                    </a>
+                                    <hr class="zero-margin-padding">
+                                </li>
+                            </ul>
+                        </li>
+                        <li ng-class="{'active':currentStateName=='main.public.home'}"
+                            ng-if="currentUser.profileType=='Contractor' && currentUser.status == 'active'"><a
+                                ui-sref="main.public.contractorDashboard.productProforma({contractorId:currentUser.id})">Dashboard</a>
+                        </li>
+                        <li ng-class="{'active':currentStateName=='main.public.home'}"
+                            ng-if="currentUser.profileType=='Consultant' && currentUser.status == 'active'"><a
+                                ui-sref="main.public.consultantDashboard.productProforma({consultantId:currentUser.id})">Dashboard</a>
+                        </li>
+                        <li ng-class="{'active':currentStateName=='main.public.home'}"
+                            ng-if="currentUser.profileType=='ProjectOwner' && currentUser.status == 'active'"><a
+                                ui-sref="main.public.projectOwnerDashboard.profile({projectOwnersId:currentUser.id})">Dashboard</a>
+                        </li>
+                        <li ng-class="{'active':currentStateName=='main.public.home'}"
+                            ng-if="currentUser.profileType=='Supplier' && currentUser.status == 'active'"><a
+                                ui-sref="main.public.supplierDashboard.proforma({supplierId:currentUser.id})">Dashboard</a>
+                        </li>
+                        <li ng-if="currentUser.profileType=='Professional' && currentUser.status == 'active'"><a
+                                ui-sref="main.public.professionalDashboard.profile({professionalId:currentUser.id})">Dashboard</a>
+                        </li>
+                        <li ng-if="currentUser.profileType=='Employee' && currentUser.status == 'active'"><a href ng-click="vm.goToDashboard()">Dashboard</a><!-- ui-sref="main.public.employeeDashboard.profile({employeeId:currentUser.id, companyId:vm.companyId}) -->
+                        </li>
+                        <li><a ng-hide="currentUser!= null"
+                               ng-class="{'active':currentStateName=='main.public.contact'}"
+                               ui-sref="main.public.contact">Contact</a></li>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+
+        </nav>
+    </header>
+    <!-- End Header -->
+
+    <ui-view style="padding-top: 500px;"></ui-view>
+    <!-- footer
+    ================================================== -->
+    <footer>
+        <div class="up-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="footer-widget">
+                            <h2>About Us</h2>
+
+                            <p style="text-align: justify">Yegnacon, is a platform designed to bring professionals,
+                                contractors and construction material suppliers in one place. The website has projects
+                                posted and
+                                contractors which are ready to start work on your projects.
+                                Furthermore you can see portfolio of contractors,professionals and product
+                                suppliers.<br><a href="#">read more...</a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="footer-widget">
+                            <h2>Tags</h2>
+                            <ul class="tag-list">
+                                <li><a href="#" ui-sref="main.public.contractor">Contractors</a></li>
+                                <li><a href="#" ui-sref="main.public.supplier">Suppliers</a></li>
+                                <li><a href="#" ui-sref="main.public.consultant">Consultants</a></li>
+                                <li><a href="#" ui-sref="main.public.vacancy">Vacancies</a></li>
+                                <li><a href="#" ui-sref="main.public.tender">Tenders</a></li>
+                                <li><a href="#" ui-sref="main.public.quickFacts">Quick Facts</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="footer-widget">
+                            <h2>Like Us on Facebook</h2>
+                            <!-- Widget :: Latest Posts -->
+                            <div class="fb-page"
+                                 data-href="https://www.facebook.com/yegnacon/"
+                                 data-width="380"
+                                 data-height="480"
+                                 data-hide-cover="false"
+                                 data-show-facepile="true"
+                                 data-show-posts="false">
+
+                            </div>
+                            <!-- /Widget :: Latest Posts -->
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="footer-widget info-widget">
+                            <h2>Contact Information</h2>
+
+                            <p class="first-par">You can contact or visit us during working time.</p>
+
+                            <p><span>Tel: </span> +251 11 8 332655</p>
+
+                            <p><span>Address: </span> Meskel Flower Addis Ababa, Ethiopia</p>
+
+                            <p><span>Email: </span> info@yegacon.com</p>
+
+                            <p><span>Working Hours: </span> 8:30 - 17:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">
+            &copy; Copyright 2016. Yegnacon&trade; All
+            rights reserved.
+        </p>
+    </footer>
+    <!-- End footer -->
+
+</div>
+<!-- End Container -->

@@ -1,0 +1,205 @@
+<form class="form-vertical" ng-submit="vm.addVacancy()">
+    <fieldset class="content-group">
+        <legend class="text-bold ">Create Vacancy</legend>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="">Choose Vacancy Type</label>
+                    <select class="form-control" ng-model="vm.companyType">
+                        <option selected value="existingCompany">Existing Company</option>
+                        <option value="newCompany" selected>New Company</option>
+
+                    </select>
+                </div>
+                <div class="form-group" ng-if="vm.companyType == 'existingCompany'">
+                    <!--Company Information-->
+                    <label>Company Name</label>
+                    <select ng-model="vm.vacancy.userId" class="form-control">
+                        <option ng-repeat="company in vm.companies" value="{{company.id}}">{{company.name}}</option>
+                    </select>
+
+                    <!--Company Information-->
+                </div>
+                <div class="form-group ">
+                    <label>Vacancy Title</label>
+
+                    <div>
+                        <input class="form-control" type="text" ng-required="true" ng-model="vm.vacancy.vacancy.title">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Employment Type:</label>
+                    <select class="form-control" name="contract" ng-model="vm.vacancy.vacancy.contract">
+                        <option ng-repeat="category in vm.filteredTenders" value="{{category.id}}">{{category.category}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Education Level</label>
+                    <select class="form-control" ng-model="vm.vacancy.vacancy.education_level"
+                            ng-options="educationalLevel for educationalLevel in vm.educationalLevel"></select>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label>Experience</label>
+                    <select class="form-control" ng-model="vm.vacancy.vacancy.experience"
+                            ng-options="experience for experience in vm.experience"></select>
+                </div>
+
+                <div class="form-group">
+
+                    <label>Salary</label>
+
+                    <div class="checkbox">
+                        <label>
+                            <input ng-click="vm.salarySet()" ng-model="vm.salary"
+                                   ng-true-value="'Negotiable'" ng-false-value="'figure'" type="checkbox">Negotiable
+                        </label>
+                    </div>
+                    <div class="input-group">
+
+                        <span class="input-group-addon" id="basic-addon1">ETB.</span>
+                        <input ng-disabled="vm.salaryDisable" type="text" class="form-control"
+                               placeholder="Salary In ETB."
+                               aria-describedby="basic-addon1"
+                               ng-model="vm.vacancy.vacancy.salary">
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label>Work Place</label>
+                    <input type="text" class="form-control" placeholder="Work Place"
+                           ng-model="vm.vacancy.vacancy.work_place">
+                </div>
+                <div class="form-group">
+                    <label>Closing Date</label>
+                    <input type="date" class="form-control" placeholder="Closing Date"
+                           ng-model="vm.vacancy.vacancy.closing_date">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Description</label>
+                    <text-angular required ng-model="vm.vacancy.vacancy.description" name="description"></text-angular>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+
+        </div>
+    </fieldset>
+    <hr>
+
+
+    <div ng-if="vm.companyType == 'newCompany'">
+        <legend>Please Fill External Company Information</legend>
+        <!--Company Information-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Company Name</label>
+                    <input type="text" ng-model="vm.vacancy.company.name" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" ng-model="vm.vacancy.company.email" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Country</label>
+                    <input type="text" name="country" ng-model="vm.vacancy.address.country" class="form-control">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>City</label>
+                    <select required ng-model="m.vacancy.address.city" name="city" class="form-control">
+                        <option ng-repeat="location in vm.locations" value="{{location}}">{{location}}</option>
+                    </select>
+
+                    <div class="form_error ng-scope ng-inactive" ng-messages="consultantProfileForm.city.$error"
+                         ng-if="consultantProfileForm.city.$touched" role="alert">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Sub City</label>
+                    <input type="text" name="subcity" ng-model="vm.vacancy.address.sub_city" class="form-control">
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Specific Address <span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="specific_address" placeholder="eg.building name,floor,office No"
+                           ng-model="vm.vacancy.address.specific_address" class="form-control">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Main Phone No.</label>
+                    <input type="text" name="house_number" placeholder="eg. +251 911 000000"
+                           ng-model="vm.vacancy.address.phone_number_1" class="form-control">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>2nd phone Number <span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="specific_address" placeholder="eg. +251 911 000000"
+                           ng-model="vm.vacancy.address.phone_number_2" class="form-control">
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Website <span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="website" ng-model="vm.vacancy.address.website" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Facebook link<span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="facebook" ng-model="vm.vacancy.address.facebook_link" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Twitter Link<span class="additional-text" style=""> (optional)</span></label>
+                    <input type="text" name="twitter" ng-model="vm.vacancy.address.twitter_link" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Linkedin Link <span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="linkedin" ng-model="vm.vacancy.address.linkidin_link" class="form-control">
+                </div>
+            </div>
+
+        </div>
+
+        <!--Company Information-->
+    </div>
+
+    <div class="pull-right">
+        <button type="submit" class="btn btn-orange">Submit <i class="icon-arrow-right14 position-right"></i></button>
+    </div>
+</form>
+
+<!--Modal-->
+
+<!--END Modal-->
+
+

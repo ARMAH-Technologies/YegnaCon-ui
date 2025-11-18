@@ -1,0 +1,84 @@
+<section class="contact-section padding-top">
+    <div class="container-fluid">
+        <div class="col-sm-6 col-sm-offset-3">
+
+            <div class="row bootplus-card">
+                <div class="alert alert-danger fade in" ng-class="{ 'display-hidden': vm.registrationError == ''}">
+                    <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Registration Error!</strong> {{ vm.registrationError }}
+                </div>
+                <form id="contact-form" class="register-form" name="registrationForm" role="form" novalidate>
+                    <div class="col-md-6">
+                        <h1 class="zero-margin-padding">Register <span style="font-size:16px;color:#ffba00"></span></h1>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group pull-right">
+                            <label>I am a</label>
+                            <toggle ng-model="vm.profile_type" on="Professional" off="Project Owner" offstyle="main-color" onstyle="btn-success"></toggle>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group" ng-class="{ 'has-error': (registrationForm.name.$touched || registrationForm.$submitted) && registrationForm.name.$invalid }">
+                                <label>Fullame</label>
+                                <input name="name" id="first_name" type="text" required placeholder="First Name" ng-model="vm.name" class="form-control">
+                                <div class="form_error" ng-messages="registrationForm.name.$error" ng-if="registrationForm.name.$touched || registrationForm.$submitted" role="alert" >
+                                    <p ng-message="required">Full Name cannot be empty!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group" ng-class="{ 'has-error': (registrationForm.email.$touched || registrationForm.$submitted) && registrationForm.email.$invalid }">
+                                <label>Email Address</label>
+                                <input name="email" type="email" placeholder="Email" required ng-model="vm.email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" class="form-control"/>
+                                <div class="form_error" ng-messages="registrationForm.email.$error" ng-if="registrationForm.email.$touched || registrationForm.$submitted" role="alert" >
+                                    <p ng-message="required">Email cannot be empty!</p>
+                                    <p ng-message="pattern">Please enter a valid email address!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" ng-class="{ 'has-error': (registrationForm.password.$touched || registrationForm.$submitted) && registrationForm.password.$invalid }">
+                                <label>Password</label>
+                                <input type="password" id="password" name="password" placeholder="" required class="form-control" ng-model="vm.password">
+                                <div class="form_error" ng-messages="registrationForm.password.$error" ng-if="registrationForm.password.$touched || registrationForm.$submitted" role="alert" >
+                                    <p ng-message="required">Password cannot be empty!</p>
+                                    <p ng-message="ngMinlength">Password must be at least 6 characters</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" ng-class="{ 'has-error': (registrationForm.confirm_password.$touched || registrationForm.$submitted) && registrationForm.confirm_password.$invalid }">
+                                <label>Confirm Password</label>
+                                <input type="password" id="confirm_password" pw-check="password" name="confirm_password" class="form-control" required placeholder="" ng-model="vm.confirm_password">
+                                <div class="form_error" ng-messages="registrationForm.confirm_password.$error" ng-if="registrationForm.confirm_password.$touched || registrationForm.$submitted" role="alert" >
+                                    <p ng-message="required">Please re-enter your password!</p>
+                                    <p ng-message="pwmatch">Passwords do not match</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input required type="checkbox" name="terms" ng-model="vm.terms">
+                                <label><a class="active" href="">Terms and references</a></label>
+                                <div class="form_error" ng-messages="registrationForm.terms.$error" ng-if="registrationForm.terms.$touched || registrationForm.$submitted" role="alert" >
+                                    <p ng-message="required">You must agree to the terms and conditions!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="button" ng-disabled = "registerButton" class="btn main-color pull-right" value="Register" ng-click="vm.register(registrationForm.$valid)" />
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>

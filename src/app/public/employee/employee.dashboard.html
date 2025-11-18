@@ -1,0 +1,32 @@
+<div class="container" id="go_to_top">
+    <section class="page-banner-section">
+        <div class="row">
+            <div class="col-md-6">
+                <h2> Employee Dashboard</h2>
+            </div>
+        </div>
+    </section>
+    <section class="services-page-section news-section " style="padding-top: 5px">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="side-navigation">
+                    <ul class="side-navigation-list">
+                        <li><a ui-sref="main.public.employeeDashboard.profile" ng-class="{'active': currentParentState=='employeeDashboard.profile'}">Profile</a></li>
+                        <li><a ui-sref="main.public.employeeDashboard.requestLeave" ng-class="{'active': currentParentState=='employeeDashboard.requestLeave'}">Request Leave</a></li>
+                        <li><a ui-sref="main.public.employeeDashboard.leaves" ng-class="{'active': currentParentState=='employeeDashboard.leaves'}">Leaves</a></li>
+                        <li><a ui-sref="main.public.employeeDashboard.leaveHistory" ng-class="{'active': currentParentState=='employeeDashboard.leaveHistory'}">Leave History</a></li>
+                        <li><a ui-sref="main.public.employeeDashboard.accountSettings" ng-class="{'active': currentParentState=='employeeDashboard.accountSettings'}">Account Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <ui-view>
+
+                </ui-view>
+
+            </div>
+        </div>
+
+
+    </section>
+</div>

@@ -1,0 +1,67 @@
+<div class="panel panel-default panel-default-main">
+    <div class="row">
+        <div class="col-sm-4">
+            <h2 class="sidebar-label">My Employees</h2>
+        </div>
+        <div class="col-sm-2">
+            <button ui-sref="main.public.contractorDashboard.leaveRequests"
+                    class="btn btn-default btn-action pull-right">Leave Requests
+            </button>
+        </div>
+        <div class="col-sm-2">
+            <button ui-sref="main.public.contractorDashboard.leaveHistory"
+                    class="btn btn-default btn-action pull-right">Leave History
+            </button>
+        </div>
+        <div class="col-sm-2">
+            <button ui-sref="main.public.contractorDashboard.leaveSettings"
+                    class="btn btn-default btn-action pull-right">Leave Settings
+            </button>
+        </div>
+        <div class="col-sm-2">
+            <button ui-sref="main.public.contractorDashboard.employeeCreate"
+                    class="btn btn-default btn-action pull-right"><i class="fa fa-plus"></i> Add Employee
+            </button>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Employee Name</th>
+            <th>Title</th>
+            <th>Contract Type</th>
+            <!--<th>Status</th>-->
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in vm.employee">
+            <td>{{$index+1}}</td>
+            <td><a class="active_anchor" ui-sref="main.public.contractorDashboard.employeeDetail({employeeId:item.id})">{{item.name}}</a></td>
+            <td>{{item.employment_title}}</td>
+            <td>{{item.employment_type}}</td>
+            <!--<td><span class="label label-success">Active</span></td>-->
+            <td>
+                <ul class="list-inline list-unstyled">
+                    <li>
+                        <button style="padding: 0 10px; margin: 0;" class="btn btn-default "
+                                ui-sref="main.public.contractorDashboard.employeeEdit({employeeId:item.id})">
+                            <i class="fa fa-pencil"></i></button>
+                    </li>
+                    <li>
+                        <button style="padding: 0 10px; margin: 0;" class="btn btn-default"
+                                ng-click="vm.deleteEmployee(item.id)"><i class="fa fa-trash-o"></i></button>
+                    </li>
+                </ul>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+    <ul class="pagination pagination-separated pagination-rounded text-center">
+        <dir-pagination-controls on-page-change="vm.getVacancies()"></dir-pagination-controls>
+    </ul>
+</div>

@@ -1,0 +1,193 @@
+<form class="form-vertical" ng-submit="vm.addTender()">
+    <fieldset class="content-group">
+        <legend class="text-bold">Create Tender</legend>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group ">
+                    <label>Choose Tender Type</label>
+                    <select class="form-control" ng-model="vm.companyType">
+                        <option value="newCompany" selected>New Company</option>
+                        <option value="existingCompany">Existing Company</option>
+                    </select>
+                </div>
+                <div class="form-group " ng-if="vm.companyType == 'existingCompany'">
+
+                    <!--Company Information-->
+                    <label>Company Name</label>
+                    <select ng-model="vm.tender.userId" class="form-control">
+                        <option ng-repeat="company in vm.companies" value="{{company.id}}">{{company.name}}</option>
+                    </select>
+                    <!--Company Information-->
+                </div>
+                <div class="form-group">
+                    <label>Tender Title</label>
+
+                    <div>
+                        <input class="form-control" type="text" ng-required="true" ng-model="vm.tender.tender.title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+
+                    <select class="form-control" name="category" ng-model="vm.tender.tender.category_id">
+                        <option ng-repeat="category in vm.filteredTenders" value="{{category.id}}">
+                            {{category.category }}
+                        </option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Document Price</label>
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">ETB.</span>
+                        <input type="number" class="form-control" placeholder="Salary In ETB."
+                               aria-describedby="basic-addon1" ng-model="vm.tender.tender.document_price">
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label>Bid Bond</label>
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Percent.</span>
+                        <input type="text" class="form-control" placeholder="Bid Bond."
+                               aria-describedby="basic-addon1" ng-model="vm.tender.tender.bid_bond">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Posted Date</label>
+                    <input type="date" class="form-control" placeholder="Closing Date"
+                           ng-model="vm.tender.tender.opening_date">
+                </div>
+                <div class="form-group">
+                    <label>Closing Date</label>
+                    <input type="date" class="form-control" placeholder="Closing Date"
+                           ng-model="vm.tender.tender.closing_date">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>Description</label>
+                    <text-angular required ng-model="vm.tender.tender.description"
+                                  name="project_description"></text-angular>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <hr>
+
+    <div ng-if="vm.companyType == 'newCompany'">
+        <legend>Company Information</legend>
+        <!--Company Information-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Company Name</label>
+                    <input type="text" ng-model="vm.tender.company.name" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" ng-model="vm.tender.company.email" class="form-control">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>City</label>
+                    <select required ng-model="vm.tender.address.city" name="city" class="form-control">
+                        <option ng-repeat="location in vm.locations" value="{{location}}">{{location}}</option>
+                    </select>
+
+                    <div class="form_error ng-scope ng-inactive" ng-messages="consultantProfileForm.city.$error"
+                         ng-if="consultantProfileForm.city.$touched" role="alert">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Sub City</label>
+                    <input type="text" name="subcity" ng-model="vm.tender.address.sub_city" class="form-control">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>House Number</label>
+                    <input type="text" name="house_number" placeholder="" ng-model="vm.tender.address.house_no"
+                           class="form-control">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Specific Address <span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="specific_address" placeholder="eg.building name,floor,office No"
+                           ng-model="vm.tender.address.specific_address" class="form-control">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Main Phone No.</label>
+                    <input type="text" name="house_number" placeholder="eg. +251 911 000000"
+                           ng-model="vm.tender.address.phone_number_1" class="form-control">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>2nd phone Number <span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="specific_address" placeholder="eg. +251 911 000000"
+                           ng-model="vm.tender.address.phone_number_2" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Country</label>
+                    <input type="text" name="country" ng-model="vm.tender.address.country" class="form-control">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Website <span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="website" ng-model="vm.tender.address.website" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Facebook link<span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="facebook" ng-model="vm.tender.address.facebook_link" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Twitter Link<span class="additional-text" style=""> (optional)</span></label>
+                    <input type="text" name="twitter" ng-model="vm.tender.address.twitter_link" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Linkedin Link <span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="linkedin" ng-model="vm.tender.address.linkidin_link" class="form-control">
+                </div>
+            </div>
+
+        </div>
+
+        <!--Company Information-->
+    </div>
+
+    <div class="pull-right">
+        <button type="submit" class="btn btn-orange">Submit <i class="icon-arrow-right14 position-right"></i></button>
+    </div>
+</form>
+
+
+

@@ -1,0 +1,183 @@
+<div class="panel panel-default panel-default-main">
+    <form id="contact-form" ng-submit="vm.submitProductProforma()" name="proformaForm">
+        <h2 class="sidebar-label">Proforma Request Form</h2>
+
+        <div class="product-form">
+            <div class="row" ng-repeat="product in vm.products track by $index" style="border: dashed black 1px;">
+                <div class="col-lg-12" ng-show="$index != 0">
+                    <div class="form-group"
+                         ng-class="{ 'has-error': proformaForm.remark.$touched && proformaForm.remark.$invalid}">
+                        <button type="button" class="btn btn-orange pull-right" ng-click="vm.removeProduct($index)"><i
+                                class="fa fa-close"></i> Remove Product
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!--product name-->
+                    <div class="form-group"
+                         ng-class="{ 'has-error': proformaForm.product_name.$touched && proformaForm.project_name.$invalid}">
+                        <label>Product Name *</label>
+                        <input type="text" class="" name="product_name" ng-model="product.item_name" required/>
+
+                        <div class="form_error" ng-messages="proformaForm.product_name.$error"
+                             ng-if="proformaForm.product_name.$touched" role="alert">
+                            <p ng-message="minlength">Product name is too short.</p>
+
+                            <p ng-message="required">Product name is required.</p>
+                        </div>
+                    </div>
+                    <!--product name-->
+
+                    <!--product category-->
+                    <div class="form-group"
+                         ng-class="{ 'has-error': proformaForm.supplier_category.$touched && proformaForm.supplier_category.$invalid}">
+
+                        <label>Product Category</label>
+                        <select class="form-control" name="supplier_category" required ng-model="product.category_id">
+                            <option ng-repeat="category in vm.categories" value={{category.id}}>{{category.category}}
+                            </option>
+                        </select>
+
+                        <div class="form_error" ng-messages="proformaForm.supplier_category.$error"
+                             ng-if="proformaForm.supplier_category.$touched" role="alert">
+                            <p ng-message="minlength">Supplier Category is too short.</p>
+
+                            <p ng-message="required">Product Category is required.</p>
+                        </div>
+                    </div>
+                    <!--product category-->
+
+                    <div>
+                        <div class="col-sm-8">
+                            <!--quantity-->
+                            <div class="form-group"
+                                 ng-class="{ 'has-error': proformaForm.quantity.$touched && proformaForm.quantity.$invalid}">
+                                <label>Qunatity</label>
+                                <input type="number" name="quantity" ng-model="product.quantity" min="1" required/>
+
+                                <div class="form_error" ng-messages="proformaForm.quantity.$error"
+                                     ng-if="proformaForm.quantity.$touched" role="alert">
+                                    <p ng-message="min">Quantity Has To Be At Least 1.</p>
+
+                                    <p ng-message="required">Quantity is required.</p>
+                                </div>
+                            </div>
+                            <!--quantity-->
+
+                        </div>
+                        <div class="col-sm-6">
+                            <!--unit of measurment-->
+                            <div class="form-group"
+                                 ng-class="{ 'has-error': proformaForm.unit.$touched && proformaForm.unit.$invalid}">
+
+                                <label>Unit of Mesurement</label>
+                                <select class="form-control" name="unit" required ng-model="product.unit">
+                                    <option ng-repeat="units in vm.coreService.units" value={{units}}>{{units}}</option>
+                                </select>
+
+                                <div class="form_error" ng-messages="proformaForm.unit.$error"
+                                     ng-if="proformaForm.unit.$touched" role="alert">
+                                    <p ng-message="required">Measurement Unit is required.</p>
+                                </div>
+                            </div>
+                            <!--unit of measurment-->
+                        </div>
+                    </div>
+
+
+                    <!--filter type-->
+                    <div class="form-group"
+                         ng-class="{ 'has-error': proformaForm.filterType.$touched && proformaForm.filterType.$invalid}">
+                        <label>Filter Type</label>
+                        <select class="form-control" type="text" name="filterType" ng-model="product.filter_type">
+                            <option value="user">User</option>
+                            <option value="group">Group</option>
+                        </select>
+
+                        <div class="form_error" ng-messages="proformaForm.filterType.$error"
+                             ng-if="proformaForm.filterType.$touched" role="alert">
+
+                            <p ng-message="required">Filter Type cant be empty.</p>
+                        </div>
+                    </div>
+                    <!--filter type-->
+
+                    <!--proforma group-->
+                    <div class="form-group"
+                         ng-class="{ 'has-error': proformaForm.group.$touched && proformaForm.group.$invalid}">
+                        <label>Select Your Proforma Group</label>
+                        <select class="form-control" type="text" name="group" ng-model="product.filter_id">
+                            <option ng-repeat="group in vm.groups" value={{group.id}}>{{group.name}}</option>
+                        </select>
+
+                        <div class="form_error" ng-messages="proformaForm.group.$error"
+                             ng-if="proformaForm.group.$touched" role="alert">
+                            <p ng-message="required">Group cant be empty.</p>
+                        </div>
+                    </div>
+                    <!--proforma group-->
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"
+                         ng-class="{ 'has-error': proformaForm.remark.$touched && proformaForm.remark.$invalid}">
+                        <label>Product Description</label>
+
+                        <text-angular name="remark" required ng-model="product.description"
+                                      name="project_description"></text-angular>
+                        <div class="form_error" ng-messages="proformaForm.remark.$error"
+                             ng-if="proformaForm.remark.$touched" role="alert">
+                            <p ng-message="minLength">Description Too Short.</p>
+
+                            <p ng-message="required">Product Description is Required.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group"
+                     ng-class="{ 'has-error': proformaForm.remark.$touched && proformaForm.remark.$invalid}">
+                    <button type="button" class="btn btn-orange pull-left" ng-click="vm.addProduct()"><i
+                            class="fa fa-plus"></i> Add Product
+                    </button>
+                </div>
+                <br>
+
+                <div class="form-group col-dm-6" style="margin-top: 15px;">
+                    <label>File Attachments</label>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn main-color" type="button"
+                                        ngf-select ng-model="vm.file" id="file2"
+                                        ngf-pattern="'.pdf, .doc,.docx, .xls, .xlsx, .jpg'"
+                                        ngf-accept="'.pdf, .doc,.docx, .xls, .xlsx,.jpg'" ngf-max-size="20MB"
+                                        ><i class="fa fa-paperclip"></i> Attach File
+                                </button>
+                            </span>
+                            <input type="text" name="file" class="form-control" placeholder="No Files Selected ... "
+                                   ng-model="vm.file.name">
+                        </div>
+                        <div class="form_error" ng-messages="proformaForm.file.$error"
+                             ng-if="proformaForm.file.$touched" role="alert">
+                            <div ng-message="maxSize">The file must be less than 2MB</div>
+                            <div ng-message="minHeight">The file must be at least 100px high</div>
+                            <div ng-message="pattern">Invalid File Type</div>
+                            <div ng-message="required">You must upload a project Doc.</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-orange pull-right" ng-disabled="vm.clicked || proformaForm.$invalid"
+                            type="submit" class="pull-right" ng-click="vm.submitProductProforma()"
+                            value="Submit Proforma">Submit Proforma
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+

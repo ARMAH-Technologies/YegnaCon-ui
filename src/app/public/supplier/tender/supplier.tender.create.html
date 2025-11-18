@@ -1,0 +1,112 @@
+<div class="panel panel-default panel-default-main">
+    <form id="contact-form" ng-submit="vm.createTender(tenderCreateForm.$valid)" name="tenderCreateForm">
+        <h2 class="sidebar-label">Tender Form</h2>
+
+        <div class="alert alert-success fade in" ng-class="{ 'display-hidden': vm.updateSuccess == ''}">
+            <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> {{ vm.updateSuccess }}
+        </div>
+
+        <div class="product-form">
+            <div class="row">
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': tenderCreateForm.tender_title.$touched && tenderCreateForm.tender_title.$invalid}">
+                    <label>Tender Title *</label>
+                    <input required type="text" class="form-control" name="tender_title" ng-model="vm.tender.title"/>
+
+                    <div class="form_error" ng-messages="tenderCreateForm.tender_title.$error"
+                         ng-if="tenderCreateForm.tender_title.$touched" role="alert">
+                        <p ng-message="minlength">Tender title is too short.</p>
+
+                        <p ng-message="required">Tender title is required.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': tenderCreateForm.document_price.$touched && tenderCreateForm.document_price.$invalid}">
+                    <label>Document Price *</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2">ETB.</span>
+                        <input type="number" class="form-control" placeholder="Document price In ETB."
+                               aria-describedby="basic-addon1" ng-model="vm.tender.document_price">
+                    </div>
+
+
+                    <div class="form_error" ng-messages="tenderCreateForm.document_price.$error"
+                         ng-if="tenderCreateForm.document_price.$touched" role="alert">
+                        <p ng-message="required">Document Price is required.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group"
+                     ng-class="{'has-error': tenderCreateForm.category.$touched && tenderCreateForm.category.$invalid}">
+                    <label>Category</label>
+                    <select class="form-control" name="category" required ng-model="vm.tender.category">
+                        <option ng-repeat="category in  vm.categories" value="{{category.id}}">{{category.category}}</option>
+                    </select>
+
+                    <div class="form_error" ng-messages="tenderCreateForm.category.$error"
+                         ng-if="tenderCreateForm.category.$touched" role="alert">
+                        <p ng-message="required">Category must be selected.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': tenderCreateForm.bid_bond.$touched && tenderCreateForm.bid_bond.$invalid}">
+                    <label>Bid Bond</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Percent.</span>
+                        <input type="number" name="bid_bond" class="form-control" placeholder="Bid Bond."
+                               aria-describedby="basic-addon1" ng-model="vm.tender.bid_bond">
+                    </div>
+
+                    <div class="form_error" ng-messages="tenderCreateForm.bid_bond.$error"
+                         ng-if="tenderCreateForm.bid_bond.$touched" role="alert">
+                        <p ng-message="required">Bid Bond is required.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': tenderCreateForm.opening_date.$touched && tenderCreateForm.opening_date.$invalid}">
+                    <label>Posting Date</label>
+                    <input required class="form-control" type="date" name="opening_date"
+                           ng-model="vm.tender.opening_date"/>
+
+                    <div class="form_error" ng-messages="tenderCreateForm.opening_date.$error"
+                         ng-if="tenderCreateForm.opening_date.$touched" role="alert">
+                        <p ng-message="required">Opening Date is required.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': tenderCreateForm.closing_date.$touched && tenderCreateForm.closing_date.$invalid}">
+                    <label>Closing Date</label>
+                    <input required class="form-control" type="date" name="closing_date"
+                           ng-model="vm.tender.closing_date"/>
+
+                    <div class="form_error" ng-messages="tenderCreateForm.closing_date.$error"
+                         ng-if="tenderCreateForm.closing_date.$touched" role="alert">
+                        <p ng-message="required">Closing Date is required.</p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <text-angular required ng-model="vm.tender.description" name="project_description"></text-angular>
+                        <div class="form_error" ng-messages="tenderCreateForm.description.$error"
+                             ng-if="tenderCreateForm.description.$touched" role="alert">
+                            <p ng-message="required">Description is required.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <input type="submit" class="pull-right" value="{{ vm.tender_label }}"/>
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+</div>
+

@@ -1,0 +1,101 @@
+<div class="panel panel-default panel-default-main">
+    <div class="row">
+        <div class="col-sm-10">
+            <h2 class="sidebar-label">Proforma Replies</h2>
+        </div>
+        <div class="col-sm-2">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tab-posts-box">
+                <ul class=" text-center nav nav-tabs" id="myReplies">
+                    <li class="active">
+                        <a class="tender" data-target="#list" data-toggle="tab">Proforma Replies List</a>
+                    </li>
+                    <li>
+                        <a data-target="#compare" data-toggle="tab">Proforma Replies Sorted By Price</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="list">
+                        <div class="positions-list" style="margin-bottom:0px;">
+                            <div class="table table-responsive">
+                                <table class="table table-striped  ">
+                                    <thead>
+                                    <tr>
+                                        <th>Proforma Invoice Id</th>
+                                        <th>From</th>
+                                        <th>Replied at</th>
+                                        <th class="text-center">No. of items</th>
+                                        <th class="text-center">View Detail</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="proforma in vm.ProformaRelies track by $index">
+                                        <td>
+                                            <a class="text-center active_anchor" ui-sref="main.public.contractorDashboard.productProformaRepliesDetail({proformaReplyId : proforma.id})">ID{{proforma.proforma_invoice_id}}</a></td>
+                                        </td>
+                                        <td>
+                                            <a>{{proforma.company}}</a>
+                                        </td>
+                                        <td>{{proforma.date|date:'mediumDate'}}</td>
+                                        <td class="text-center">{{proforma.noReplyItems}}</td>
+                                        <td class="text-center"><a ui-sref="main.public.contractorDashboard.productProformaRepliesDetail({proformaReplyId : proforma.id})">Read Detail</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="compare">
+                        <div class="positions-list" style="margin-bottom:0px;">
+                            <div class="accordion-box ">
+                                <div class="table table-responsive">
+                                    <table class="table table-striped " style="padding-left: 30px">
+                                        <tr>
+                                            <th>Proforma Invoice ID</th>
+                                            <th>From</th>
+                                            <th>Replied at</th>
+                                            <th>Qty</th>
+                                            <th class="text-center">Unit Price</th>
+                                            <th class="text-center">Total Price</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div ng-repeat="products in vm.productReplies"
+                                     class="accord-elem active">
+                                    <div class="accord-title">
+                                        <a class="accord-link" href=""></a>
+
+                                        <h2>{{products.item_name}}</h2>
+                                    </div>
+                                    <div class="accord-content">
+                                        <div class="table table-responsive">
+                                            <table class="table table-striped ">
+                                                <tr ng-repeat="proforma in products.proformaResponseItems.data track by $index">
+                                                    <td>
+                                                        <a ui-sref="main.public.contractorDashboard.productProformaRepliesDetail({proformaRequestId:proforma.proforma_response_id})">View More</a></td>
+                                                    <td class="text-center">{{proforma.company}}</td>
+                                                    <td>{{proforma.date|date:'mediumDate'}}</td>
+                                                    <td>{{products.quantity}} {{products.unit}}</td>
+                                                    <td class="text-center">{{proforma.price|number:2}} ETB</td>
+                                                    <td class="text-center">{{((proforma.price *
+                                                        products.quantity)*1.15)|number:2 }} ETB
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

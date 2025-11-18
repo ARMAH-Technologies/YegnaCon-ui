@@ -1,0 +1,128 @@
+<div class="panel panel-default panel-default-main">
+    <form id="contact-form" ng-submit="vm.addGroup(groupCreateForm.$valid)" name="groupCreateForm"
+          name="groupCreateForm" novalidate>
+        <div class="row">
+            <div class="col-lg-10">
+                <h2 ng-hide="!vm.disabled" class="sidebar-label">Group Form</h2>
+
+                <h2 ng-hide="vm.disabled" class="sidebar-label">Edit Group</h2>
+            </div>
+            <div class="col-lg-2">
+                <div ng-hide="!vm.disabled" style="padding-right:20px;" class="pull-right">
+                    <div class="form-group">
+                        <div class="row"><br><br>
+                            <button class="btn btn-orange btn-sm" ng-click="vm.enableEditGroup()">
+                                Edit Group
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="alert alert-success fade in" ng-class="{ 'display-hidden': vm.updateSuccess == ''}">
+            <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> {{vm.updateSuccess }}
+        </div>
+        <div class="product-form">
+            <div class="row col-lg-6 col-md-12">
+                <!--group name-->
+                <div class="form-group"
+                     ng-class="{ 'has-error': (groupCreateForm.groupName.$touched || groupCreateForm.$submitted) && groupCreateForm.groupName.$invalid}">
+                    <label>Group Name *</label>
+                    <input ng-disabled="vm.disabled" class="form-control" required type="text"
+                           name="groupName"
+                           ng-model="vm.group.name"/>
+
+                    <div class="form_error" ng-messages="groupCreateForm.groupName.$error"
+                         ng-if="groupCreateForm.groupName.$touched || groupCreateForm.$submitted" role="alert">
+                        <p ng-message="required">Group name is required.</p>
+                    </div>
+                </div>
+                <!--group name-->
+
+                <!--group type-->
+                <div class=" form-group"
+                     ng-class="{ 'has-error': (groupCreateForm.type.$touched || groupCreateForm.$submitted) && groupCreateForm.type.$invalid}">
+                    <label>Group Type</label>
+                    <select ng-hide="vm.disabled" required name="type" ng-model="vm.type"
+                            ng-click="vm.getCategories(vm.type)"
+                            class="form-control">
+                        <option ng-repeat="type in vm.types" value="{{type.type}}">{{type.name}}</option>
+                    </select>
+                    <input ng-hide="!vm.disabled" ng-disabled="vm.disabled" class="form-control" type="text"
+                           class=""
+                           ng-model="vm.group.type"/>
+
+                    <div class="form_error" ng-messages="groupCreateForm.type.$error"
+                         ng-if="groupCreateForm.type.$touched  || groupCreateForm.$submitted" role="alert">
+                        <p ng-message="required">Group Type is required.</p>
+                    </div>
+                </div>
+                <!--group type-->
+
+                <!--group Category-->
+                <div class="form-group" ng-hide="vm.disabled"
+                     ng-class="{ 'has-error': (groupCreateForm.categories.$touched || groupCreateForm.$submitted) && groupCreateForm.type.$invalid}">
+                    <label>{{vm.group.type}} categories</label>
+                    <select required name="categories" ng-model="vm.category"
+                            ng-change="vm.getSuppliersByCategory(vm.category)" class="form-control">
+                        <option ng-repeat="category in vm.categories" value={{category.id}}>{{category.category}}
+                        </option>
+                    </select>
+
+                    <div class="form_error" ng-messages="groupCreateForm.categories.$error"
+                         ng-if="groupCreateForm.categories.$touched  || groupCreateForm.$submitted" role="alert">
+                        <p ng-message="required">{{vm.group.type}} categories is required.</p>
+                    </div>
+                </div>
+
+                <!--group supplier-->
+                <div class="form-group" ng-hide="vm.disabled"
+                     ng-class="{ 'has-error': (groupCreateForm.category.$touched || groupCreateForm.$submitted) && groupCreateForm.category.$invalid}">
+                    <label>Suppliers </label>
+                    <multiselect required ng-model="vm.suppliersSelected" data-compare-by="id"
+                                 options="supplier.name for supplier in vm.suppliers"
+                                 data-multiple="true" ng-change="vm.checkArrayDuplicates()"
+                                 scroll-after-rows="5"></multiselect>
+
+                    <div class="form_error" ng-messages="groupCreateForm.category.$error"
+                         ng-if="groupCreateForm.category.$touched  || groupCreateForm.$submitted" role="alert">
+                        <p ng-message="required">Field is required.</p>
+                    </div>
+                </div>
+                <!--group supplier-->
+
+                <!--group supplier number-->
+                <div class="form-group" ng-hide="!vm.disabled">
+                    <label>No. Of Suppliers </label>
+
+                    <input ng-disabled="vm.disabled" class="form-control" type="text" class=""
+                           ng-model="vm.group.supplier_count"/>
+                </div>
+                <!--group supplier Number-->
+
+            </div>
+            <div class="row col-lg-6 col-md-12">
+                <div class="col-lg-offset-2">
+                    <h4 ng-if="vm.suppliersSelectedName.length ==0">So far you have included no supplier</h4>
+                    <h4 ng-if="vm.suppliersSelectedName.length >0">So far you have included the following
+                        Suppliers</h4>
+                    <span style="font-size: 14px" class="label label-default" style="color: white !important;"
+                          ng-repeat="supplier in vm.suppliersSelectedName track by $index"> {{supplier}}  <br> <br></span><br><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group" ng-hide="vm.disabled">
+                        <input type="submit" class="pull-right" value="Submit Group" ng-click=""/>
+                    </div>
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </form>
+</div>

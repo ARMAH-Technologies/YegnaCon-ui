@@ -1,0 +1,143 @@
+<div class="container">
+    <section class="page-banner-section">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Project Owner Detail</h2>
+            </div>
+            <div class="col-md-6">
+                <ul class="page-depth">
+                    <li><a href="" ui-sref="main.public.contractor">Home</a></li>
+                    <li><a href="" ui-sref="main.public.contractor">Project Owner</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- news-section
+<!-- news-section
+        ================================================== -->
+    <section class="news-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 panel panel-default panel-default-main">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <img class="logo image-round-border"
+                                 src="assets/images/public/upload/others/img_projectOwner.png" alt="" width="90"
+                                 height="90">
+                        </div>
+                        <div class="col-lg-10">
+                            <h2 class="list-title">{{vm.projectOwner.name}}</h2>
+
+                            <ul class="list-icons location list-unstyled">
+                                <li>
+                                    <span>{{vm.projectOwner.profile.data.projectOwner_title}}</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-map-marker"></i> <span>{{vm.projectOwner.address.data.city}}, {{vm.projectOwner.address.data.city}}</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope"></i> <span><a href="mailto:abe@teka.com">{{vm.projectOwner.email}}</a></span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-phone"></i> <span><a href="mailto:abe@teka.com">{{vm.projectOwner.address.data.phone_number_1}}</a></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <h2 class="sidebar-label">Experience</h2>
+
+                    <div class="row">
+                        <dl class="dl-horizontal">
+                            <div ng-repeat="experience in vm.projectOwner.profile.data.experiences.data"
+                                 class="dl-info">
+                                <dt>{{experience.started_date | date:'MMM yyyy'}} - {{experience.ended_date | date:'MMM yyyy'}}
+                                </dt>
+                                <dd>
+                                    <div class="list-icons location">
+                                        {{experience.position}} <br>
+                                        <i class="fa fa-map-marker"></i>
+                                        <span>{{experience.company}}</span>
+                                        <br>
+                                    </div>
+                                    <div><p>{{experience.description}}</p></div>
+
+                                </dd>
+                            </div>
+
+                        </dl>
+                    </div>
+                    <hr>
+                    <h2 class="sidebar-label">Education</h2>
+
+                    <div class="row">
+                        <dl class="dl-horizontal">
+                            <div ng-repeat="education in vm.projectOwner.profile.data.educations.data">
+                                <dt>{{education.started_date | date:'MMM yyyy'}} - {{education.ended_date | date:'MMM yyyy'}}
+                                </dt>
+                                <dd>
+                                    <div class="list-icons location">
+                                        {{education.grad_level}} in {{education.study_field}}<br>
+                                        <i class="fa fa-map-marker"></i>
+                                        <span>{{education.school_name}}</span>
+                                        <br>
+                                    </div>
+
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <hr>
+                    <h2 class="sidebar-label">Skills</h2>
+
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled list-inline">
+                            <li ng-repeat="skill in vm.projectOwner.profile.data.skills.data">
+                            <span class="label label-info label-big">
+                                {{skill.skill}}
+                            </span>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                    <h2 class="sidebar-label">Connect</h2>
+
+                    <div class="col-lg-12 connect">
+                        <a href="{{vm.projectOwner.address.data.linkidin_link}}"><i
+                                class="fa fa-linkedin-square fa-2x"></i></a>
+                    </div>
+
+                    <div style="padding-right:20px;" class="pull-right" ng-show="showButton">
+                        <div class="form-group">
+                            <div class="row"><br><br>
+                                <button class="btn btn-orange btn-sm" ui-sref="main.public.projectOwnerDashboard.profile({projectOwnersId:vm.projectOwner.id})">Edit Profile</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-3">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="sidebar-label">Search</h2>
+
+                            <div class="form-group">
+                                <input type="search" class="form-control" placeholder="Search projectOwners.."/>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="advertisement">
+                        <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End news section -->
+</div>

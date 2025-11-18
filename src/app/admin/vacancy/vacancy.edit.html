@@ -1,0 +1,92 @@
+<form class="form-vertical" ng-submit="vm.updateVacancy()">
+    <fieldset class="content-group">
+        <legend class="text-bold ">Edit Vacancy</legend>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group ">
+                    <label>Vacancy Title</label>
+
+                    <div>
+                        <input class="form-control" type="text" ng-required="true" ng-model="vm.vacancy.title">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Employment Type</label>
+                    <select class="form-control" name="contract" ng-model="vm.vacancy.contract"
+                            ng-options="contract for contract in vm.contracts"></select>
+                </div>
+                <div class="form-group">
+                    <label>Education Level</label>
+                    <select class="form-control" ng-model="vm.vacancy.education_level"
+                            ng-options="educationalLevel for educationalLevel in vm.educationalLevel"></select>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label>Experience</label>
+                    <select class="form-control" ng-model="vm.vacancy.experience"
+                            ng-options="experience for experience in vm.experience"></select>
+                </div>
+
+                <div class="form-group">
+
+                    <label>Salary</label>
+
+                    <div class="checkbox">
+                        <label>
+                            <input ng-click="vm.salarySet()" ng-model="vm.salary"
+                                   ng-true-value="'Negotiable'" ng-false-value="'figure'" type="checkbox">Negotiable
+                        </label>
+                    </div>
+                    <div class="input-group">
+
+                        <span class="input-group-addon" id="basic-addon1">ETB.</span>
+                        <input ng-disabled="vm.salaryDisable" type="text" class="form-control"
+                               placeholder="Salary In ETB."
+                               aria-describedby="basic-addon1"
+                               ng-model="vm.vacancy.salary">
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label>Work Place</label>
+                    <input type="text" class="form-control" placeholder="Work Place"
+                           ng-model="vm.vacancy.work_place">
+                </div>
+                <div class="form-group">
+                    <label>Closing Date</label>
+                    <input type="date" class="form-control" placeholder="Closing Date"
+                           ng-model="vm.vacancy.closing_date">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="form-group">
+
+                <div class="col-md-12 form-group"
+                     ng-class="{ 'has-error': tenderCreateForm.description.$touched && tenderCreateForm.description.$invalid}">
+                    <label>Description</label>
+
+                    <text-angular ng-model="vm.vacancy.description" name="description"></text-angular>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+
+
+    <div class="pull-right">
+        <button type="submit" class="btn btn-orange">Submit <i class="icon-arrow-right14 position-right"></i></button>
+    </div>
+</form>
+
+<!--Modal-->
+
+<!--END Modal-->
+
+

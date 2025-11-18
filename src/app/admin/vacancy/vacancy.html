@@ -1,0 +1,24 @@
+<!-- Segmented button -->
+<div class="panel border-orange-700">
+    <div class="panel-heading bg-orange-700">
+        <h6 class="panel-title">Vacancy</h6>
+
+        <div class="heading-elements">
+            <div class="btn-group heading-btn">
+
+                <button class="btn btn-orange dropdown-toggle" data-toggle="dropdown"><i class="icon-menu"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a ui-sref="main.admin.vacancy.add"><i class="icon-add"></i>Add Vacancy</a></li>
+                    <li><a ui-sref="main.admin.vacancy.list"><i class="icon-three-bars"></i>List Vacancy</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <ui-view></ui-view>
+    </div>
+</div>
+<!-- /segmented button -->

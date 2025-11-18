@@ -1,0 +1,104 @@
+<div class="container">
+    <section class="page-banner-section">
+        <div class="row container">
+            <div class="col-md-6" style="padding-left: 40px">
+                <h2>News</h2>
+            </div>
+            <div class="col-md-6" style="padding-right: 40px">
+                <ul class="page-depth">
+                    <li><a href="#">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="blog-section">
+        <div class="row ">
+            <div class="col-md-9">
+                <div class="blog-box panel panel-default panel-default-main">
+                    <div class="blog-post single-post">
+                        <h1 class="text-center">{{vm.news.title}}</h1>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img src="{{vm.image}}" alt="" width="500px" height="300px">
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="post-content-text">
+                                <div class="list-icons location" style="padding-left: 50px;">
+
+                                    <i class="fa fa-clock-o"></i> <span>{{vm.news.created_at|date:'mediumDate'}}</span>
+                                </div>
+
+
+                                <p style="text-align: justify;padding-left: 50px;padding-right: 50px"
+                                   ng-bind-html="vm.dumpHTML(vm.news.description)">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-section">
+                        <h2>{{vm.news.totalComments}} Comments</h2>
+                        <ul class="comment-tree ">
+                            <li ng-repeat="comments in vm.comments">
+                                <div class="comment-box" style="margin: 0;padding:10px;border-bottom:1px solid silver;">
+                                    <img alt="" class="img-circle"
+                                         src="assets/images/public/uploads/profile/default_user.png"
+                                         style="width:70px;height:70px;">
+
+                                    <div class="comment-content">
+                                        <h4>{{comments.name}}</h4>
+                                        <span>{{comments.created_at|date:'mediumDate'}}</span>
+
+                                        <p>{{comments.comment}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <a style="float: right" ng-show="vm.loadMore"
+                           ng-click="vm.getComments(vm.news.comments.data.length,false)"><h5>View
+                            More</h5>
+                        </a>
+
+                        <form class="comment-form">
+                            <h2>Leave a Comment</h2>
+                            <input name="name" id="name" ng-model="vm.comment.comment.name" type="text"
+                                   placeholder="Name (required)">
+                            <input name="mail" id="mail" ng-model="vm.comment.comment.email" type="text"
+                                   placeholder="Email (required)">
+                            <textarea name="comment" id="comment" ng-model="vm.comment.comment.comment"
+                                      placeholder="Your Message (required)"></textarea>
+                            <input type="submit" id="submit_contact" ng-click="vm.postComment()" value="Post Comment">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="side-navigation">
+                    <div class="sidebar">
+
+                        <div class="category-widget widget">
+                            <h2>Recent news articles</h2>
+                            <ul class="category-list">
+                                <li ng-repeat = "news in vm.newsList"><a href=""  ui-sref="main.public.news({newsId:news.id})"><strong>{{news.title|limitTo:25}}</strong></a><small><span class="pull-right">{{news.created_at}}</span></small></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+

@@ -1,0 +1,118 @@
+<div class="col-md-12">
+
+    <ul class="nav navbar-nav no-border visible-xs-block">
+        <li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-filter"><i
+                class="icon-menu7"></i></a></li>
+    </ul>
+
+    <div class="navbar-collapse collapse" id="navbar-filter">
+        <p class="navbar-text">Filter:</p>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="icon-sort-time-asc position-left"></i> By Profile Type <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="" ng-click="vm.setProfileType('')">All</a></li>
+                    <li class="divider"></li>
+                    <li><a href="" ng-click="vm.setProfileType('Contractor')">Contractors</a></li>
+                    <li><a href="" ng-click="vm.setProfileType('Consultant')">Consultants</a></li>
+                    <li><a href="" ng-click="vm.setProfileType('Supplier')">Suppliers</a></li>
+                    <li><a href="" ng-click="vm.setProfileType('ProjectOwner')">Project Owner</a></li>
+                    <li><a href="" ng-click="vm.setProfileType('Professional')">Professionals</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="icon-sort-time-asc position-left"></i> By Package Type <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="" ng-click="vm.setPackageType('')">All</a></li>
+                    <li class="divider"></li>
+                    <li><a href="" ng-click="vm.setPackageType('Premium')">Premium</a></li>
+                    <li><a href="" ng-click="vm.setPackageType('Corporate')">Corporate</a></li>
+                    <li><a href="" ng-click="vm.setPackageType('Standard')">Standard</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <div class="form-group has-feedback">
+                    <input ng-change="vm.getUsers()" ng-model="vm.query"
+                           style="margin-top: 8px;margin-left:-4px" type="text"
+                           class="form-control"
+                           placeholder="Search">
+
+                    <div class="form-control-feedback">
+                        <i class="icon-search4 text-size-base"></i>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>User Name</th>
+                    <th>User Type</th>
+                    <th>Subscription Type</th>
+                    <th>Expiration Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr dir-paginate="user in vm.users | itemsPerPage: vm.itemsPerPage track by $index"
+                    total-items="vm.totalItems"
+                    current-page="vm.currentPage">
+                    <td style="width: 5%">{{$index + 1}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.profileType}}</td>
+                    <td>{{user.subscriptions.data.package.data.package}}</td>
+                    <td>{{user.subscriptions.data.expiration_date}}</td>
+
+                    <td ng-if="user.status=='active'"><span class="label label-success">{{user.status}}</span></td>
+                    <td ng-if="user.status=='inactive'"><span class="label label-warning">{{user.status}}</span>
+                    </td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a ng-click="vm.openModal(user,$index)"><i class="icon-user-check"></i>Subscribe</a>
+                                    </li>
+                                    <li ng-hide="!user.subscriptions">
+                                        <a ui-sref="main.admin.subscriptionInvoice({userId: user.id})"><i class="icon-printer2"></i>Invoice</a>
+                                    </li>
+                                    <li><a ng-click="$event.preventDefault();vm.activateUser(user);"
+                                           ng-hide="user.status == 'active' " data-toggle="modal"
+                                           data-target="#modal_primary"><i class="icon-user-block"></i> Activate</a>
+                                    </li>
+                                    <li><a ng-click="$event.preventDefault();vm.deactivateUser(user);"
+                                           ng-hide="user.status != 'active'" data-toggle="modal"
+                                           data-target="#modal_primary"><i class="icon-user-plus"></i>
+                                        Deactivate</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            <ul class="pagination pagination-separated pagination-rounded text-center">
+                <dir-pagination-controls on-page-change="vm.getUsers()"></dir-pagination-controls>
+            </ul>
+
+        </div>
+    </div>
+
+</div>
+
+

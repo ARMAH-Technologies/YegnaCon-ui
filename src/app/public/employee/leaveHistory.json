@@ -1,0 +1,19 @@
+[
+  {
+    "id":"1",
+    "leaveType":"Annual Leave",
+    "leaveStartingDate":"03/04/2015",
+    "leaveEndingDate":"03/06/2015",
+    "numberOfDays":"3",
+    "status": "Approved"
+  },
+  {
+    "id":"2",
+    "leaveType":"Sick Leave",
+    "leaveStartingDate":"08/12/2016",
+    "leaveEndingDate":"08/13/2016",
+    "numberOfDays":"2",
+    "status": "Denied"
+  }
+]
+

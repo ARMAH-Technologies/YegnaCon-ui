@@ -1,0 +1,99 @@
+<div class="container">
+    <section class="page-banner-section">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>{{vm.consultant.name}}</h2>
+            </div>
+            <div class="col-md-6">
+                <ul class="page-depth">
+                    <li><a href="" ui-sref="main.public.products">Products</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- news-section
+            ================================================== -->
+    <section class="news-section ">
+        <div class="row">
+            <div class="col-lg-9 panel panel-default panel-default-main">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <img class="logo image-round-border"
+                             src="{{ vm.product.logo }}" alt=""
+                             width="90" height="90">
+                    </div>
+                    <div class="col-lg-10">
+                        <h2 class="detail-title list-title">{{vm.product.name}}</h2>
+                        <h4 class="detail-subtitle">Product Category: {{vm.product.category}}</h4>
+                        <h4 class="detail-subtitle">Available Qty in stock: {{vm.product.quantity}}
+                            {{vm.product.unit}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <hr>
+                    <h2>Brief Description</h2>
+
+                    <div class="col-lg-12">
+                        <p ng-bind-html="vm.dumpHTML(vm.product.description)"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <hr>
+                    <h2>Related Products</h2>
+
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled product_list">
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div class="well prod_thumnail col-md-3" ng-repeat="product in  vm.relatedProducts">
+                                        <div class="prod_logo"><img class="img-thumbnail"
+                                                                    ng-src="{{ product.logo }}" alt=""></div>
+                                        <div class="prod_detail">
+                                            <h2 ui-sref="main.public.productdetail({productId:product.id})" class="prod_title text-center">{{ product.name | limitTo:15 }}</h2>
+
+                                            <div><strong>Available Qty: </strong>{{product.quantity}}</div>
+                                            <div><strong>Category: </strong>{{ product.category|limitTo:18}}...</div>
+                                            <div><strong>Supplier: </strong>{{product.supplier.data.supplier_name|limitTo:18}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="sidebar-label"><a ui-sref="main.public.supplierDetail({supplierId:vm.product.supplier.data.supplier_id})">{{vm.product.supplier.data.supplier_name}}</a></h2>
+                        <ul class="list-unstyled company-info">
+                            <li><i class="fa fa-globe"></i>&nbsp; {{vm.product.supplier.data.address.data.website}}</li>
+                            <li><i class="fa fa-phone"></i>&nbsp; {{vm.product.supplier.data.address.data.phone_number_1}}</li>
+                            <li><i class="fa fa-phone"></i>&nbsp; {{vm.product.supplier.data.address.data.phone_number_2}}</li>
+                            <li><i class="fa fa-envelope"></i>&nbsp; {{vm.product.supplier.data.email}}</li>
+                        </ul>
+                        <h2 class="sidebar-label">Connect with us</h2>
+
+                        <div class="company-details">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="side-navigation">
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End news section -->
+</div>

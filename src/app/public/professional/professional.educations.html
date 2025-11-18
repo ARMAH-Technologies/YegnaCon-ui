@@ -1,0 +1,38 @@
+<div class="panel panel-default panel-default-main">
+    <div class="row">
+        <div class="col-sm-10">
+            <h2 class="sidebar-label">My Experiences</h2>
+        </div>
+        <div class="col-sm-2">
+            <button ui-sref="main.public.professionalDashboard.experiencesCreate"
+                    class="btn btn-default btn-action pull-right"><i class="fa fa-plus"></i></button>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Field of Study</th>
+            <th>Graduation Level</th>
+            <th>School Name</th>
+            <th>Started Date</th>
+            <th>Ended Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="experience in vm.professional.experiences | itemsPerPage: vm.itemsPerPage"
+            total-items="vm.totalItems" current-page="vm.currentPage">
+            <td><a ui-sref="main.public.experienceDetail({experienceId:experience.id})"> {{ experience.company }}</a>
+            </td>
+            <td>{{ experience.position }}</td>
+            <td>{{ experience.started_date}}</td>
+            <td>{{ experience.ended_date}}</td>
+
+        </tr>
+
+        </tbody>
+    </table>
+    <ul class="pagination pagination-separated pagination-rounded text-center">
+        <dir-pagination-controls on-page-change="vm.getVacancies()"></dir-pagination-controls>
+    </ul>
+</div>

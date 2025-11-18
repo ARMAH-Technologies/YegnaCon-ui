@@ -1,0 +1,46 @@
+
+<div class="panel panel-default panel-default-main">
+    <div class="row">
+        <div class="col-sm-10">
+            <h2 class="sidebar-label">My Products</h2>
+        </div>
+        <div class="col-sm-2">
+            <button ui-sref="main.public.supplierDashboard.productCreate({supplierId:vm.supplier.id})" class="btn btn-default btn-action pull-right"><i class="fa fa-plus"></i> Add Product</button>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Product Title</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Edit</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="product in vm.products | itemsPerPage: vm.itemsPerPage" total-items="vm.totalItems" current-page="vm.currentPage">
+            <td>{{ product.order }}</td>
+            <td>{{ product.name}}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.quantity }} {{ product.unit }}</td>
+            <td ng-if="product.price">{{ product.price }}</td>
+            <td ng-if="!product.price">N/A</td>
+            <td>
+                <ul class="list-inline list-unstyled">
+                    <li><button style="padding: 0 10px; margin: 0;" class="btn btn-default " ui-sref="main.public.supplierDashboard.productCreate({productId: product.id, edit:true})"><i class="fa fa-pencil"></i></button></li>
+                    <li><button style="padding: 0 10px; margin: 0;" class="btn btn-default" ng-click="vm.deleteProduct(product.id)"><i class="fa fa-trash-o"></i></button></li>
+                </ul>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <ul class="pagination pagination-separated pagination-rounded text-center">
+        <dir-pagination-controls on-page-change="vm.getSupplierProducts()"></dir-pagination-controls>
+    </ul>
+</div>
+
+

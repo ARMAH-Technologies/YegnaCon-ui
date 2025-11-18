@@ -1,0 +1,82 @@
+<div class="col-md-12">
+    <ul class="nav navbar-nav no-border visible-xs-block">
+        <li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-filter"><i
+                class="icon-menu7"></i></a></li>
+    </ul>
+    <div class="navbar-collapse collapse" id="navbar-filter">
+        <p class="navbar-text">Filter:</p>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="icon-sort-time-asc position-left"></i> By status <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="" ng-click="vm.getCampaignsFilter('')">Show all</a></li>
+                    <li class="divider"></li>
+                    <li><a href="" ng-click="vm.getCampaignsFilter('&status=active')">Active</a></li>
+                    <li><a href="" ng-click="vm.getCampaignsFilter('&status=achieved')">Achieved</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <div class="form-group has-feedback">
+                    <input ng-change="vm.getCampaignsFilter('&search='+ query)" ng-model="query"
+                           style="margin-top: 8px;margin-left:-4px" type="text"
+                           class="form-control"
+                           placeholder="Search">
+
+                    <div class="form-control-feedback">
+                        <i class="icon-search4 text-size-base"></i>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div class="panel body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="width: 5%">No.</th>
+                    <th>Title</th>
+                    <th>Posted By</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr dir-paginate="tender in vm.tenders | itemsPerPage: vm.itemsPerPage track by $index"
+                    total-items="vm.totalItems"
+                    current-page="vm.currentPage">
+                    <td style="width: 5%">{{$index + 1}}</td>
+                    <td><a ui-sref="main.public.tenderDetail({tenderId : tender.id})">{{tender.title}}</a></td>
+                    <td>{{tender.company}}</td>
+                    <td>{{tender.category}}</td>
+                    <td ng-if="tender.status =='active'"><span class="label label-success">{{tender.status}}</span></td>
+                    <td ng-if="tender.status =='inactive'"><span class="label label-warning">{{tender.status}}</span>
+                    </td>
+                    <td width="15%" class="text-center">
+                        <ul class="list-inline list-unstyled">
+                            <li>
+                                <button style="padding: 0 10px; margin: 0;" ui-sref="main.admin.tender.edit({tenderId: tender.id})" class="btn btn-default ">
+                                    <i class="icon-pencil"></i></button>
+                            </li>
+                            <li>
+                                <button style="padding: 0 10px; margin: 0;" class="btn btn-default"
+                                        ng-click="vm.deleteTender(tender.id)"><i class="icon-trash"></i></button>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            <ul class="pagination pagination-separated pagination-rounded text-center">
+                <dir-pagination-controls on-page-change="vm.getTenders()"></dir-pagination-controls>
+            </ul>
+
+        </div>
+
+    </div>
+</div>

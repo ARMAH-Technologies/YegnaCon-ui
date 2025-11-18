@@ -1,0 +1,219 @@
+<div class="container">
+    <section class="page-banner-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Projects</h2>
+                </div>
+                <div class="col-md-6">
+                    <ul class="page-depth">
+                        <li><a href="index.html">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- news-section ================================================== -->
+    <section class="news-section">
+        <div class="row">
+
+            <div class="col-lg-10 panel panel-default panel-default-main">
+                <div class="row card">
+                    <form>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="search_keywords" ng-model="vm.search"
+                                       ng-change=""
+                                       placeholder="Search tenders..."/>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <select class="form-control" ng-model="vm.category">
+                                    <option value="">All Categories</option>
+                                    <option ng-repeat="category in vm.categories" value="{{ category.category }}">{{
+                                        category.category }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <select class="form-control" ng-model="vm.status">
+                                    <option value="" selected>Companies</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">InActive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group text-center">
+                                <button class="form-control btn-orange" type="button" ng-click=""><i
+                                        class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <section class="single-page-section" style="padding-top: 10px;">
+                    <div class="container">
+                        <div ng-repeat="project in vm.projects track by $index" class="row"
+                             style="border-bottom: 1px dashed #818181;">
+                            <div ng-if="$index%2 == 0">
+                                <div class="col-md-6">
+                                    <div class="project-content">
+                                        <div class="project-content-box">
+                                            <h2><a ui-sref="main.public.projectDetail({projectId: project.id})">Project
+                                                Name: <i>{{project.name}}</i></a></h2>
+                                            <ul>
+                                                <li><i class="fa fa-calendar"></i> <span>Date:</span> {{project.created_at|date:'mediumDate'}}</li>
+                                                <li ng-if="vm.project.location != null"><i class="fa fa-map-marker"></i> <span>Location:</span> {{project.location}}</li>
+                                                <li ng-if="vm.project.location == null"><i class="fa fa-map-marker"></i> <span>Location:</span> N/A</li>
+                                                <li><i class="fa fa-usd"></i> <span>Value:</span>{{project.cost|number:2}} ETB</li>
+                                                <li><i class="fa fa-tag"></i> <span>Category:</span>
+                                                    {{project.category}}
+                                                </li>
+                                                <li><i class="fa fa-user"></i> <span>Client:</span>{{project.client}}
+                                                </li>
+                                                <li><i class="fa fa-user"></i> <span>Contractor:</span><a ui-sref="main.public.contractorDetail({contractorId:project.company_id})">{{project.company}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="project-content-box">
+                                            <h2>Project Description</h2>
+
+                                            <div ng-bind-html="project.description"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="{{project.image}}">
+                                </div>
+                            </div>
+                            <div ng-if="$index%2 != 0">
+                                <div class="col-md-6">
+                                    <img src="{{project.image}}">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="project-content">
+                                        <div class="project-content-box">
+                                            <h2><a ui-sref="main.public.projectDetail({projectId: project.id})">Project
+                                                Name: <i>{{project.name}}</i></a></h2>
+                                            <ul>
+                                                <li><i class="fa fa-calendar"></i> <span>Date:</span> {{project.created_at|date:'mediumDate'}}</li>
+                                                <li ng-if="vm.project.location != null"><i class="fa fa-map-marker"></i> <span>Location:</span> {{project.location}}</li>
+                                                <li ng-if="vm.project.location == null"><i class="fa fa-map-marker"></i> <span>Location:</span> N/A</li>
+                                                <li><i class="fa fa-usd"></i> <span>Value:</span>{{project.cost|number:2}} ETB</li>
+                                                <li><i class="fa fa-tag"></i> <span>Category:</span>
+                                                    {{project.category}}
+                                                </li>
+                                                <li><i class="fa fa-user"></i> <span>Client:</span>{{project.client}}
+                                                </li>
+                                                <li><i class="fa fa-user"></i> <span>Contractor:</span><a ui-sref="main.public.contractorDetail({contractorId:project.companyId})">{{project.company}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="project-content-box">
+                                            <h2>Project Description</h2>
+
+                                            <div ng-bind-html="project.description"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                <ul class="pagination pagination-separated pagination-rounded text-center">
+                    <dir-pagination-controls on-page-change="vm.getProjects()"></dir-pagination-controls>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <div class="side-navigation">
+
+                    <div style="margin-bottom:15px;">
+                        <div ng-if="!currentUser" class="row">
+                            <form class="panel panel-default" role="form" name="loginForm" novalidate>
+                                <h2 class="panel-heading">Login</h2>
+                                <small class="display-block  alert-danger">{{loginError}}</small>
+                                <img class="col-md-offset-4" ng-show="authenticating" height="80px"
+                                     src="assets/images/loading.png"/>
+
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"
+                                                 ng-class="{ 'has-error': (loginForm.company.$touched || loginForm.$submitted) && loginForm.company.$invalid || loginError != ''}">
+                                                <label>Email</label>
+                                                <input required name="company" class="form-control" type="email"
+                                                       placeholder="Enter your email here"
+                                                       ng-model="email">
+
+                                                <div class="form_error" ng-messages="loginForm.company.$error"
+                                                     ng-if="loginForm.company.$touched || loginForm.$submitted || loginError != ''"
+                                                     role="alert">
+                                                    <p ng-message="required">Name cannot be empty!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"
+                                                 ng-class="{ 'has-error': (loginForm.password.$touched || loginForm.$submitted) && loginForm.password.$invalid || loginError != ''}">
+                                                <label>Password</label>
+                                                <input required name="password" class="form-control" type="password"
+                                                       placeholder=""
+                                                       ng-model="password">
+
+                                                <div class="form_error" ng-messages="loginForm.password.$error"
+                                                     ng-if="loginForm.password.$touched || loginForm.$submitted || loginError != ''"
+                                                     role="alert">
+                                                    <p ng-message="required">Password cannot be empty!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="submit" class="col-md-12 btn btn-default pull-right" value="Login"
+                                           ng-click="singIn(loginForm.$valid, email, password)"/>
+
+                                    <p style="margin-top: 10px">If You don't have an Account,</p>
+
+                                    <a ui-sref="main.public.pricing"><i class="fa fa-user"></i>&nbsp;&nbsp;Sign Up</a>
+
+                                </div>
+                            </form>
+                        </div>
+                        <figure ng-if="currentUser" class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+                    <hr>
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+                    <hr>
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End news section -->
+</div>
+
+
+
+

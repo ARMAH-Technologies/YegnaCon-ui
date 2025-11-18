@@ -1,0 +1,63 @@
+<div class="container">
+    <!-- news-section
+            ================================================== -->
+    <section class="news-section">
+        <div class="row">
+            <div class="col-lg-9 panel panel-default panel-default-main">
+                <div id="printableArea">
+                    <div class="row">
+                        <h1 class="col-lg-10">{{vm.employee.employee.name}}</h1>
+                    </div>
+                    <div class="row">
+                        <div class="row  col-md-6 ">
+                            <table class="table table-responsive">
+                                <tr>
+                                    <td>Employee Title:</td>
+                                    <td>
+                                        {{vm.employee.employee.employment_title}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Employment Type</td>
+                                    <td>
+                                        {{vm.employee.employee.employment_type}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Employment Date</td>
+                                    <td>{{vm.employee.employee.employment_date}}</td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 ">
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">
+                        <img src="assets/images/public/images/professional.png" alt="" width="80" height="72">
+
+                    </div>
+                    <div class="panel-heading">
+                        <h2 class="sidebar-label">Address Info</h2>
+                        <button style="float:right" class="btn btn-default "
+                                      ui-sref="main.public.employeeDashboard.editProfile">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <ul class="list-unstyled company-info">
+                            <li><i class="fa fa-phone"></i> {{vm.employee.employee.user.address.phone_number_1}}</li>
+                            <li><i class="fa fa-envelope"></i>{{vm.employee.employee.user.email}}</li>
+                            <li><i class="fa fa-map-marker"></i>{{vm.employee.employee.user.address.sub_city}} , {{vm.employee.employee.user.address.city}}
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- End news section -->
+</div>

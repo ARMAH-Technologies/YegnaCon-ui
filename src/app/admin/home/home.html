@@ -1,0 +1,85 @@
+
+<!-- Segmented button -->
+<div class="panel border-orange">
+    <div class="panel-heading bg-orange-700">
+        <h6 class="panel-title">Home</h6>
+
+    </div>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5>Users</h5>
+                    </div>
+                    <div class="col-lg-12">
+                        <highchart id="profileTypeChart" config="userStatByProfileChartConfig" class="" ></highchart>
+                    </div>
+                    <div class="col-lg-12">
+                        <highchart id="packageTypeChart" config="userStatByPackageTypeChartConfig" class="" ></highchart>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5>Other Stats</h5>
+                        <div class="panel bg-primary-300">
+                            <div class="panel-body">
+
+                                <h3 class="no-margin">{{vacancyStat.itemCount}} </h3>
+                                Vacancies
+
+                                <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+                        </div>
+                        <div class="panel bg-orange-300">
+                            <div class="panel-body">
+                                <h3 class="no-margin">{{tenderStat.itemCount}} </h3>
+                                Tenders
+
+                                <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+                        </div>
+
+                        <div class="panel bg-info-300">
+                            <div class="panel-body">
+
+                                <h3 class="no-margin">{{productStat.itemCount}} </h3>
+                                Products from {{productStat.suppliersCount}} suppliers
+
+                                <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+                        </div>
+
+                        <div class="panel bg-blue-400">
+                            <div class="panel-body">
+                                <div class="heading-elements">
+
+                                </div>
+
+                                <h3 class="no-margin">Profoma </h3>
+                                {{proformaStat.itemsCount}} Proforma Requests <br>
+                                {{proformaStat.itemsWithResponseCount}} Proforma Responses <br>
+                                {{proformaStat.itemsPendingResponseCount}} <span class="heading-text badge bg-teal-800">Pending</span> Requests
+
+
+                                <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <hr>
+        <div class="row">
+            <highchart id="tenderVacancyChart" config="tenderVacancyChartConfig" class="" ></highchart>
+        </div>
+        <hr>
+    </div>
+</div>
+<!-- /segmented button -->

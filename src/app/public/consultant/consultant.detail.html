@@ -1,0 +1,159 @@
+<div class="container">
+    <section class="page-banner-section">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>{{vm.consultant.name}}</h2>
+            </div>
+            <div class="col-md-6">
+                <ul class="page-depth">
+                    <li><a href="" ui-sref="main.public.consultant">Consultants</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- news-section
+            ================================================== -->
+    <section class="news-section ">
+        <div class="row">
+            <div class="col-lg-9 panel panel-default panel-default-main">
+
+                <div class="row">
+                    <div class="col-lg-2">
+                        <img class="logo image-round-border"
+                             ng-src="{{ vm.consultant.logo }}" alt=""
+                             width="90" height="90">
+                    </div>
+                    <div class="col-lg-8">
+                        <h2 class="detail-title list-title">{{vm.consultant.name}}</h2>
+                        <h4 class="detail-subtitle">{{vm.consultant.profile.data.type}}</h4>
+                        <h4 class="detail-subtitle">{{vm.consultant.profile.data.level}}</h4>
+                    </div>
+                    <div class="col-lg-2">
+                        <div style="padding-right:20px;" class="pull-right" ng-show="(currentUser.id == vm.consultant.id)">
+                            <div class="form-group">
+                                <div class="row"><br><br>
+                                    <button class="btn btn-orange btn-sm" ui-sref="main.public.consultantDashboard.profile({consultantId:vm.consultant.id})">Edit Profile</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <br>
+                    <hr>
+                    <div class="col-lg-10">
+
+                        <ul class="list-icons location list-unstyled">
+
+                            <li>
+                                <i class="fa fa-map-marker">&nbsp; Specific Address</i> <span>{{vm.consultant.address.data.sub_city}} Sub city at {{vm.consultant.address.data.specific_address}}</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-map-marker">&nbsp; Address</i> <span>{{vm.consultant.address.data.city}}, {{vm.consultant.address.data.country}}</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope">&nbsp; Email:</i> <span><a
+                                    href="mailto:{{ vm.consultant.email }}">{{vm.consultant.email}}</a></span>
+                            </li>
+                            <li>
+                                <i class="fa fa-phone">&nbsp; Phone No.</i> <span><a
+                                    href="mailto:{{ vm.consultant.email }}">{{vm.consultant.address.data.phone_number_1}}</a></span>
+                            </li>
+                            <li>
+                                <i class="fa fa-phone">&nbsp; Cell phone</i> <span><a
+                                    href="mailto:{{ vm.consultant.email }}">{{vm.consultant.address.data.phone_number_2}}</a></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <hr>
+                    <h2>Brief Description</h2>
+
+                    <div class="row">
+                        <div class="col-lg-12"><span>Established in {{vm.consultant.profile.data.established_year | date:"MMM, yyyy"}}</span>
+                            <br>
+
+                            <p ng-bind-html="vm.dumpHTML(vm.consultant.profile.data.description)"></p>
+                        </div>
+                    </div>
+
+                    </div>
+                    <div class="row">
+                        <hr>
+                        <h2>Projects Completed</h2>
+
+                        <div class="col-lg-12">
+                            <div class="well prod_thumnail col-md-3"
+                                 ng-repeat="project in vm.projects">
+                                <div class="prod_logo"><a ui-sref="main.public.projectDetail({projectId: project.id})"><img
+                                        class="img-thumbnail" ng-src="{{ project.logo }}"
+                                        alt=""></a></div>
+                                <div class="prod_detail">
+                                    <h2 class="prod_title">{{ project.name | limitTo:15 }}</h2>
+
+                                    <div><strong>Client: </strong>{{project.client}}</div>
+                                    <div><strong>Project Status: </strong>{{ project.elapsed_time}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="sidebar-label">{{vm.consultant.name}}</h2>
+                        <ul class="list-unstyled company-info">
+                            <li><i class="fa fa-globe"></i>&nbsp; {{vm.consultant.address.data.website}}
+                            </li>
+                            <li><i class="fa fa-phone"></i>&nbsp;
+                                {{vm.consultant.address.data.phone_number_1}}
+                            </li>
+                            <li><i class="fa fa-phone"></i>&nbsp;
+                                {{vm.consultant.address.data.phone_number_2}}
+                            </li>
+                            <li><i class="fa fa-envelope"></i>&nbsp; {{vm.consultant.email}}</li>
+                        </ul>
+                        <h2 class="sidebar-label">Connect with us</h2>
+
+                        <div class="company-details">
+
+                            <ul class="list-unstyled list-inline company-info">
+                                <li ng-if="vm.consultant.address.data.facebook_link !=''"><a
+                                        href="http://{{vm.consultant.address.data.facebook_link}}"><i
+                                        class="fa fa-facebook-square fa-2x"></i></a></li>
+                                <li ng-if="vm.consultant.address.data.google_link!=''"><a
+                                        href="http://{{vm.consultant.address.data.google_link}}"><i
+                                        class="fa fa-google-plus-square fa-2x"></i></a></li>
+                                <li ng-if="vm.consultant.address.data.instagram_link !=''"><a
+                                        href="http://{{vm.consultant.address.data.instagram_link}}"><i
+                                        class="fa fa-instagram fa-2x"></i></a></li>
+                                <li ng-if="vm.consultant.address.data.twitter_link !=''"><a
+                                        href="http://{{vm.consultant.address.data.twitter_link}}"><i
+                                        class="fa fa-twitter fa-2x"></i></a></li>
+                                <li ng-if="vm.consultant.address.data.linkidin_link !=''"><a
+                                        href="http://{{vm.consultant.address.data.linkidin_link}}"><i
+                                        class="fa fa-linkedin-square fa-2x"></i></a></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="side-navigation">
+                    <div style="margin-bottom:15px;">
+                        <figure class="position-static">
+                            <figure>
+                                <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                            </figure>
+                        </figure>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yegnacon&trade;</title>
+    <link rel="shortcut icon" href="favicon.png">
+
+    <!--Global stylesheets -->
+    <!-- a comments-->
+   <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700">-->
+    <!--<link ng-if="currentState == 'Admin' || currentState == 'Auth'"
+          href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet"
+          type="text/css">-->
+    <!-- / a comments-->
+    <link ng-if="currentState == 'Admin' || currentState == 'Auth'" href="css/admin/icons/icomoon/css/styles.css"
+          rel="stylesheet" type="text/css">
+
+    <link href="css/admin/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.css" rel="stylesheet"
+          type="text/css">
+    <link href="../bower_components/ng-tags-input/ng-tags-input.min.css" rel="stylesheet" type="text/css">
+    <link href="../bower_components/textangular/dist/textangular.css" rel="stylesheet" type="text/css">
+
+    <link ng-if="currentState == 'Admin' || currentState == 'Auth'" href="css/admin/css/core.css" rel="stylesheet"
+          type="text/css">
+    <link ng-if="currentState == 'Admin' || currentState == 'Auth'" href="css/admin/components.css" rel="stylesheet"
+          type="text/css">
+    <link ng-if="currentState == 'Admin' || currentState == 'Auth'" href="css/admin/colors.css" rel="stylesheet"
+          type="text/css">
+    <!-- Sweet Alert-->
+    <link href="../bower_components/sweetalert/dist/sweetalert.css" rel="stylesheet"
+          type="text/css">
+    <!-- / Sweet Alert-->
+    <link href="../bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet"
+          type="text/css">
+
+    <!-- /global stylesheets -->
+
+    <link rel="stylesheet" type="text/css" href="css/public/css/font-awesome.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="css/public/css/jquery.bxslider.css" media="screen">
+    <link ng-if="currentState == 'Public'" rel="stylesheet" type="text/css" href="css/public/css/animate.css"
+          media="screen">
+    <link ng-if="currentState == 'Public'" rel="stylesheet" type="text/css" href="css/public/css/flexslider.css"
+          media="screen">
+    <link ng-if="currentState == 'Public'" rel="stylesheet" type="text/css" href="css/public/css/settings.css"
+          media="screen"/>
+    <link ng-if="currentState == 'Public'" rel="stylesheet" type="text/css" href="css/public/css/style.css"
+          media="screen">
+    <link rel="stylesheet" type="text/css" href="../bower_components/angular-notify/dist/angular-notify.min.css">
+    <link ng-if="currentState == 'Public'" rel="stylesheet" type="text/css" href="css/public/css/dataurl.css"/>
+
+    <script ng-if="currentState == 'Public'" type="text/javascript" src="js/public/js/jquery.min.js"></script>
+    <script ng-if="currentState == 'Public'" type="text/javascript" src="js/public/js/jquery.migrate.js"></script>
+    <script ng-if="currentState == 'Public'" type="text/javascript" src="js/public/js/jquery.bxslider.min.js"></script>
+    <script ng-if="currentState == 'Public'" type="text/javascript" src="js/public/js/jquery.flexslider.js"></script>
+    <script ng-if="currentState == 'Public'" type="text/javascript"
+            src="js/public/js/jquery.imagesloaded.min.js"></script>
+    <script ng-if="currentState == 'Public'" type="text/javascript" src="js/public/js/jquery.isotope.min.js"></script>
+    <script ng-if="currentState == 'Public'" type="text/javascript" src="js/public/js/retina-1.1.0.min.js"></script>
+    <script ng-if="currentState == 'Public'" type="text/javascript" src="js/public/js/plugins-scroll.js"></script>
+    <script ng-if="currentState == 'Public'" type="text/javascript" src="js/public/js/script.js"></script>
+
+    <script>
+        jQuery(document).ready(function ($) {
+
+            // site preloader -- also uncomment the div in the header and the css style for #preloader
+            $(window).load(function () {
+                $('#preloader').fadeOut('slow', function () {
+                    $(this).remove();
+                });
+            });
+
+        });
+
+
+    </script>
+    <style>
+        .js div#preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 999;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            background: #fff url('assets/images/loading.gif') no-repeat center center;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div id="preloader"></div>
+
+<ui-view></ui-view>
+<!-- /angular js -->
+<script ng-if="currentState == 'Admin'" type="text/javascript" src="js/admin/loaders/pace.min.js"></script>
+<script type="text/javascript" src="../bower_components/angular/angular.min.js"></script>
+<script type="text/javascript" src="../bower_components/angular-touch/angular-touch.min.js"></script>
+<script type="text/javascript" src="../bower_components/angular-animate/angular-animate.min.js"></script>
+<script type="text/javascript" src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/admin/core/libraries/jasny_bootstrap.min.js"></script>
+<script type="text/javascript" src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+<script type="text/javascript" src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="../bower_components/angularUtils-pagination/dirPagination.js"></script>
+<script type="text/javascript" src="../bower_components/lodash/dist/lodash.min.js"></script>
+<script type="text/javascript" src="../bower_components/ng-lodash/build/ng-lodash.min.js"></script>
+<script type="text/javascript" src="../bower_components/restangular/dist/restangular.min.js"></script>
+<script type="text/javascript" src="../bower_components/angular-notify/dist/angular-notify.min.js"></script>
+<script type="text/javascript" src="../bower_components/angular-messages/angular-messages.js"></script>
+<script type="text/javascript" src="../bower_components/ng-file-upload-shim/ng-file-upload-shim.min.js"></script>
+<script type="text/javascript" src="../bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+<script type="text/javascript"
+        src="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.js"></script>
+<script type="text/javascript" src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script type="text/javascript" src="../bower_components/angular-ckeditor/angular-ckeditor.js"></script>
+<script type="text/javascript" src="../bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+<script type="text/javascript"
+        src="../bower_components/angular-bootstrap-multiselect/angular-bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="../bower_components/textangular/dist/textAngular-rangy.min.js"></script>
+<script type="text/javascript" src="../bower_components/textangular/dist/textAngular-sanitize.min.js"></script>
+<script type="text/javascript" src="../bower_components/textangular/dist/textAngular.min.js"></script>
+<script type="text/javascript" src="../bower_components/highcharts/highcharts.src.js"></script>
+<script type="text/javascript" src="../bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+<!-- Sweet Alert -->
+<script type="text/javascript" src="../bower_components/sweetalert/dist/sweetalert.min.js"></script>
+<!-- /Sweet Alert -->
+<script type="text/javascript" src="js/public/js/jssor.slider-21.1.min.js"></script>
+
+<!-- /angular js -->
+
+
+<!-- Template JS files -->
+
+<script ng-if="currentState == 'Admin' || currentState == 'Auth'" type="text/javascript"
+        src="js/admin/loaders/blockui.min.js"></script>
+<script ng-if="currentState == 'Admin' || currentState == 'Auth'" type="text/javascript"
+        src="js/admin/pages/nicescroll.min.js"></script>
+<!--
+<script ng-if="currentState == 'Admin' || currentState == 'Auth'" type="text/javascript" src="js/admin/pages/layout_sidebar_sticky.js"></script>
+<script ng-if="currentState == 'Admin' || currentState == 'Auth'" type="text/javascript" src="js/admin/pages/layout_sidebar_sticky_custom.js"></script>-->
+<script ng-if="currentState == 'Admin' || currentState == 'Auth'" type="text/javascript"
+        src="js/admin/core/app.min.js"></script>
+<script ng-if="currentState == 'Admin' || currentState == 'Auth'" type="text/javascript"
+        src="js/admin/pages/interact.min.js"></script>
+
+<!-- Template JS files -->
+
+<!-- App Core modules-->
+<!-- Core modules-->
+<script type="text/javascript" src="app/app.module.js"></script>
+<script type="text/javascript" src="app/core/core.module.js"></script>
+<script type="text/javascript" src="app/core/core.service.js"></script>
+<script type="text/javascript" src="app/core/core.route.js"></script>
+<script type="text/javascript" src="app/core/main.controller.js"></script>
+<!-- Core module-->
+
+<!-- auth module-->
+<script type="text/javascript" src="app/auth/auth.module.js"></script>
+<script type="text/javascript" src="app/auth/auth.service.js"></script>
+<script type="text/javascript" src="app/auth/auth.route.js"></script>
+<script type="text/javascript" src="app/auth/auth.controller.js"></script>
+<!-- auth module-->
+
+<!-- Admin Modules -->
+<!-- Core module-->
+<script type="text/javascript" src="app/admin/admin.module.js"></script>
+
+<script type="text/javascript" src="app/admin/core/core.module.js"></script>
+<script type="text/javascript" src="app/admin/core/core.service.js"></script>
+<script type="text/javascript" src="app/admin/core/core.route.js"></script>
+<script type="text/javascript" src="app/admin/core/admin.controller.js"></script>
+<!-- /Core module-->
+
+
+<!-- Home module-->
+<script type="text/javascript" src="app/admin/home/home.module.js"></script>
+<script type="text/javascript" src="app/admin/home/home.service.js"></script>
+<script type="text/javascript" src="app/admin/home/home.route.js"></script>
+<script type="text/javascript" src="app/admin/home/home.controller.js"></script>
+
+<!-- /Home module-->
+
+<!-- Tender module-->
+<script type="text/javascript" src="app/admin/tender/tender.module.js"></script>
+<script type="text/javascript" src="app/admin/tender/tender.service.js"></script>
+<script type="text/javascript" src="app/admin/tender/tender.route.js"></script>
+<script type="text/javascript" src="app/admin/tender/tender.controller.js"></script>
+<script type="text/javascript" src="app/admin/tender/tender.add.controller.js"></script>
+<script type="text/javascript" src="app/admin/tender/tenders.list.controller.js"></script>
+<script type="text/javascript" src="app/admin/tender/tender.detail.controller.js"></script>
+<script type="text/javascript" src="app/admin/tender/tender.edit.controller.js"></script>
+<!-- /Tender module-->
+
+
+<!-- Vacancy module-->
+<script type="text/javascript" src="app/admin/vacancy/vacancy.module.js"></script>
+<script type="text/javascript" src="app/admin/vacancy/vacancy.service.js"></script>
+<script type="text/javascript" src="app/admin/vacancy/vacancy.route.js"></script>
+<script type="text/javascript" src="app/admin/vacancy/vacancy.controller.js"></script>
+<script type="text/javascript" src="app/admin/vacancy/vacancy.add.controller.js"></script>
+<script type="text/javascript" src="app/admin/vacancy/vacancy.edit.controller.js"></script>
+<script type="text/javascript" src="app/admin/vacancy/vacancy.list.controller.js"></script>
+
+<!-- /Vacancy module-->
+
+<!-- User module-->
+<script type="text/javascript" src="app/admin/user/user.module.js"></script>
+<script type="text/javascript" src="app/admin/user/user.service.js"></script>
+<script type="text/javascript" src="app/admin/user/user.route.js"></script>
+<script type="text/javascript" src="app/admin/user/user.list.controller.js"></script>
+<script type="text/javascript" src="app/admin/user/user.subscription.modal.controller.js"></script>
+<script type="text/javascript" src="app/admin/user/user.subscription.invoice.controller.js"></script>
+
+<!-- /User module-->
+
+<!-- News module-->
+<script type="text/javascript" src="app/admin/news/news.module.js"></script>
+<script type="text/javascript" src="app/admin/news/news.service.js"></script>
+<script type="text/javascript" src="app/admin/news/news.route.js"></script>
+<script type="text/javascript" src="app/admin/news/news.controller.js"></script>
+<script type="text/javascript" src="app/admin/news/news.post.controller.js"></script>
+<script type="text/javascript" src="app/admin/news/news.list.controller.js"></script>
+<script type="text/javascript" src="app/admin/news/news.edit.controller.js"></script>
+<!-- /News module-->
+
+<!-- /Admin Modules -->
+
+
+<!-- Public Modules -->
+
+<script type="text/javascript" src="app/public/public.module.js"></script>
+<!-- Home module-->
+<script type="text/javascript" src="app/public/home/home.module.js"></script>
+<script type="text/javascript" src="app/public/home/home.service.js"></script>
+<script type="text/javascript" src="app/public/home/register.service.js"></script>
+<script type="text/javascript" src="app/public/home/home.route.js"></script>
+<script type="text/javascript" src="app/public/home/home.controller.js"></script>
+<script type="text/javascript" src="app/public/home/news.controller.js"></script>
+<script type="text/javascript" src="app/public/home/register.controller.js"></script>
+<script type="text/javascript" src="app/public/home/contact.controller.js"></script>
+<script type="text/javascript" src="app/public/home/quickFacts.controller.js"></script>
+<script type="text/javascript" src="app/public/home/other.services.controller.js"></script>
+<!-- Home module-->
+
+
+<!-- Core module-->
+<script type="text/javascript" src="app/public/core/core.module.js"></script>
+<script type="text/javascript" src="app/public/core/public.service.js"></script>
+<script type="text/javascript" src="app/public/core/core.route.js"></script>
+<script type="text/javascript" src="app/public/core/public.controller.js"></script>
+<!-- /Core module-->
+
+
+<!-- Profile module-->
+<script type="text/javascript" src="app/public/profile/profile.module.js"></script>
+<script type="text/javascript" src="app/public/profile/profile.service.js"></script>
+<script type="text/javascript" src="app/public/profile/profile.route.js"></script>
+<script type="text/javascript" src="app/public/profile/profile.controller.js"></script>
+<!-- /Profile module-->
+
+
+<!-- Active Project module-->
+<script type="text/javascript" src="app/public/project/project.module.js"></script>
+<script type="text/javascript" src="app/public/project/project.service.js"></script>
+<script type="text/javascript" src="app/public/project/project.route.js"></script>
+<script type="text/javascript" src="app/public/project/project.controller.js"></script>
+<script type="text/javascript" src="app/public/project/project.detail.controller.js"></script>
+<!-- /Core module-->
+
+
+<!-- Proforma module-->
+<script type="text/javascript" src="app/public/proforma/proforma.module.js"></script>
+<script type="text/javascript" src="app/public/proforma/proforma.service.js"></script>
+<script type="text/javascript" src="app/public/proforma/proforma.route.js"></script>
+<script type="text/javascript" src="app/public/proforma/proforma.controller.js"></script>
+<!-- /proforma module-->
+
+
+<!-- tender module-->
+<script type="text/javascript" src="app/public/tender/tender.module.js"></script>
+<script type="text/javascript" src="app/public/tender/tender.service.js"></script>
+<script type="text/javascript" src="app/public/tender/tender.route.js"></script>
+<script type="text/javascript" src="app/public/tender/tender.controller.js"></script>
+<script type="text/javascript" src="app/public/tender/tender.detail.controller.js"></script>
+<!-- /tender module-->
+
+<!-- product module-->
+<script type="text/javascript" src="app/public/product/product.module.js"></script>
+<script type="text/javascript" src="app/public/product/product.route.js"></script>
+<script type="text/javascript" src="app/public/product/product.service.js"></script>
+<script type="text/javascript" src="app/public/product/product.controller.js"></script>
+<script type="text/javascript" src="app/public/product/product.detail.controller.js"></script>
+<!-- /product module-->
+
+<!-- Vacancy module-->
+<script type="text/javascript" src="app/public/vacancy/vacancy.module.js"></script>
+<script type="text/javascript" src="app/public/vacancy/vacancy.service.js"></script>
+<script type="text/javascript" src="app/public/vacancy/vacancy.route.js"></script>
+<script type="text/javascript" src="app/public/vacancy/vacancy.controller.js"></script>
+<script type="text/javascript" src="app/public/vacancy/vacancy.detail.controller.js"></script>
+<!-- /vacancy module-->
+
+<!-- Professional module-->
+<script type="text/javascript" src="app/public/professional/professional.module.js"></script>
+<script type="text/javascript" src="app/public/professional/professional.service.js"></script>
+<script type="text/javascript" src="app/public/professional/professional.route.js"></script>
+<script type="text/javascript" src="app/public/professional/professional.controller.js"></script>
+<script type="text/javascript" src="app/public/professional/professional.detail.controller.js"></script>
+<script type="text/javascript" src="app/public/professional/professional.dashboard.controller.js"></script>
+<script type="text/javascript" src="app/public/professional/professional.profile.controller.js"></script>
+<!-- /Professional module-->
+
+<!-- Project Owner module-->
+<script type="text/javascript" src="app/public/projectOwner/projectOwner.module.js"></script>
+<script type="text/javascript" src="app/public/projectOwner/projectOwner.service.js"></script>
+<script type="text/javascript" src="app/public/projectOwner/projectOwner.route.js"></script>
+<script type="text/javascript" src="app/public/projectOwner/projectOwner.controller.js"></script>
+<script type="text/javascript" src="app/public/projectOwner/projectOwner.detail.controller.js"></script>
+<script type="text/javascript" src="app/public/projectOwner/projectOwner.dashboard.controller.js"></script>
+<script type="text/javascript" src="app/public/projectOwner/projectOwner.profile.controller.js"></script>
+
+<!-- /Project Owner module-->
+
+<!-- Supplier module-->
+<script type="text/javascript" src="app/public/supplier/supplier.module.js"></script>
+<script type="text/javascript" src="app/public/supplier/supplier.service.js"></script>
+<script type="text/javascript" src="app/public/supplier/supplier.route.js"></script>
+<script type="text/javascript" src="app/public/supplier/supplier.controller.js"></script>
+<script type="text/javascript" src="app/public/supplier/supplier.detail.controller.js"></script>
+<script type="text/javascript" src="app/public/supplier/supplier.profile.controller.js"></script>
+<script type="text/javascript" src="app/public/supplier/supplier.product.controller.js"></script>
+<script type="text/javascript" src="app/public/supplier/supplier.product.create.controller.js"></script>
+<script type="text/javascript" src="app/public/supplier/supplier.proforma.controller.js"></script>
+<script type="text/javascript" src="app/public/supplier/supplier.dashboard.controller.js"></script>
+<script type="text/javascript" src="app/public/supplier/supplier.proforma.detail.controller.js"></script>
+<!-- /Supplier module-->
+<!--Supplier Vacancy Module-->
+<script type="text/javascript" src="app/public/supplier/vacancy/supplier.vacancy.module.js"></script>
+<script type="text/javascript" src="app/public/supplier/vacancy/supplier.vacancy.service.js"></script>
+<script type="text/javascript" src="app/public/supplier/vacancy/supplier.vacancy.route.js"></script>
+<script type="text/javascript" src="app/public/supplier/vacancy/supplier.vacancy.controller.js"></script>
+<script type="text/javascript" src="app/public/supplier/vacancy/supplier.vacancy.create.controller.js"></script>
+<!--/Supplier Vacancy Module-->
+
+<!--Supplier Tender Service-->
+<script type="text/javascript" src="app/public/supplier/tender/supplier.tender.module.js"></script>
+<script type="text/javascript" src="app/public/supplier/tender/supplier.tender.route.js"></script>
+<script type="text/javascript" src="app/public/supplier/tender/supplier.tender.service.js"></script>
+<script type="text/javascript" src="app/public/supplier/tender/supplier.tender.controller.js"></script>
+<script type="text/javascript" src="app/public/supplier/tender/supplier.tender.create.controller.js"></script>
+<!--/Supplier Tender Service-->
+
+<!-- Consultant module-->
+<script type="text/javascript" src="app/public/consultant/consultant.module.js"></script>
+<script type="text/javascript" src="app/public/consultant/consultant.service.js"></script>
+<script type="text/javascript" src="app/public/consultant/consultant.route.js"></script>
+<script type="text/javascript" src="app/public/consultant/consultant.controller.js"></script>
+<script type="text/javascript" src="app/public/consultant/consultant.detail.controller.js"></script>
+<script type="text/javascript" src="app/public/consultant/consultant.profile.controller.js"></script>
+<script type="text/javascript" src="app/public/consultant/consultant.dashboard.controller.js"></script>
+<script type="text/javascript" src="app/public/consultant/consultant.proforma.controller.js"></script>
+<script type="text/javascript" src="app/public/consultant/consultant.groupCreate.controller.js"></script>
+<script type="text/javascript" src="app/public/consultant/consultant.groupList.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/product/contractor.product.proforma.controller.js"></script>
+<script type="text/javascript" src="app/public/consultant/product/consultant.product.proforma.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/consultant/product/consultant.product.proforma.create.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/consultant/product/consultant.product.proforma.request.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/consultant/product/consultant.product.proforma.replies.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/consultant/notification/consultant.notification.controller.js"></script>
+
+<!-- /Consultant Module module-->
+
+<!--Consultant Project Module-->
+<script type="text/javascript" src="app/public/consultant/project/consultant.project.module.js"></script>
+<script type="text/javascript" src="app/public/consultant/project/consultant.project.route.js"></script>
+<script type="text/javascript" src="app/public/consultant/project/consultant.project.service.js"></script>
+<script type="text/javascript" src="app/public/consultant/project/consultant.project.controller.js"></script>
+<script type="text/javascript" src="app/public/consultant/project/consultant.project.create.controller.js"></script>
+<script type="text/javascript" src="app/public/consultant/project/consultant.project.edit.controller.js"></script>
+<script type="text/javascript" src="app/public/consultant/project/consultant.project.proforma.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/consultant/project/consultant.project.proforma.create.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/consultant/project/consultant.project.proforma.detail.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/consultant/product/consultant.product.proforma.replies.detail.controller.js"></script>
+<!--/Consultant Project Module-->
+
+<!--Consultant Vacancy Module-->
+<script type="text/javascript" src="app/public/consultant/vacancy/consultant.vacancy.module.js"></script>
+<script type="text/javascript" src="app/public/consultant/vacancy/consultant.vacancy.service.js"></script>
+<script type="text/javascript" src="app/public/consultant/vacancy/consultant.vacancy.route.js"></script>
+<script type="text/javascript" src="app/public/consultant/vacancy/consultant.vacancy.controller.js"></script>
+<script type="text/javascript" src="app/public/consultant/vacancy/consultant.vacancy.create.controller.js"></script>
+<!--/Consultant Vacancy Module-->
+
+<!--Consultant Tender Module-->
+<script type="text/javascript" src="app/public/consultant/tender/consultant.tender.module.js"></script>
+<script type="text/javascript" src="app/public/consultant/tender/consultant.tender.route.js"></script>
+<script type="text/javascript" src="app/public/consultant/tender/consultant.tender.service.js"></script>
+<script type="text/javascript" src="app/public/consultant/tender/consultant.tender.controller.js"></script>
+<script type="text/javascript" src="app/public/consultant/tender/consultant.tender.create.controller.js"></script>
+<!--/Consultant Tender Module-->
+
+
+<!-- Contractor module-->
+<script type="text/javascript" src="app/public/contractor/contractor.module.js"></script>
+<script type="text/javascript" src="app/public/contractor/contractor.service.js"></script>
+<script type="text/javascript" src="app/public/contractor/contractor.route.js"></script>
+<script type="text/javascript" src="app/public/contractor/contractor.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/contractor.detail.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/contractor.profile.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/contractor.dashboard.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/contractor.groupCreate.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/contractor.groupList.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/product/contractor.product.proforma.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/contractor/product/contractor.product.proforma.create.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/contractor/product/contractor.product.proforma.request.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/contractor/product/contractor.product.proforma.replies.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/contractor/product/contractor.product.proforma.replies.detail.controller.js"></script>
+
+<!-- /Contractor Module module-->
+
+<!--Contractor Project Controller-->
+<script type="text/javascript" src="app/public/contractor/project/contractor.project.module.js"></script>
+<script type="text/javascript" src="app/public/contractor/project/contractor.project.route.js"></script>
+<script type="text/javascript" src="app/public/contractor/project/contractor.project.service.js"></script>
+<script type="text/javascript" src="app/public/contractor/project/contractor.project.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/project/contractor.project.create.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/project/contractor.project.edit.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/project/contractor.project.proforma.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/contractor/project/contractor.project.proforma.create.controller.js"></script>
+<script type="text/javascript"
+        src="app/public/contractor/project/contractor.project.proforma.detail.controller.js"></script>
+
+<!--/Contractor Project Controller-->
+
+<!--Contractor Vacancy Module-->
+<script type="text/javascript" src="app/public/contractor/vacancy/contractor.vacancy.module.js"></script>
+<script type="text/javascript" src="app/public/contractor/vacancy/contractor.vacancy.service.js"></script>
+<script type="text/javascript" src="app/public/contractor/vacancy/contractor.vacancy.route.js"></script>
+<script type="text/javascript" src="app/public/contractor/vacancy/contractor.vacancy.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/vacancy/contractor.vacancy.create.controller.js"></script>
+<!--/Contractor Vacancy Module-->
+
+<!--Contractor Tender Service-->
+<script type="text/javascript" src="app/public/contractor/tender/contractor.tender.module.js"></script>
+<script type="text/javascript" src="app/public/contractor/tender/contractor.tender.route.js"></script>
+<script type="text/javascript" src="app/public/contractor/tender/contractor.tender.service.js"></script>
+<script type="text/javascript" src="app/public/contractor/tender/contractor.tender.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/tender/contractor.tender.create.controller.js"></script>
+<!--/Contractor Tender Service-->
+
+
+<!--Notification Controller-->
+<script type="text/javascript" src="app/public/notification/notification.module.js"></script>
+<script type="text/javascript" src="app/public/notification/notification.route.js"></script>
+<script type="text/javascript" src="app/public/notification/notification.service.js"></script>
+<script type="text/javascript" src="app/public/notification/notification.controller.js"></script>
+<!--/Notification Controller-->
+
+<!--Documentation Controller-->
+<script type="text/javascript" src="app/public/documentation/documentation.module.js"></script>
+<script type="text/javascript" src="app/public/documentation/documentation.route.js"></script>
+<script type="text/javascript" src="app/public/documentation/documentation.controller.js"></script>
+<!--Documentation Controller-->
+
+<!-- Contractor/ Employee Controller -->
+<script type="text/javascript" src="app/public/contractor/employee/employee.module.js"></script>
+<script type="text/javascript" src="app/public/contractor/employee/employee.route.js"></script>
+<script type="text/javascript" src="app/public/contractor/employee/employee.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/employee/employee.leaveSettings.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/employee/employee.leaveRequests.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/employee/employee.service.js"></script>
+<script type="text/javascript" src="app/public/contractor/employee/employee.create.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/employee/employee.edit.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/employee/employee.detail.controller.js"></script>
+<script type="text/javascript" src="app/public/contractor/employee/employee.leaveHistory.controller.js"></script>
+
+<!-- Controller/ Employee Controller -->
+
+<!-- Employee Controller-->
+
+<script type="text/javascript" src="app/public/employee/employee.module.js"></script>
+<script type="text/javascript" src="app/public/employee/employee.route.js"></script>
+<script type="text/javascript" src="app/public/employee/employeeUser.service.js"></script>
+<script type="text/javascript" src="app/public/employee/employee.leaveHistory.controller.js"></script>
+<script type="text/javascript" src="app/public/employee/employee.requestLeave.controller.js"></script>
+<script type="text/javascript" src="app/public/employee/employee.leaves.controller.js"></script>
+<script type="text/javascript" src="app/public/employee/employee.profile.controller.js"></script>
+<script type="text/javascript" src="app/public/employee/employee.editProfile.controller.js"></script>
+<script type="text/javascript" src="app/public/employee/employee.accountSettings.controller.js"></script>
+
+<!-- Employee Controller-->
+
+
+
+<!--facebook script-->
+<!-- a comments-->
+<!--<script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+&lt;!&ndash;facebook script&ndash;&gt;
+
+&lt;!&ndash;google analytics&ndash;&gt;
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-58017917-4', 'auto');
+    ga('send', 'pageview');
+
+</script>-->
+<!-- / a comments-->
+<!--google analytics-->
+
+</body>
+</html>

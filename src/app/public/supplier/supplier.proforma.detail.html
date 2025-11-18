@@ -1,0 +1,265 @@
+<div class="panel panel-default panel-default-main">
+    <form id="contact-form" name="proformaForm">
+        <div class="row">
+
+            <div id="printableArea">
+                <div class="col-sm-6">
+                    <div class="col-md-3"><img src="{{vm.productProforma.logo}}" alt="Company Logo" width="80"
+                                               height="80"></div>
+                    <div class="col-md-9">
+                        <br>
+                        <h2>
+                            {{vm.productProforma.user.data.name}}
+                        </h2>
+                    </div>
+
+                </div>
+                <div class="col-sm-6" style="padding:0px 30px 0px 30px ">
+                    <div class="row">
+                        <h1 class="sidebar-label"><span class="pull-right">{{vm.productProforma.date | date:"MMM dd, yyyy" }}</span>
+                        </h1>
+                    </div>
+                    <div class="row">
+                        <span class="detail-subtitle pull-right">Proforma Request Id: &nbsp; ID{{vm.productProforma.proforma_request_id}} </span><br>
+                        <span class="detail-subtitle pull-right">Proforma Invoice Id: &nbsp; ID{{vm.productProforma.proforma_response_id}} </span>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+
+                            <ul class="list-icons location list-unstyled">
+                                <li>
+                                    <h2 style="padding: 0" class="sidebar-label">Proforma Request From::
+                                        {{vm.productProforma.user.data.name}}</h2>
+                                </li>
+                                <li>
+                                    <i class="fa fa-map-marker"></i> <span>{{vm.productProforma.user.data.address.data.specific_address}}, {{vm.productProforma.user.data.address.data.city}}</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope"></i>
+                                    <span>{{vm.productProforma.user.data.email}}</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-phone"></i> <span>{{vm.productProforma.user.data.address.data.phone_number_1}}</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-12">
+
+                            <h2 class="text-center"> Material List</h2>
+
+                            <div uib-alert ng-repeat="alert in vm.alerts" class="alert-success text-center">
+                                {{alert.msg}}
+                            </div>
+
+                            <div class="table-responsive" style="padding-top:40px">
+
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Description</th>
+                                        <th width="20%">Quantity</th>
+                                        <th width="20%">unit Price</th>
+                                        <th>Total Price</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="proformaRequestItem  in vm.proformaDto.proformaResponseItems track by $index">
+                                        <td>{{proformaRequestItem.item_name}}</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-orange text-center" href=""
+                                               ng-click="vm.toggleRequestDescription(proformaRequestItem.description,$index)">
+                                                Read / Add Description ...
+                                            </a>
+                                        </td>
+                                        <td ng-if="vm.proformaStatus=='Open'">
+                                            <div style="border: none;background: transparent; padding: 2px;margin-bottom: 2px;"
+                                                 ng-class="{ 'has-error': proformaForm.quantity.$touched && proformaForm.quantity.$invalid}">
+                                                <input ng-change="vm.priceCalculator()"
+                                                       ng-model="proformaRequestItem.quantity"
+                                                       name="{quantity + $index}" min="0"
+                                                       type="text" placeholder={{proformaRequestItem.quantity}} required>
+                                            </div>
+                                        </td>
+                                        <td ng-if="vm.proformaStatus=='Closed'">{{proformaRequestItem.quantity}}</td>
+                                        <td ng-if="vm.proformaStatus=='Open'">
+                                            <div style="border: none;background: transparent; padding: 2px;margin-bottom: 2px;">
+                                                <div class="form-group"
+                                                     ng-class="{ 'has-error': proformaForm.price.$touched && proformaForm.price.$invalid}">
+                                                    <input ng-change="vm.priceCalculator()"
+                                                           ng-model="proformaRequestItem.price" min="0"
+                                                           name="{price+$index}"
+                                                           type="number" placeholder="Price">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td ng-if="vm.proformaStatus=='Closed'">
+                                            {{proformaRequestItem.price|number:2 }}
+                                        </td>
+                                        <td>
+                                            {{(proformaRequestItem.quantity*proformaRequestItem.price)|number:2}}
+                                        </td>
+
+                                    </tr>
+                                    <tr ng-show="vm.showDescription">
+                                        <td colspan="5">
+                                            <div class="accordion-box">
+                                                <div class="accord-elem active">
+                                                    <div class="accord-title">
+                                                        <a class="accord-link" href=""></a>
+
+                                                        <h2>View Request Description</h2>
+                                                    </div>
+                                                    <div class="accord-content">
+                                                        <p ng-bind-html="vm.currentDescription"></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="accord-elem active">
+                                                    <div class="accord-title">
+                                                        <a class="accord-link" href=""></a>
+
+                                                        <h2>Write Your Response Item Description </h2>
+                                                    </div>
+                                                    <div class="accord-content">
+                                                        <div class="form-group">
+
+                                                            <text-angular name="remark"
+                                                                          ng-model="vm.reply[vm.index]"
+                                                                          name="project_description"></text-angular>
+
+                                                        </div>
+                                                        <button class="btn btn-orange pull-right" ng-click="vm.postReply()">Submit Reply</button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="pull-right">
+                                    <table class="table table responsive">
+                                        <tr>
+                                            <td>Sub total:</td>
+                                            <td>{{vm.subTotal|number:2}} ETB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>VAT:</td>
+                                            <td>{{(vm.subTotal*0.15)|number:2}} ETB</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Grand total:</strong></td>
+                                            <td><strong>{{(vm.subTotal*1.15)|number:2}} ETB</strong></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div ng-if="vm.proformaStatus=='Open'" class="pull-left">
+
+                                    <div class="form-group"
+                                         ng-class="{ 'has-error': productForm.valid_until.$touched && productForm.valid_until.$invalid}">
+                                        <p>The Above Prices are valid until
+                                            <input type="date" name="valid_until" ng-model="vm.validity_date" required>
+                                        </p>
+
+                                        <div class="form_error" ng-messages="proformaForm.valid_until.$error"
+                                             ng-if="proformaForm.valid_until.$touched" role="alert">
+                                            <p ng-message="required">Please SelectValidity Date.</p>
+                                        </div>
+                                        <br>
+
+                                        <p> The Above materials list are available on
+
+                                        <div class="form-group"
+                                             ng-class="{ 'has-error': proformaForm.delivery_type.$touched && proformaForm.delivery_type.$invalid}">
+                                            <Select class="form-control" type="text" required name="delivery_type"
+                                                    ng-model="vm.delivery_type">
+                                                <option selected value="stock">From Stock</option>
+                                                <option value="Appointment">Appointment</option>
+                                            </Select>
+
+                                            <div class="form_error" ng-messages="proformaForm.delivery_type.$error"
+                                                 ng-if="proformaForm.delivery_type.$touched" role="alert">
+                                                <p ng-message="required">Please Select Delivery Type.</p>
+                                            </div>
+                                        </div>
+                                        </p>
+
+                                        <p ng-if="vm.delivery_type=='Appointment'">Available On<input type="date"
+                                                                                                      ng-model="vm.delivery_date">
+                                        </p>
+                                    </div>
+                                    <div ng-if="vm.proformaStatus == 'Closed'" class="push-left">
+                                        <p>You set the Above Prices to be valid until: {{
+                                            vm.proformaResponseItems[0].validity_date|date:'mediumDate'}} </p>
+
+                                        <p>The Above materials list are available on: {{
+                                            vm.proformaResponseItems[0].delivery_date|date:'mediumDate'}}</p>
+                                    </div>
+
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-md-4" style="margin-left: 4px">
+                <div ng-if="vm.productProforma.file" >
+                    <p>File Attached &nbsp;&nbsp;&nbsp;<a class="btn btn-orange" href="{{ vm.productProforma.file}}"
+                                                          data-target="_blank"><i class="fa fa-download">
+                        Download</i></a></p>
+                </div>
+                <div class="push-left form-group">
+                    <p>File Attachments</p>
+
+                    <div class="form-group"
+                         ng-class="{'has-error':proformaForm.file.$touched && proformaForm.file.$invalid}">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn main-color" type="button"
+                                        ngf-select ng-model="vm.file" id="file2"
+                                        ngf-pattern="'.pdf, .doc,.docx, .xls, .xlsx, .jpg'"
+                                        ngf-accept="'.pdf, .doc,.docx, .xls, .xlsx,.jpg'" ngf-max-size="20MB"
+                                        ><i class="fa fa-paperclip"></i> Attach File
+                                </button>
+                            </span>
+                            <input type="text" name="file" class="form-control"
+                                   placeholder="No Files Selected ... "
+                                   ng-model="vm.file.name" >
+                        </div>
+                        <div class="form_error" ng-messages="proformaForm.file.$error"
+                             ng-if="proformaForm.file.$touched" role="alert">
+                            <div ng-message="maxSize">The file must be less than 2MB</div>
+                            <div ng-message="minHeight">The file must be at least 100px high</div>
+                            <div ng-message="pattern">Invalid File Type</div>
+                            <div ng-message="required">You must upload a project Doc.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-lg-12 form-group text-right">
+                <!--<form class="contact-form">-->
+                <div class="btn-group text-center" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-orange"
+                            ng-click="vm.printDiv('printableArea')">Print
+                    </button>
+                </div>
+                <div class="btn-group text-center" role="group" aria-label="Basic example">
+                    <button ng-disabled="vm.disabled || vm.clicked || proformaForm.$invalid" type="button"
+                            class="btn btn-orange"
+                            ng-click="vm.submitProforma()">
+                        Submit Reply
+                    </button>
+                </div>
+                <!--</form>-->
+            </div>
+        </div>
+    </form>
+</div>

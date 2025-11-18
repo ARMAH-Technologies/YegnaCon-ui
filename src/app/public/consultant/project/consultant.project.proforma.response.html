@@ -1,0 +1,205 @@
+<div class="container">
+    <section>
+        <div class="row">
+
+            <div class="col-lg-9 panel panel-default panel-default-main">
+                <div class="row">
+                    <div class="alert alert-success fade in" ng-class="{ 'display-hidden': vm.updateSuccess == ''}">
+                        <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Success!</strong> {{ vm.updateSuccess }}
+                    </div>
+                    <h1 class="col-md-9">{{ vm.proforma.proformaRequestProjectCost.data.title }}</h1>
+                    <button ng-if="!vm.userProforma && !vm.replied" class="pull-right btn btn-lg col-md-2 main-color"
+                            style="margin-top: 20px;" data-toggle="modal" data-target="#proformaReply">Reply</button>
+                </div>
+                <hr>
+                Project Category: <strong>{{ vm.proforma.proformaRequestProjectCost.data.type }} | {{ vm.proforma.proformaRequestProjectCost.data.level }}</strong><br>
+                Posted Date: <strong>{{ vm.proforma.date }}</strong>
+                <hr>
+                <h3>Description</h3>
+
+                <div class="row">
+                    <blockquote>
+                        <div ng-bind-html="vm.bindHtml(vm.proforma.proformaRequestProjectCost.data.description)"></div>
+                    </blockquote>
+
+                </div>
+                <hr>
+                <div ng-if="vm.userProforma">
+                    <h3>Replies</h3>
+                    <div ng-if="!vm.proforma.proformaResponses || (vm.proforma.proformaResponses.data && vm.proforma.proformaResponses.data.length == 0)">
+                        <h3>There are no replies yet.</h3>
+                    </div>
+                    <div class="table-responsive" ng-if="vm.proforma.proformaResponses.data && vm.proforma.proformaResponses.data.length">
+                        <table class="table table-striped table-hover table-bordered" >
+                            <thead>
+                            <tr>
+                                <th>Respondent Name</th>
+                                <th>Response Title</th>
+                                <th>Reply Date</th>
+                                <th>Validity Date</th>
+                                <th>File</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr dir-paginate="response in vm.proforma.proformaResponses.data | itemsPerPage: vm.itemsPerPage" total-items="vm.totalItems" current-page="vm.currentPage">
+                                <td><a href="" ng-click="vm.setCurrentResponse(response)" data-toggle="modal" data-target="#replyDetail">{{ response.company}}</a></td>
+                                <td>{{ response.proformaResponseProjectCost.data[0].title }}</td>
+                                <td>{{ response.date }}</td>
+                                <td>{{ response.validity_date}}</td>
+                                <td><a href="{{ response.file_name }}" target="_blank">Download File</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <ul class="pagination pagination-separated pagination-rounded text-center">
+                            <dir-pagination-controls on-page-change="vm.getProformas()"></dir-pagination-controls>
+                        </ul>
+                    </div>
+                </div>
+                <div ng-if="vm.replied">
+                    <h3>My Reply</h3>
+                    <span><strong>Title: </strong>
+                    </span>{{vm.myReply.proformaResponseProjectCost.data[0].title}}<br>
+                    <p>{{vm.myReply.proformaResponseProjectCost.data[0].description}}</p>
+                </div>
+
+
+            </div>
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">
+                        <img ng-src="{{ vm.proforma.userLogo }}" alt="" width="100" height="100">
+
+                    </div>
+                    <div class="panel-heading">
+                        <h2 class="sidebar-label display-inline">{{ vm.proforma.user.data.name }}</h2>
+                        <ul class="list-unstyled company-info">
+                            <li><i class="fa fa-globe"></i> {{ vm.proforma.user.data.email }}</li>
+                            <li><i class="fa fa-phone"></i> {{ vm.proforma.user.data.address.data.phone_number_1 }}</li>
+                            <li><i class="fa fa-phone"></i> {{ vm.proforma.user.data.address.data.phone_number_2 }}</li>
+                        </ul>
+                        <hr>
+                        <div class="company-details">
+
+                            <ul class="list-unstyled list-inline company-info">
+                                <li><a href="http://{{vm.consultant.address.data.facebook_link}}"><i
+                                        class="fa fa-facebook-square fa-2x"></i></a></li>
+                                <li><a href="http://{{vm.consultant.address.data.google_link}}"><i
+                                        class="fa fa-google-plus-square fa-2x"></i></a></li>
+                                <li><a href="http://{{vm.consultant.address.data.instagram_link}}"><i
+                                        class="fa fa-instagram fa-2x"></i></a></li>
+                                <li><a href="http://{{vm.consultant.address.data.twitter_link}}"><i
+                                        class="fa fa-twitter fa-2x"></i></a></li>
+                                <li><a href="http://{{vm.consultant.address.data.linkidin_link}}"><i
+                                        class="fa fa-linkedin-square fa-2x"></i></a></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="proformaReply" class="modal fade" role="dialog">
+        <div class="modal-dialog ">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Proforma Reply</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="replyForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+
+                                    <div class="form-group col-md-6" ng-class="{ 'has-error': replyForm.title.$touched && replyForm.title.$invalid}">
+                                        <label>Reason</label>
+                                        <input type="text"
+                                               name="title" ng-model="vm.proformaReply.title" ng-required="true" class="form-control"/>
+                                        <div class="form_error" ng-messages="replyForm.title.$error" ng-if="replyForm.title.$touched" role="alert" >
+                                            <p ng-message="minlength">Project name is too short.</p>
+                                            <p ng-message="required">Project name is required.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6" ng-class="{ 'has-error': replyForm.validity.$touched && replyForm.validity.$invalid}">
+                                        <label>Valid Before</label>
+                                        <input type="date"
+                                               name="validity" ng-model="vm.proformaReply.validity" ng-required="true" class="form-control"/>
+                                        <div class="form_error" ng-messages="replyForm.validity.$error" ng-if="replyForm.validity.$touched" role="alert" >
+                                            <p ng-message="required">Validity Date is required.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-class="{ 'has-error': replyForm.description.$touched && replyForm.description.$invalid}">
+                                    <label>Description</label>
+                                    
+                                    <text-angular required ng-model="vm.proformaReply.description" name="description"></text-angular>
+                                    <div class="form_error" ng-messages="replyForm.description.$error" ng-if="replyForm.description.$touched" role="alert" >
+                                        <p ng-message="minlength">Description is too short.</p>
+                                        <p ng-message="required">Description is required.</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div>{{ vm.file.name }}</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="form-group" ng-class="{'has-error':replyForm.file.$touched && replyForm.file.$invalid}">
+                            <div class="input-group" ng-class="{'has-error':replyForm.file.$touched && replyForm.file.$invalid}" >
+                            <span class="input-group-btn">
+                                <button class="btn main-color" type="button" required
+                                        ngf-select ng-model="vm.file" name="file" id="file2" ngf-pattern="'.pdf, .doc,.docx, .xls, .xlsx'"
+                                        ngf-accept="'.pdf, .doc,.docx, .xls, .xlsx'" ngf-max-size="20MB"
+                                ><i class="fa fa-paperclip"></i> Attach File</button>
+                            </span>
+                                <input type="text" class="form-control" placeholder="No Files Selected ... "
+                                       ng-model="vm.file.name">
+                            </div>
+                            <div class="form_error" ng-messages="replyForm.file.$error" ng-if="replyForm.file.$touched || replyForm.$submitted" role="alert">
+                                <div ng-message="maxSize">The file must be less than 2MB</div>
+                                <div ng-message="minHeight">The file must be at least 100px high</div>
+                                <div ng-message="pattern">Invalid File Type</div>
+                                <div ng-message="required">You must upload a project Logo</div>
+                            </div>
+                        </div>
+                        <div class="form-group pull-right">
+                            <button class="btn btn-primary" ng-click="vm.submitReply(replyForm.$valid)" data-dismiss="modal">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    <!--Modal 2-->
+    <div id="replyDetail" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Reply Detail</h4>
+                </div>
+                <div class="modal-body">
+                    <span><strong>Title: </strong>
+                    </span>{{vm.response.proformaResponseProjectCost.data[0].title}}<br>
+                    <p>{{vm.response.proformaResponseProjectCost.data[0].description}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

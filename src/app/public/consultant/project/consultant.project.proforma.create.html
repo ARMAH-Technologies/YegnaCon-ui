@@ -1,0 +1,94 @@
+<div class="panel panel-default panel-default-main">
+    <form ng-submit="vm.submitProforma(proformaForm.$valid)" name="proformaForm" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group"
+                     ng-class="{ 'has-error': (proformaForm.project_name.$touched || proformaForm.$submitted) && proformaForm.project_name.$invalid}">
+                    <label for="proj_name">Project Name</label>
+                    <input type="text" id="proj_name"
+                           name="project_name" ng-model="vm.project.name" ng-required="true" ng-minlength="3"
+                           class="form-control" value="{{ vm.project.name }}"/>
+
+                    <div class="form_error" ng-messages="proformaForm.project_name.$error"
+                         ng-if="proformaForm.project_name.$touched  || proformaForm.$submitted" role="alert">
+                        <p ng-message="minlength">Project name is too short.</p>
+
+                        <p ng-message="required">Project name is required.</p>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{ 'has-error': (proformaForm.type.$touched || proformaForm.$submitted) && proformaForm.type.$invalid}">
+                    <label>Company Type</label>
+                    <select required class="form-control" name="type" ng-model="vm.project.type">
+                        <option ng-repeat="type in vm.companyTypes" value="{{ type }}">
+                            {{ type }}
+                        </option>
+                    </select>
+
+                    <div class="form_error" ng-messages="proformaForm.type.$error"
+                         ng-if="proformaForm.type.$touched  || proformaForm.$submitted" role="alert">
+                        <p ng-message="required">Contractor Type is required.</p>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{ 'has-error': (proformaForm.level.$touched || proformaForm.$submitted) && proformaForm.level.$invalid}">
+                    <label>Company Grade</label>
+                    <select required class="form-control" name="level" ng-model="vm.project.level">
+                        <option ng-repeat="level in vm.companyLevels" value="{{ level }}">
+                            {{ level }}
+                        </option>
+                    </select>
+
+                    <div class="form_error" ng-messages="proformaForm.level.$error"
+                         ng-if="proformaForm.level.$touched  || proformaForm.$submitted" role="alert">
+                        <p ng-message="required">Contractor Grade is required.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-12">
+                <h2 class="sidebar-label">Project Brief Description</h2>
+
+                <div class="form-group"
+                     ng-class="{ 'has-error': (proformaForm.project_description.$touched || proformaForm.$submitted) && proformaForm.project_description.$invalid}">
+                    <text-angular required ng-model="vm.project.description" name="project_description"></text-angular>
+                    <div class="form_error" ng-messages="proformaForm.project_description.$error"
+                         ng-if="proformaForm.project_description.$touched || proformaForm.$submitted" role="alert">
+                        <p ng-message="required">Project Description is required.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-9"
+                         ng-class="{'has-error':proformaForm.file.$touched && proformaForm.file.$invalid}">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn main-color" type="button" required
+                                        ngf-select ng-model="vm.file" id="file2"
+                                        ngf-pattern="'.pdf, .doc,.docx, .xls, .xlsx'"
+                                        ngf-accept="'.pdf, .doc,.docx, .xls, .xlsx'" ngf-max-size="20MB"
+                                        ><i class="fa fa-paperclip"></i> Attach File
+                                </button>
+                            </span>
+                            <input type="text" name="file" class="form-control" placeholder="No Files Selected ... "
+                                   ng-model="vm.file.name" required>
+                        </div>
+                        <div class="form_error" ng-messages="proformaForm.file.$error"
+                             ng-if="proformaForm.file.$touched" role="alert">
+                            <div ng-message="maxSize">The file must be less than 2MB</div>
+                            <div ng-message="minHeight">The file must be at least 100px high</div>
+                            <div ng-message="pattern">Invalid File Type</div>
+                            <div ng-message="required">You must upload a project Doc.</div>
+                        </div>
+                    </div>
+                    <div class=" col-md-3 form-group">
+                        <button class="btn btn-orange pull-right" ng-disabled="vm.clicked || proformaForm.$invalid"
+                                type="submit" class="pull-right"
+                                value="Submit Proforma">Submit Proforma
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

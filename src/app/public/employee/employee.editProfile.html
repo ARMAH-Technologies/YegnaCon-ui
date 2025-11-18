@@ -1,0 +1,105 @@
+<div class="panel panel-default panel-default-main">
+    <form id="contact-form" name="form" novalidate>
+        <div class="row">
+            <div class="col-sm-4">
+                <h2 class="sidebar-label">Edit Profile</h2>
+            </div>
+        </div>
+        <div class="product-form">
+            <div class="row">
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': form.phoneNo.$touched && form.phoneNo.$invalid }">
+                    <label>phone Number</label>
+                    <input class="form-control" required type="text" class="" name="phoneNo"
+                           ng-model="vm.employee.employee.user.address.phone_number_1" ng-required="true"/>
+
+                    <div class="form_error" ng-messages="form.phoneNo.$error" ng-if="form.phoneNo.$touched" role="alert" >
+                        <p ng-message="required">You have to enter your Phone Number</p>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': form.email.$touched && form.email.$invalid }">
+                    <label>Email</label>
+                    <input class="form-control" required type="email" class="" name="email"
+                           ng-model="vm.employee.employee.user.email"/>
+
+                    <div class="form_error" ng-messages="form.email.$error" ng-if="form.email.$touched" role="alert" >
+                        <p ng-message="required">You have to enter your Email</p>
+                        <p ng-message="email">Please enter a valid Email</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': form.city.$touched && form.city.$invalid }">
+                    <label>City</label>
+                    <input class="form-control" required type="text" name="city"
+                           ng-model="vm.employee.employee.user.address.city"/>
+
+                    <div class="form_error" ng-messages="form.city.$error" ng-if="form.city.$touched" role="alert" >
+                        <p ng-message="required">You have to enter your City</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': form.subCity.$touched && form.subCity.$invalid }">
+                    <label>Sub City</label>
+                    <input class="form-control" required type="text" name="subCity"
+                           ng-model="vm.employee.employee.user.address.sub_city"/>
+
+                    <div class="form_error" ng-messages="form.subCity.$error" ng-if="form.subCity.$touched" role="alert" >
+                        <p ng-message="required">You have to enter your Sub City</p>
+                    </div>
+                </div>
+
+
+                <!--<div class="col-md-6 form-group"
+                     ng-class="{ 'has-error': (vacancyCreateForm.closing_date.$touched || vacancyCreateForm.$submitted) && vacancyCreateForm.closing_date.$invalid}">
+
+                    <div class="form-group">
+                        <label>Employee Photo</label>
+
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn main-color" type="button"
+                                        ngf-select ng-model="vm.file" id="file2"
+                                        ngf-pattern="'.pdf, .doc,.docx, .xls, .xlsx, .jpg'"
+                                        ngf-accept="'.pdf, .doc,.docx, .xls, .xlsx,.jpg'" ngf-max-size="20MB"
+                                ><i class="fa fa-paperclip"></i> Attach File
+                                </button>
+                            </span>
+                            <input type="text" name="file" class="form-control" placeholder="No Files Selected ... "
+                                   ng-model="vm.file.name">
+                        </div>
+                        <div class="form_error" ng-messages="proformaForm.file.$error"
+                             ng-if="proformaForm.file.$touched" role="alert">
+                            <div ng-message="maxSize">The file must be less than 2MB</div>
+                            <div ng-message="minHeight">The file must be at least 100px high</div>
+                            <div ng-message="pattern">Invalid File Type</div>
+                            <div ng-message="required">You must upload a project Doc.</div>
+                        </div>
+                    </div>
+
+                </div>-->
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <input type="submit" class="btn main-color pull-right" value="Update" ng-click="vm.editEmployee()" ng-disabled="form.$invalid"/>
+                </div>
+
+            </div>
+
+        </div>
+        <div>
+        </div>
+
+    </form>
+
+
+</div>

@@ -1,0 +1,244 @@
+<div class="container">
+    <section class="page-banner-section">
+        <div class="row">
+            <div class="col-md-6 " style="padding-left: 40px">
+                <h2>Other Service Providers</h2>
+            </div>
+            <div class="col-md-6 " style="padding-right: 40px">
+                <ul class="page-depth">
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="side-navigation">
+                <div style="margin-bottom:15px;">
+                    <figure class="position-static">
+                        <figure>
+                            <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                        </figure>
+                    </figure>
+                </div>
+                <hr>
+                <div style="margin-bottom:15px;">
+                    <figure class="position-static">
+                        <figure>
+                            <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                        </figure>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 panel panel-default panel-default-main">
+            <!-- Nav tabs -->
+            <div class="tab-posts-box">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active">
+                        <a data-target="#option1" data-toggle="tab" ng-click="vm.getOtherService(vm.banksCategory)">Banks</a>
+                    </li>
+                    <li>
+                        <a data-target="#option2" data-toggle="tab" ng-click="vm.getOtherService(vm.insuranceCategory)">Insurance</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="option1">
+                        <ul id="tender-list" class="list-unstyled">
+                            <!--Tender Lists-->
+                            <div dir-paginate="supplier in vm.suppliers | itemsPerPage: vm.itemsPerPage"
+                                 total-items="vm.totalItems" current-page="vm.currentPage"
+                                 class="row news-post bootplus-card">
+                                <div class="col-lg-2 text-center">
+                                    <img class="logo" src="{{ supplier.image }}" alt=""
+                                         width="90" height="90">
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <h2 class="list-title"><a
+                                            href="" ng-click="vm.showDetail(supplier.id, 'supplier')">{{supplier.name}}</a>
+                                    </h2>
+
+                                    <div class="list-icons location">
+                                        <i class="fa fa-map-marker"></i> <span>{{ supplier.address.data.city}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    Supplier Categories: <span ng-if="supplier.supplier.data.category.data.length == 0"
+                                                               class="label label-warning" style="color: white !important;">No Category</span>
+                        <span class="label label-primary" style="color: white !important;"
+                              ng-repeat="category in supplier.supplier.data.category.data track by $index"> {{ category.category }}<br></span><br>
+
+                                </div>
+                                <div class="col-lg-3">
+                                    Established in: <strong>{{ supplier.supplier.data.established_year | date:'mediumDate'
+                                    }}</strong>
+                                </div>
+                            </div>
+
+
+                        </ul>
+
+                        <ul class="pagination pagination-separated pagination-rounded text-center">
+                            <dir-pagination-controls on-page-change="vm.getSuppliers()"></dir-pagination-controls>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="option2">
+                        <ul id="tender-list2" class="list-unstyled">
+                            <!--Tender Lists-->
+                            <div dir-paginate="supplier in vm.suppliers | itemsPerPage: vm.itemsPerPage"
+                                 total-items="vm.totalItems" current-page="vm.currentPage"
+                                 class="row news-post bootplus-card">
+                                <div class="col-lg-2 text-center">
+                                    <img class="logo" src="{{ supplier.image }}" alt=""
+                                         width="90" height="90">
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <h2 class="list-title"><a
+                                            href="" ng-click="vm.showDetail(supplier.id, 'supplier')">{{supplier.name}}</a>
+                                    </h2>
+
+                                    <div class="list-icons location">
+                                        <i class="fa fa-map-marker"></i> <span>{{ supplier.address.data.city}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    Supplier Categories: <span ng-if="supplier.supplier.data.category.data.length == 0"
+                                                               class="label label-warning" style="color: white !important;">No Category</span>
+                        <span class="label label-primary" style="color: white !important;"
+                              ng-repeat="category in supplier.supplier.data.category.data track by $index"> {{ category.category }}<br></span><br>
+
+                                </div>
+                                <div class="col-lg-3">
+                                    Established in: <strong>{{ supplier.supplier.data.established_year | date:'mediumDate'
+                                    }}</strong>
+                                </div>
+                            </div>
+
+
+                        </ul>
+
+                        <ul class="pagination pagination-separated pagination-rounded text-center">
+                            <dir-pagination-controls on-page-change="vm.getSuppliers()"></dir-pagination-controls>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="option3">
+                        <ul id="tender-list3" class="list-unstyled">
+                            <!--Tender Lists-->
+                            <div dir-paginate="supplier in vm.suppliers | itemsPerPage: vm.itemsPerPage"
+                                 total-items="vm.totalItems" current-page="vm.currentPage"
+                                 class="row news-post bootplus-card">
+                                <div class="col-lg-2 text-center">
+                                    <img class="logo" src="{{ supplier.image }}" alt=""
+                                         width="90" height="90">
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <h2 class="list-title"><a
+                                            href="" ng-click="vm.showDetail(supplier.id, 'supplier')">{{supplier.name}}</a>
+                                    </h2>
+
+                                    <div class="list-icons location">
+                                        <i class="fa fa-map-marker"></i> <span>{{ supplier.address.data.city}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    Supplier Categories: <span ng-if="supplier.supplier.data.category.data.length == 0"
+                                                               class="label label-warning" style="color: white !important;">No Category</span>
+                        <span class="label label-primary" style="color: white !important;"
+                              ng-repeat="category in supplier.supplier.data.category.data track by $index"> {{ category.category }}<br></span><br>
+
+                                </div>
+                                <div class="col-lg-3">
+                                    Established in: <strong>{{ supplier.supplier.data.established_year | date:'mediumDate'
+                                    }}</strong>
+                                </div>
+                            </div>
+
+
+                        </ul>
+
+                        <ul class="pagination pagination-separated pagination-rounded text-center">
+                            <dir-pagination-controls on-page-change="vm.getSuppliers()"></dir-pagination-controls>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Nav tabs -->
+        </div>
+        <div class="col-md-2">
+            <div class="side-navigation">
+
+                <div style="margin-bottom:15px;">
+                    <div ng-if="!currentUser" class="row">
+                        <form class="panel panel-default" role="form" name="loginForm" novalidate>
+                            <h2 class="panel-heading">Login</h2>
+                            <small class="display-block  alert-danger">{{loginError}}</small>
+                            <img class="col-md-offset-4" ng-show="authenticating" height="80px"
+                                 src="assets/images/loading.png"/>
+
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group"
+                                             ng-class="{ 'has-error': (loginForm.company.$touched || loginForm.$submitted) && loginForm.company.$invalid || loginError != ''}">
+                                            <label>Email</label>
+                                            <input required name="company" class="form-control" type="email"
+                                                   placeholder="Enter your email here"
+                                                   ng-model="email">
+
+                                            <div class="form_error" ng-messages="loginForm.company.$error"
+                                                 ng-if="loginForm.company.$touched || loginForm.$submitted || loginError != ''"
+                                                 role="alert">
+                                                <p ng-message="required">Name cannot be empty!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group"
+                                             ng-class="{ 'has-error': (loginForm.password.$touched || loginForm.$submitted) && loginForm.password.$invalid || loginError != ''}">
+                                            <label>Password</label>
+                                            <input required name="password" class="form-control" type="password"
+                                                   placeholder=""
+                                                   ng-model="password">
+
+                                            <div class="form_error" ng-messages="loginForm.password.$error"
+                                                 ng-if="loginForm.password.$touched || loginForm.$submitted || loginError != ''"
+                                                 role="alert">
+                                                <p ng-message="required">Password cannot be empty!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="submit" class="col-md-12 btn btn-default pull-right" value="Login"
+                                       ng-click="singIn(loginForm.$valid, email, password)"/>
+
+                                <p style="margin-top: 10px">If You don't have an Account,</p>
+
+                                <a ui-sref="main.public.pricing"><i class="fa fa-user"></i>&nbsp;&nbsp;Sign Up</a>
+
+                            </div>
+                        </form>
+                    </div>
+                    <figure ng-if="currentUser" class="position-static">
+                        <figure>
+                            <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                        </figure>
+                    </figure>
+                </div>
+                <hr>
+                <div style="margin-bottom:15px;">
+                    <figure class="position-static">
+                        <figure>
+                            <img src="assets/images/public/images/ad-5.jpg" alt="" width="100%">
+                        </figure>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

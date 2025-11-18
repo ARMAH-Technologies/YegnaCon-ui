@@ -1,0 +1,39 @@
+<div class="panel panel-default panel-default-main">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="sidebar-label text-center">Requested Proforma</h2>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Proforma Request Id Preview</th>
+            <th>From</th>
+            <th>Requested date</th>
+            <th class="text-center">Number of Items</th>
+            <th>Status</th>
+            <th>Reply</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="proforma in vm.proforma | itemsPerPage: vm.itemsPerPage" total-items="vm.totalItems"
+            current-page="vm.currentPage">
+            <td class="text-center"><a class="active_anchor"
+                                       ui-sref="main.public.supplierDashboard.proformaDetail({proformaRequestId:proforma.id})">ID{{proforma.proforma_request_id}}</a>
+            </td>
+            <td>{{proforma.company}}</td>
+            <td>{{proforma.date|date:'mediumDate'}}</td>
+            <td class="text-center">{{proforma.noItems}}</td>
+            <td>{{proforma.status}}</td>
+            <td>
+                <button style="padding: 0 10px; margin: 0;" class="btn btn-orange"
+                        ui-sref="main.public.supplierDashboard.proformaDetail({proformaRequestId:proforma.id})">
+                    <i class="fa fa-exchange"></i> Reply
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+

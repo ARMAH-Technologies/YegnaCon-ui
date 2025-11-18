@@ -1,0 +1,47 @@
+<div class="container">
+    <section class="page-banner-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Projects Detail</h2>
+                </div>
+                <div class="col-md-6">
+                    <ul class="page-depth">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html">Projects</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="single-page-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="project-content">
+                        <div class="project-content-box">
+                            <h2>{{vm.project.name}}</h2>
+                            <ul>
+                                <li><i class="fa fa-calendar"></i> <span>Date:</span>{{vm.project.created_at|date:'mediumDate'}}</li>
+                                <li ng-if="vm.project.location != null"><i class="fa fa-map-marker"></i> <span>Location:</span> {{vm.project.location}}</li>
+                                <li ng-if="vm.project.location == null"><i class="fa fa-map-marker"></i> <span>Location:</span> N/A</li>
+                                <li ng-if="vm.project.cost != null"><i class="fa fa-usd"></i> <span>Value:</span> {{vm.project.cost|number:2}}ETB</li>
+                                <li ng-if="vm.project.cost == null"><i class="fa fa-usd"></i> <span>Value:</span> N/A</li>
+                                <li><i class="fa fa-tag"></i> <span>Category:</span> {{vm.project.category}}</li>
+                                <li><i class="fa fa-user"></i> <span>Client:</span> {{vm.project.client}}</li>
+                                <li><i class="fa fa-user"></i> <span>Contractor:</span><a ui-sref="main.public.contractorDetail({contractorId:vm.project.company_id"})>{{vm.project.company}}</a></li>
+                                 </ul>
+                        </div>
+                        <div class="project-content-box">
+                            <h2>Project Description</h2>
+                            <p ng-bind-html="vm.project.description"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <img src={{vm.project.file}} alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

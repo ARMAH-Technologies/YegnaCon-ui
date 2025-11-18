@@ -1,0 +1,38 @@
+
+<div>
+
+    <div class="modal-header">
+        <h3 class="modal-title">Subscription Form</h3>
+    </div>
+    <div class="modal-body">
+        <form  class="form-horizontal" ng-submit="subscribe()">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label col-lg-2">Package</label>
+                    <div class="col-lg-10">
+                        <select ng-model="subscription.package_id" class="form-control">
+                            <option ng-repeat="package in packages" value="{{package.id}}">{{package.package}} for {{package.duration_in_months}} months</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-lg-2">Sales Person</label>
+                    <div class="col-lg-10">
+                        <select ng-model="subscription.sales_id" class="form-control">
+                            <option ng-repeat="sales in sales" value="{{sales.id}}">{{sales.full_name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" ng-click="cancel()">Close</button>
+                <button ng-disabled="subscriptionButtonDisabled" type="submit" class="btn btn-orange">Subscribe User</button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+

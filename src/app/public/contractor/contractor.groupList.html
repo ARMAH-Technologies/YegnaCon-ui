@@ -1,0 +1,42 @@
+
+<div class="panel panel-default panel-default-main">
+    <div class="row">
+        <div class="col-sm-10">
+            <h2 class="sidebar-label">My Proforma Groups</h2>
+        </div>
+        <div class="col-sm-2">
+            <button ui-sref="main.public.contractorDashboard.groupCreate"
+                    class="btn btn-default btn-action pull-right"><i class="fa fa-plus"></i>Add Group</button>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Group Name</th>
+            <th>Type</th>
+            <th># of Suppliers</th>
+            <th>Created at</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="group in vm.groups | itemsPerPage: vm.itemsPerPage" total-items="vm.totalItems" current-page="vm.currentPage">
+            <td><a class="active_anchor" ui-sref="main.public.contractorDashboard.groupDetail({groupId:group.id})"> {{ group.name }}</a></td>
+            <td>{{group.type}}</td>
+            <td>{{group.supplier_count}}</td>
+            <td>{{group.updated_at|date:'mediumDate'}}</td>
+            <td>
+                <ul class="list-inline list-unstyled">
+                    <li><button style="padding: 0 10px; margin: 0;" class="btn btn-default " ui-sref="main.public.contractorDashboard.groupCreate({groupId:group.id, edit:true})"><i class="fa fa-pencil"></i></button></li>
+                    <li><button style="padding: 0 10px; margin: 0;" class="btn btn-default" ng-click="vm.deleteGroup(group.id)"><i class="fa fa-trash-o"></i></button></li>
+                </ul>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <ul class="pagination pagination-separated pagination-rounded text-center">
+        <dir-pagination-controls on-page-change="vm.getUserGroup ()"></dir-pagination-controls>
+    </ul>
+</div>

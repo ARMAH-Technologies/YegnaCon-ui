@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 ">
+            <div class="panel">
+                <section class="contact-section padding-top">
+                    <div class="container-fluid">
+
+                        <div class="col-lg-4 col-lg-offset-4">
+                            <div class="alert alert-danger fade in" ng-class="{ 'display-hidden': vm.loginError == ''}">
+                                <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Login Error!</strong> {{ vm.loginError }}
+                            </div>
+                            <form role="form" id="contact-form" class="register-form" name="loginForm" novalidate>
+                                <div class="row card">
+                                    <div class="col-xs-12" id="login_header"><h1 class="text-center">LOGIN</h1>
+                                    </div>
+                                     <div class="col-sm-offset-1">
+
+                                        <div class="row ">
+                                            <img class="col-md-offset-4" ng-show="vm.authenticating"  height="80px" src="assets/images/loading.png"/>
+
+                                            <div class="col-sm-11">
+                                                <br>
+
+                                                <div class="form-group"
+                                                     ng-class="{ 'has-error': (loginForm.company.$touched || loginForm.$submitted) && loginForm.company.$invalid || vm.loginError != ''}">
+                                                    <label>Email</label>
+                                                    <input required name="company" type="text"
+                                                           placeholder="Enter your email here"
+                                                           ng-model="vm.email" class="form-control"
+                                                           style="height: 40px !important;">
+
+                                                    <div class="form_error" ng-messages="loginForm.company.$error"
+                                                         ng-if="loginForm.company.$touched || loginForm.$submitted || vm.loginError != ''"
+                                                         role="alert">
+                                                        <p ng-message="required">Company Name cannot be empty!</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-11">
+                                                <div class="form-group"
+                                                     ng-class="{ 'has-error': (loginForm.password.$touched || loginForm.$submitted) && loginForm.password.$invalid || vm.loginError != ''}">
+                                                    <label>Password</label>
+                                                    <input required name="password" type="password"
+                                                           placeholder=""
+                                                           ng-model="vm.password" class="form-control"
+                                                           style="height: 40px !important;">
+
+                                                    <div class="form_error" ng-messages="loginForm.password.$error"
+                                                         ng-if="loginForm.password.$touched || loginForm.$submitted || vm.loginError != ''"
+                                                         role="alert">
+                                                        <p ng-message="required">Password cannot be empty!</p>
+                                                    </div>
+                                                </div>
+                                                <input type="submit" id="login_btn" class="col-xs-12" value="Login"
+                                                       ng-click="vm.singIn(loginForm.$valid)"/>
+
+                                                <p class="col-xs-12 col-sm-12 " style="margin-bottom:0"><a
+                                                        ui-sref="main.public.pricing">Create
+                                                    an Account</a></p>
+
+                                                <p class="col-xs-12 col-sm-12 "><a href="">Forgot your
+                                                    Password?</a></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

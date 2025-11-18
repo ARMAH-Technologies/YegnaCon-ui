@@ -1,0 +1,241 @@
+<div class="panel panel-default panel-default-main">
+    <form id="contact-form" name="supplierUpdateForm" ng-submit="vm.updateSupplier(supplierUpdateForm.$valid)">
+        <div class="alert alert-success fade in" ng-class="{ 'display-hidden': vm.updateSuccess == ''}">
+            <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> {{ vm.updateSuccess }}
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Supplier Name *</label>
+                    <input type="text" class="" name="supplier_name" ng-disabled="true" ng-model="vm.supplier.name"/>
+                </div>
+                <div class="form-group">
+                    <label>Supplier Category *<span style="font-size:12px;color:#ffba00">(Multiple categories allowed here)</span></label></br>
+                    <multiselect style="overflow-y: scroll" required ng-model="vm.category" data-compare-by="id"
+                                 options="c.category for c in vm.categories" data-multiple="true"></multiselect>
+                    <br>
+
+                    <div style="font-size: large" class="display-inline" ng-repeat="category in vm.category">
+                        <span class="label main-color">{{ category.category }}</span> ,
+                    </div>
+
+                </div>
+                <div class="form-group"
+                     ng-class="{ 'has-error': (supplierUpdateForm.establishment_date.$touched || supplierUpdateForm.$submitted) && supplierUpdateForm.establishment_date.$invalid}">
+                    <label>Year of establishment</label>
+                    <input type="date" name="establishment_date"
+                           ng-model="vm.supplier.profile.data.established_year">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label>Company Logo:</label>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <a type="button" class="btn btn-orange btn-sm " data-toggle="modal"
+                               data-target="#changePic"><i class="fa fa-edit"></i></a>
+                            <img style="width:200px;height:200px;float:left;" src="{{ vm.supplier.logo }}">&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="sidebar-label">Contact</h2>
+                <hr>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"
+                     ng-class="{ 'has-error': (supplierUpdateForm.city.$touched || supplierUpdateForm.$submitted) && supplierUpdateForm.city.$invalid}">
+                    <label>City</label>
+
+                    <select required ng-model="vm.city" name="city" class="form-control">
+                        <option ng-repeat="location in vm.locations" value="{{location}}">{{location}}</option>
+                    </select>
+
+                    <div class="form_error" ng-messages="supplierUpdateForm.city.$error"
+                         ng-if="supplierUpdateForm.city.$touched || supplierUpdateForm.$submitted" role="alert">
+                        <p ng-message="required">City is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"
+                     ng-class="{ 'has-error': (supplierUpdateForm.subcity.$touched || supplierUpdateForm.$submitted) && supplierUpdateForm.subcity.$invalid}">
+                    <label>Sub City</label>
+                    <input type="text" name="subcity" ng-model="vm.sub_city"/>
+
+                    <div class="form_error" ng-messages="supplierUpdateForm.subcity.$error"
+                         ng-if="supplierUpdateForm.subcity.$touched || supplierUpdateForm.$submitted" role="alert">
+                        <p ng-message="required">Sub City is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"
+                     ng-class="{ 'has-error': (supplierUpdateForm.company_name.$touched || supplierUpdateForm.$submitted) && supplierUpdateForm.company_name.$invalid}">
+                    <label>House Number</label>
+                    <input type="text" name="house_number" placeholder=""
+                           ng-model="vm.house_no"/>
+
+                    <div class="form_error" ng-messages="supplierUpdateForm.house_number.$error"
+                         ng-if="supplierUpdateForm.house_number.$touched || supplierUpdateForm.$submitted" role="alert">
+                        <p ng-message="required">House Number is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Specific Address <span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="specific_address" placeholder="eg.building name,floor,office No"
+                           ng-model="vm.specific_address"/>
+
+                    <div class="form_error" ng-messages="supplierUpdateForm.specific_address.$error"
+                         ng-if="supplierUpdateForm.specific_address.$touched || supplierUpdateForm.$submitted"
+                         role="alert">
+                        <p ng-message="required">Specific Address is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"
+                     ng-class="{ 'has-error': (supplierUpdateForm.house_number.$touched || supplierUpdateForm.$submitted) && supplierUpdateForm.house_number.$invalid}">
+                    <label>Main Phone No.</label>
+                    <input type="text" name="house_number" placeholder="eg. +251 911 000000"
+                           ng-model="vm.phone_number_1"/>
+
+                    <div class="form_error" ng-messages="supplierUpdateForm.house_number.$error"
+                         ng-if="supplierUpdateForm.house_number.$touched || supplierUpdateForm.$submitted" role="alert">
+                        <p ng-message="required">Main Phone No. is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Cell Phone <span class="additional-text"> (SMS purposes)</span></label>
+                    <input type="text" name="second_phone" placeholder="eg. +251 911 000000"
+                           ng-model="vm.phone_number_2"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" disabled ng-model="vm.supplier.email"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group"
+                     ng-class="{ 'has-error': (supplierUpdateForm.country.$touched || supplierUpdateForm.$submitted) && supplierUpdateForm.country.$invalid}">
+                    <label>Country</label>
+                    <input type="text" name="country" ng-model="vm.country"/>
+
+                    <div class="form_error" ng-messages="supplierUpdateForm.country.$error"
+                         ng-if="supplierUpdateForm.country.$touched || supplierUpdateForm.$submitted" role="alert">
+                        <p ng-message="required">Country is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Website <span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="website" ng-model="vm.website"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Facebook link<span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="facebook" ng-model="vm.facebook_link"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Twitter Link<span class="additional-text" style=""> (optional)</span></label>
+                    <input type="text" name="twitter" ng-model="vm.twitter_link"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Linkedin Link <span class="additional-text"> (optional)</span></label>
+                    <input type="text" name="linkedin" ng-model="vm.linkidin_link"/>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h2 class="sidebar-label">Company Brief Description</h2>
+                <hr>
+                <div class="form-group"
+                     ng-class="{ 'has-error': (supplierUpdateForm.description.$touched || supplierUpdateForm.$submitted) && supplierUpdateForm.description.$invalid}">
+                    <label>Description</label>
+
+                    <text-angular ng-model="vm.supplier.profile.data.description"
+                                  name="description"></text-angular>
+                    <!--<div class="form_error" ng-messages="supplierUpdateForm.description.$error"
+                         ng-if="supplierUpdateForm.description.$touched || supplierUpdateForm.$submitted" role="alert">
+                        <p ng-message="required">Description is required</p>
+                    </div>-->
+                </div>
+                <input type="submit" class="pull-right" value="Save Changes"
+                       ng-click="vm.updateContractor(supplierUpdateForm.$valid)"/>
+
+            </div>
+
+        </div>
+
+    </form>
+    <!-- Modal -->
+    <div id="changePic" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change Picture</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"
+                         ng-class="{'has-error':supplierUpdateForm.file.$touched && supplierUpdateForm.file.$invalid}">
+                        <div class="input-group">
+                            <input type="text" class="form-control"
+                                   placeholder="No Files Selected ... "
+                                   ng-model="vm.file.name">
+                            <span class="input-group-btn">
+                                                    <button class="btn btn-orange main-color" type="button"
+                                                            ngf-select ng-model="vm.file"
+                                                            name="file" id="file2" ngf-pattern="'image/*'"
+                                                            ngf-accept="'image/*'" ngf-max-size="20MB"
+                                                            ngf-min-height="100"
+                                                            >Browse...
+                                                    </button>
+                                                </span>
+                        </div>
+                        <div class="help-block" ng-messages="supplierUpdateForm.file.$error">
+                            <div ng-message="maxSize">The file must be less than 2MB</div>
+                            <div ng-message="minHeight">The file must be at least 100px high</div>
+                            <div ng-message="pattern">Invalid File Type</div>
+                            <div ng-message="required">You must upload a project Logo</div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <img ng-show="vm.file" style="width:100px;height:100px;float:left;"
+                             ngf-thumbnail="vm.file">&nbsp;
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-orange" ng-click="vm.updatePicture()"
+                            data-dismiss="modal">
+                        Update
+                    </button>
+                    <button type="button" class="btn btn-orange" data-dismiss="modal" >Close
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

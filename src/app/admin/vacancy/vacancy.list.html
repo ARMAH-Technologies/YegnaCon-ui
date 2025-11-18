@@ -1,0 +1,90 @@
+<div class="col-lg-12">
+
+    <ul class="nav navbar-nav no-border visible-xs-block">
+        <li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-filter"><i
+                class="icon-menu7"></i></a></li>
+    </ul>
+
+    <div class="navbar-collapse collapse" id="navbar-filter">
+        <p class="navbar-text">Filter:</p>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="icon-sort-time-asc position-left"></i> By status <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="" ng-click="vm.getCampaignsFilter('')">Show all</a></li>
+                    <li class="divider"></li>
+                    <li><a href="" ng-click="vm.getCampaignsFilter('&status=active')">Active</a></li>
+                    <li><a href="" ng-click="vm.getCampaignsFilter('&status=pending')">Pending</a></li>
+                    <li><a href="" ng-click="vm.getCampaignsFilter('&status=achieved')">Achieved</a></li>
+                    <li><a href="" ng-click="vm.getCampaignsFilter('&status=inactive')">Canceled</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <div class="form-group has-feedback">
+                    <input ng-change="vm.getCampaignsFilter('&search='+ query)" ng-model="query"
+                           style="margin-top: 8px;margin-left:-4px" type="text"
+                           class="form-control"
+                           placeholder="Search">
+
+                    <div class="form-control-feedback">
+                        <i class="icon-search4 text-size-base"></i>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="width: 5%">No.</th>
+                    <th>Position</th>
+                    <th>Posted By</th>
+                    <th>Created At</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr dir-paginate="vacancy in vm.vacancies | itemsPerPage: vm.itemsPerPage track by $index"
+                    total-items="vm.totalItems"
+                    current-page="vm.currentPage">
+                    <td style="width: 5%">{{$index + 1}}</td>
+                    <td><a ui-sref="main.public.vacancyDetail({vacancyId : vacancy.id})">{{vacancy.title}}</a></td>
+                    <td>{{vacancy.company}}</td>
+                    <td>{{vacancy.posted_date|date:'MediumDate'}}</td>
+                    <td ng-if="vacancy.status == 'active'"><span class="label label-success">{{vacancy.status}}</span>
+                    </td>
+                    <td ng-if="vacancy.status == 'inactive'"><span class="label label-warning">{{vacancy.status}}</span>
+                    </td>
+                    <td class="text-center">
+                        <ul class="list-inline list-unstyled">
+                            <li>
+                                <button style="padding: 0 10px; margin: 0;" ui-sref="main.admin.vacancy.edit({vacancyId: vacancy.id})" class="btn btn-default "
+                                        ng-click="">
+                                    <i class="icon-pencil"></i></button>
+                            </li>
+                            <li>
+                                <button style="padding: 0 10px; margin: 0;" class="btn btn-default"
+                                        ng-click="vm.deleteVacancy(vacancy.id)"><i class="icon-trash"></i></button>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <ul class="pagination pagination-separated pagination-rounded pull-right">
+        <dir-pagination-controls on-page-change="vm.getVacancies()"></dir-pagination-controls>
+    </ul>
+
+
+</div>
